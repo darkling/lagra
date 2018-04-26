@@ -10,6 +10,8 @@
 -export([new_quad/4]).
 -export([subject/1, predicate/1, object/1, graph/1]).
 
+-export([is_absolute_iri/1]).
+
 -type literal() :: {string, string()}            % untyped string
                  | {string, string(), string()}  % string plus locale
                  | {typed, term(), string()}.    % typed non-string term
@@ -36,9 +38,9 @@
 new_literal(Text) when is_list(Text) ->
 	{literal, {string, Text}};
 new_literal(Int) when is_integer(Int) ->
-	{literal, {typed, Int, "xsd:integer"}};
+	{literal, {typed, Int, "http://www.w3.org/2001/XMLSchema#integer"}};
 new_literal(Float) when is_float(Float) ->
-	{literal, {typed, Float, "xsd:float"}}.
+	{literal, {typed, Float, "http://www.w3.org/2001/XMLSchema#float"}}.
 
 -spec new_literal(string(), string()) -> literalnode().
 new_literal(Text, Locale) when is_list(Text), is_list(Locale) ->
@@ -114,3 +116,12 @@ graph({_S, _P, _O}) ->
 	"";
 graph({_S, _P, _O, G}) ->
 	G.
+
+-spec is_absolute_iri(iri()) -> true | false.
+is_absolute_iri({iri, Text}) ->
+	case re:run(Text, "^[A-Za-z][A-Za-z0-9+.-]*:", [unicode]) of
+		nomatch ->
+			false;
+		{match, _} ->
+			true
+	end.

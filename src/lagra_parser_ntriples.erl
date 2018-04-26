@@ -1,0 +1,233 @@
+-module(lagra_parser_ntriples).
+-export([parse/3, terms/2]).
+-export([next_term/1, term/2, first_match/2]).
+
+-define(UCHAR, "\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}").
+-define(ECHAR, "\\\\[tbnrf\"'\\\\]").
+-define(PN_CHARS_U, "A-Za-z\\x{00C0}-\\x{00D6}\\x{00D8}-\\x{00F6}\\x{00F8}-\\x{02FF}\\x{0370}-\\x{037D}\\x{037F}-\\x{1FFF}\\x{200C}-\\x{200D}\\x{2070}-\\x{218F}\\x{2C00}-\\x{2FEF}\\x{3001}-\\x{D7FF}\\x{F900}-\\x{FDCF}\\x{FDF0}-\\x{FFFD}\\x{10000}-\\x{EFFFF}_:").
+-define(PN_CHARS, ?PN_CHARS_U++"0-9\\x{00B7}\\x{0300}-\\x{036F}\\x{203F}-\\x{2040}-").
+
+-define(
+   REGEX,
+   [{dot, "(\\.)"},
+	{type_hats, "(\\^\\^)"},
+	{langtag, "@([a-zA-Z]+(?:-[a-zA-Z]+)*)"},
+	{iriref, "<((?:[^\\x00-\\x20<>\"{}|^`\\\\]|"++?UCHAR++")*)>"},
+	{string_literal_quote, "\"((?:[^\\x22\\x5c\\x0a\\x0d]|"++?UCHAR++"|"++?ECHAR++")*)\""},
+	{blank_node_label, "_:(["++?PN_CHARS_U++"0-9](?:(?:[."++?PN_CHARS++"])*["++?PN_CHARS++"])?)"},
+	{whitespace, "([\\x09\\x20])"},
+	{eol, "(\\r?\\n)"},
+	{comment, "(#.*$)"}]).
+
+-type partial_triple() :: {lagra_model:subject() | none,
+						   lagra_model:predicate() | none,
+						   lagra_model:object() | none}.
+-type pos() :: {integer(), integer()}.
+-type lexeme() :: {atom(), pos(), string()}.
+-type error_value() :: {error, atom(), pos()}.
+
+-spec parse(lagra:store(), file:io_device(), proplists:proplist())
+		   -> ok | error_value().
+parse(Store, File, _Options) ->
+	TermSrv = spawn_link(?MODULE, terms, [File, {"", 0, 0}]),
+	Result = parse_subject(Store, TermSrv, next_term(TermSrv),
+						   {none, none, none}),
+	stop_server(TermSrv),
+	Result.
+
+%%% The parser is basically a simple state machine, cycling through
+%%% subject (iri or bnode), predicate (iri), object (iri, bnode,
+%%% literal), literal annotations (lang tag, type) if appropriate, and
+%%% finishing with dot and EOL.
+%%% Whitespace and comments are dropped in the lexer.
+%%% The parser adds triples to the store incrementally. It returns
+%%% either 'ok' or {'error', ErrType, {Line, Char}}
+
+-spec parse_subject(lagra:store(), pid(), lexeme(), partial_triple())
+				   -> ok | error_value().
+parse_subject(Store, TermSrv, {eol, _, _}, {none, none, none}) ->
+	parse_subject(Store, TermSrv, next_term(TermSrv), {none, none, none});
+parse_subject(Store, TermSrv, {iriref, Pos, Text}, {none, none, none}) ->
+	IRI = lagra_model:new_iri(Text),
+	case lagra_model:is_absolute_iri(IRI) of
+		true ->
+			parse_predicate(Store, TermSrv, next_term(TermSrv),
+							{IRI, none, none});
+		false ->
+			{error, relative_iri, Pos}
+	end;
+parse_subject(Store, TermSrv, {blank_node_label, _, Text}, {none, none, none}) ->
+	parse_predicate(Store, TermSrv, next_term(TermSrv),
+					{{bnode, Text}, none, none});
+parse_subject(_, _, {eof, _, _}, {none, none, none}) ->
+	ok;
+parse_subject(_, _, Term={_, Pos, _}, {none, none, none}) ->
+	io:format("Failed subject ~p~n", [Term]),
+	{error, syntax, Pos}.
+
+
+-spec parse_predicate(lagra:store(), pid(), lexeme(), partial_triple())
+					 -> ok | error_value().
+parse_predicate(Store, TermSrv, {iriref, Pos, Text}, {S, none, none}) ->
+	IRI = lagra_model:new_iri(Text),
+	case lagra_model:is_absolute_iri(IRI) of
+		true ->
+			parse_object(Store, TermSrv, next_term(TermSrv),
+						 {S, IRI, none});
+		false ->
+			{error, relative_iri, Pos}
+	end;
+parse_predicate(_, _, {_, Pos, _}, {_, none, none}) ->
+	{error, syntax, Pos}.
+
+
+-spec parse_object(lagra:store(), pid(), lexeme(), partial_triple())
+				  -> ok | error_value().
+parse_object(Store, TermSrv, {iriref, Pos, Text}, {S, P, none}) ->
+	IRI = lagra_model:new_iri(Text),
+	case lagra_model:is_absolute_iri(IRI) of
+		true ->
+			parse_dot(Store, TermSrv, next_term(TermSrv),
+					  {S, P, IRI});
+		false ->
+			{error, relative_iri, Pos}
+	end;
+parse_object(Store, TermSrv, {blank_node_label, _, Text}, {S, P, none}) ->
+	parse_dot(Store, TermSrv, next_term(TermSrv),
+			  {S, P, {bnode, Text}});
+parse_object(Store, TermSrv, {string_literal_quote, _, Text}, {S, P, none}) ->
+	parse_maybe_string_annotation(Store, TermSrv, next_term(TermSrv),
+								  {S, P, {literal, {string, Text}}});
+parse_object(_, _, {_, Pos, _}, {_, _, none}) ->
+	{error, syntax, Pos}.
+
+
+-spec parse_maybe_string_annotation(
+		lagra:store(), pid(), lexeme(), partial_triple())
+								   -> ok | error_value().
+parse_maybe_string_annotation(Store, TermSrv, {langtag, _, Lang},
+							  {S, P, {literal, {string, Text}}}) ->
+	parse_dot(Store, TermSrv, next_term(TermSrv),
+			  {S, P, {literal, {string, Text, Lang}}});
+parse_maybe_string_annotation(Store, TermSrv, {type_hats, _, _},
+							  Triple={_S, _P, {literal, {string, _Text}}}) ->
+	parse_type(Store, TermSrv, next_term(TermSrv), Triple);
+parse_maybe_string_annotation(Store, TermSrv, Dot={dot, _, _}, Triple) ->
+	parse_dot(Store, TermSrv, Dot, Triple);
+parse_maybe_string_annotation(_, _, {_, Pos, _}, _) ->
+	{error, syntax, Pos}.
+
+
+-spec parse_type(lagra:store(), pid(), lexeme(), partial_triple())
+				-> ok | error_value().
+parse_type(Store, TermSrv, {iriref, Pos, Type},
+		   {S, P, {literal, {string, Text}}}) ->
+	TypeIRI = lagra_model:new_iri(Type),
+	case lagra_model:is_absolute_iri(TypeIRI) of
+		true ->
+			parse_dot(Store, TermSrv, next_term(TermSrv),
+					  {S, P, {literal, {typed, Text, TypeIRI}}});
+		false ->
+			{error, relative_iri, Pos}
+	end;
+parse_type(_, _, {_, Pos, _}, _) ->
+	{error, syntax, Pos}.
+
+
+-spec parse_dot(lagra:store(), pid(), lexeme(), partial_triple())
+			   -> ok | error_value().
+parse_dot(Store, TermSrv, {dot, _, _}, Triple) ->
+	ok = lagra:add(Store, Triple),
+	io:format("add ~p~n", [Triple]),
+	parse_eol(Store, TermSrv, next_term(TermSrv), {none, none, none});
+parse_dot(_, _, {_, Pos, _}, _) ->
+	{error, syntax, Pos}.
+
+
+-spec parse_eol(lagra:store(), pid(), lexeme(), partial_triple())
+			   -> ok | error_value().
+parse_eol(Store, TermSrv, {eol, _, _}, Triple={none, none, none}) ->
+	parse_subject(Store, TermSrv, next_term(TermSrv), Triple);
+parse_eol(_Store, _TermSrv, {eof, _, _}, {none, none, none}) ->
+	ok;
+parse_eol(_, _, {_, Pos, _}, {none, none, none}) ->
+	{error, syntax, Pos}.
+
+%%% The lexer is a mini server for parsing terms incrementally. The
+%%% server reads a line at a time from the input, and returns the next
+%%% token on that line on a call to next_term/1. 
+
+%%% Call next_term/1 to get the next term, and stop_server/1 to
+%%% terminate it.
+-spec next_term(pid()) -> lexeme().
+next_term(TermSrv) ->
+	TermSrv ! {next, self()},
+	receive
+		{term, Term} -> Term
+	after
+		5000 -> {eof, none}
+	end.
+
+-spec stop_server(pid()) -> ok.
+stop_server(TermSrv) ->
+	TermSrv ! {halt, self()},
+	ok.
+
+-spec terms(file:io_device(), {string(), integer(), integer()}) -> ok.
+terms(File, State) ->
+	{Src, {Term, NewState}} =
+		receive
+			{next, From} -> {From, term(File, State)};
+			{halt, From} -> {From, {halt, {halt, 0, 0}}}
+		end,
+	case NewState of
+		{halt, 0, 0} ->
+			ok;
+		_ ->
+			Src ! {term, Term},
+			terms(File, NewState)
+	end.
+
+-spec term(file:io_device(), {string(), integer(), integer()}) ->
+				  {lexeme(),                         % Type, Pos, Text = Result
+				   {string(), integer(), integer()}}.% Rest, Ln, Char = State
+term(File, {[], LnNo, ChNo}) ->
+	io:format("Empty line: reading new one"),
+	Line = case file:read_line(File) of
+			   {ok, L} -> io:format(" ~p~n", [L]), L;
+			   eof -> io:format(" eof~n"), eof;
+			   {error, Reason} ->
+				   throw(Reason)
+		   end,
+	{{eol, {LnNo, ChNo}, ""}, {Line, LnNo+1, 1}};
+term(_File, {eof, LnNo, ChNo}) ->
+	io:format("EOF"),
+	{{eof, {LnNo, ChNo}, ""}, {"", LnNo, ChNo}};
+term(File, {Line, LnNo, ChNo}) ->
+	io:format("Line with content: '~p'~n", [Line]),
+	case first_match(Line, ?REGEX) of
+		notfound ->
+			io:format("err: ~p~n", [Line]),
+			{{error, {LnNo, ChNo}, Line}, {tl(Line), LnNo, ChNo+1}};
+		{{whitespace, Text}, Rest} ->
+			io:format("ws~n"),
+			term(File, {Rest, LnNo, ChNo+length(Text)});
+		{{comment, Text}, Rest} ->
+			io:format("comm~n"),
+			term(File, {Rest, LnNo, ChNo+length(Text)});
+		X = {{Type, Text}, Rest} ->
+			io:format("Found ~p~n", [X]),
+			{{Type, {LnNo, ChNo}, Text}, {Rest, LnNo, ChNo+length(Text)}}
+	end.
+
+-spec first_match(string(), [{atom(), string()}]) ->
+						 notfound | {{atom(), string()}, string()}.
+first_match(_Line, []) ->
+	notfound;
+first_match(Line, [{Tag, Re} | Tail]) ->
+	io:format("Trying ~p on ~p~n", [Tag, Line]),
+	case re:run(Line, "^"++Re++"(.*)", [{capture, all, list}, unicode]) of
+		{match, [_, Found, Rest]} ->
+			{{Tag, Found}, Rest};
+		nomatch -> first_match(Line, Tail)
+	end.
