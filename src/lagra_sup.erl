@@ -9,9 +9,9 @@ start_link() ->
 
 init([]) ->
 	Procs = [#{id => manager,
-			   start => {lagra_mgr, start, []}},
+			   start => {lagra_mgr, start_link, []}},
 			 #{id => stores_sup,
-			   start => {lagra_store_trivial_sup, start, []},
+			   start => {lagra_store_trivial_sup, start_link, []},
 			   type => supervisor}
 			],
 	{ok, {{one_for_one, 1, 5}, Procs}}.

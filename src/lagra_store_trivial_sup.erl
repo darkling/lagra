@@ -9,6 +9,6 @@ start_link() ->
 
 init([]) ->
 	Procs = [#{id => store,
-			   start => {lagra_store_trivial, start, []}}
+			   start => {lagra_store_trivial, start_link, []}}
 			],
-	{ok, {{one_for_one, 1, 5}, Procs}}.
+	{ok, {{simple_one_for_one, 1, 5}, Procs}}.
