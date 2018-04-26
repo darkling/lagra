@@ -12,7 +12,8 @@
 -export([terminate/2]).
 -export([code_change/3]).
 
--record(state, {quads :: [lagra_model:quad()]
+-record(state, {quads :: [lagra_model:quad()],
+				default = {iri, "urn:nil"} :: lagra_model:graph()
 	   }).
 
 %% API.
@@ -28,6 +29,16 @@ init([]) ->
 
 handle_call({po_from_s, Subject}, _From, State) ->
 	{reply, po_from_s(State, Subject), State};
+handle_call({add_triple, Triple}, _From, State) ->
+	case add(State, Triple) of
+		{ok, NewState} -> {reply, ok, NewState};
+		Err = {error, _} -> {reply, Err, State}
+	end;
+handle_call({add_quad, Quad}, _From, State) ->
+	case add(State, Quad) of
+		{ok, NewState} -> {reply, ok, NewState};
+		Err = {error, _} -> {reply, Err, State}
+	end;
 handle_call(_Request, _From, State) ->
 	{reply, ignored, State}.
 
@@ -44,6 +55,15 @@ code_change(_OldVsn, State, _Extra) ->
 	{ok, State}.
 
 %% Internals
+
+-spec add(#state{}, lagra_model:triple() | lagra_model:quad()) ->
+				 ok | {error, term()}.
+add(State, {S, P, O}) ->
+	Quad = {S, P, O, State#state.default},
+	add(State, Quad);
+add(State = #state{quads=Quads}, Quad = {_S, _P, _O, _G}) ->
+	{ok, State#state{quads=[Quad|Quads]}}.
+
 
 -spec po_from_s(#state{}, lagra_model:subject()) ->
 					   [{lagra_model:predicate(), lagra_model:object()}].
