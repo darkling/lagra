@@ -12,7 +12,8 @@
 -export([terminate/2]).
 -export([code_change/3]).
 
--record(state, {quads :: [lagra_model:quad()],
+-record(state, {quads                      :: [lagra_model:quad()],
+				bnode_id = 1               :: integer(),
 				default = {iri, "urn:nil"} :: lagra_model:graph()
 	   }).
 
@@ -30,15 +31,13 @@ init([]) ->
 handle_call({po_from_s, Subject}, _From, State) ->
 	{reply, po_from_s(State, Subject), State};
 handle_call({add_triple, Triple}, _From, State) ->
-	case add(State, Triple) of
-		{ok, NewState} -> {reply, ok, NewState};
-		Err = {error, _} -> {reply, Err, State}
-	end;
+	{ok, NewState} = add(State, Triple),
+	{reply, ok, NewState};
 handle_call({add_quad, Quad}, _From, State) ->
-	case add(State, Quad) of
-		{ok, NewState} -> {reply, ok, NewState};
-		Err = {error, _} -> {reply, Err, State}
-	end;
+	{ok, NewState} = add(State, Quad),
+	{reply, ok, NewState};
+handle_call({new_bnode}, _From, State = #state{bnode_id=Id}) ->
+	{reply, {bnode, integer_to_list(Id)}, State#state{bnode_id=Id+1}};
 handle_call(_Request, _From, State) ->
 	{reply, ignored, State}.
 
@@ -57,7 +56,7 @@ code_change(_OldVsn, State, _Extra) ->
 %% Internals
 
 -spec add(#state{}, lagra_model:triple() | lagra_model:quad()) ->
-				 ok | {error, term()}.
+				 {ok, #state{}}. %| {error, term()}.
 add(State, {S, P, O}) ->
 	Quad = {S, P, O, State#state.default},
 	add(State, Quad);

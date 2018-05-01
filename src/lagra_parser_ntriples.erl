@@ -19,19 +19,24 @@
 	{eol, "(\\r?\\n)"},
 	{comment, "(#.*$)"}]).
 
+-record(state,
+		{triple :: partial_triple(),
+		 bnodes :: map()}).
+
 -type partial_triple() :: {lagra_model:subject() | none,
 						   lagra_model:predicate() | none,
 						   lagra_model:object() | none}.
 -type pos() :: {integer(), integer()}.
 -type lexeme() :: {atom(), pos(), string()}.
 -type error_value() :: {error, atom(), pos()}.
+-type state() :: #state{}.
 
 -spec parse(lagra:store(), file:io_device(), proplists:proplist())
 		   -> ok | error_value().
 parse(Store, File, _Options) ->
 	TermSrv = spawn_link(?MODULE, terms, [File, {"", 0, 0}]),
-	Result = parse_subject(Store, TermSrv, next_term(TermSrv),
-						   {none, none, none}),
+	State = #state{triple={none, none, none}, bnodes=#{}},
+	Result = parse_subject(Store, TermSrv, next_term(TermSrv), State),
 	stop_server(TermSrv),
 	Result.
 
@@ -43,90 +48,105 @@ parse(Store, File, _Options) ->
 %%% The parser adds triples to the store incrementally. It returns
 %%% either 'ok' or {'error', ErrType, {Line, Char}}
 
--spec parse_subject(lagra:store(), pid(), lexeme(), partial_triple())
+-spec parse_subject(lagra:store(), pid(), lexeme(), state())
 				   -> ok | error_value().
-parse_subject(Store, TermSrv, {eol, _, _}, {none, none, none}) ->
-	parse_subject(Store, TermSrv, next_term(TermSrv), {none, none, none});
-parse_subject(Store, TermSrv, {iriref, Pos, Text}, {none, none, none}) ->
+parse_subject(Store, TermSrv, {eol, _, _},
+			  State = #state{triple={none, none, none}}) ->
+	parse_subject(Store, TermSrv, next_term(TermSrv), State);
+parse_subject(Store, TermSrv, {iriref, Pos, Text},
+			  State = #state{triple={none, none, none}}) ->
 	IRI = lagra_model:new_iri(Text),
 	case lagra_model:is_absolute_iri(IRI) of
 		true ->
 			parse_predicate(Store, TermSrv, next_term(TermSrv),
-							{IRI, none, none});
+							State#state{triple={IRI, none, none}});
 		false ->
 			{error, relative_iri, Pos}
 	end;
-parse_subject(Store, TermSrv, {blank_node_label, _, Text}, {none, none, none}) ->
-	parse_predicate(Store, TermSrv, next_term(TermSrv),
-					{{bnode, Text}, none, none});
-parse_subject(_, _, {eof, _, _}, {none, none, none}) ->
+parse_subject(Store, TermSrv, {blank_node_label, _, Text},
+			  State = #state{triple={none, none, none}, bnodes=BNodes}) ->
+	{NewMap, BNode} = get_bnode_or_new(Store, BNodes, Text),
+	NewState = State#state{triple = {BNode, none, none},
+						   bnodes = NewMap},
+	parse_predicate(Store, TermSrv, next_term(TermSrv), NewState);
+parse_subject(_, _, {eof, _, _}, #state{triple={none, none, none}}) ->
 	ok;
-parse_subject(_, _, Term={_, Pos, _}, {none, none, none}) ->
+parse_subject(_, _, Term={_, Pos, _}, #state{triple={none, none, none}}) ->
 	io:format("Failed subject ~p~n", [Term]),
 	{error, syntax, Pos}.
 
 
--spec parse_predicate(lagra:store(), pid(), lexeme(), partial_triple())
+-spec parse_predicate(lagra:store(), pid(), lexeme(), state())
 					 -> ok | error_value().
-parse_predicate(Store, TermSrv, {iriref, Pos, Text}, {S, none, none}) ->
+parse_predicate(Store, TermSrv, {iriref, Pos, Text},
+				State = #state{triple={S, none, none}}) ->
 	IRI = lagra_model:new_iri(Text),
 	case lagra_model:is_absolute_iri(IRI) of
 		true ->
 			parse_object(Store, TermSrv, next_term(TermSrv),
-						 {S, IRI, none});
+						 State#state{triple={S, IRI, none}});
 		false ->
 			{error, relative_iri, Pos}
 	end;
-parse_predicate(_, _, {_, Pos, _}, {_, none, none}) ->
+parse_predicate(_, _, {_, Pos, _}, #state{triple={_, none, none}}) ->
 	{error, syntax, Pos}.
 
 
--spec parse_object(lagra:store(), pid(), lexeme(), partial_triple())
+-spec parse_object(lagra:store(), pid(), lexeme(), state())
 				  -> ok | error_value().
-parse_object(Store, TermSrv, {iriref, Pos, Text}, {S, P, none}) ->
+parse_object(Store, TermSrv, {iriref, Pos, Text},
+			 State = #state{triple={S, P, none}}) ->
 	IRI = lagra_model:new_iri(Text),
 	case lagra_model:is_absolute_iri(IRI) of
 		true ->
 			parse_dot(Store, TermSrv, next_term(TermSrv),
-					  {S, P, IRI});
+					  State#state{triple={S, P, IRI}});
 		false ->
 			{error, relative_iri, Pos}
 	end;
-parse_object(Store, TermSrv, {blank_node_label, _, Text}, {S, P, none}) ->
-	parse_dot(Store, TermSrv, next_term(TermSrv),
-			  {S, P, {bnode, Text}});
-parse_object(Store, TermSrv, {string_literal_quote, _, Text}, {S, P, none}) ->
-	parse_maybe_string_annotation(Store, TermSrv, next_term(TermSrv),
-								  {S, P, {literal, {string, Text}}});
-parse_object(_, _, {_, Pos, _}, {_, _, none}) ->
+parse_object(Store, TermSrv, {blank_node_label, _, Text},
+			 State = #state{triple={S, P, none}, bnodes=BNodes}) ->
+	{NewMap, BNode} = get_bnode_or_new(Store, BNodes, Text),
+	NewState = State#state{triple = {S, P, BNode},
+						   bnodes = NewMap},
+	parse_dot(Store, TermSrv, next_term(TermSrv), NewState);
+parse_object(Store, TermSrv, {string_literal_quote, _, Text},
+			 State = #state{triple={S, P, none}}) ->
+	parse_maybe_string_annotation(
+	  Store, TermSrv, next_term(TermSrv),
+	  State#state{triple={S, P, {literal, {string, Text}}}});
+parse_object(_, _, {_, Pos, _}, #state{triple={_, _, none}}) ->
 	{error, syntax, Pos}.
 
 
--spec parse_maybe_string_annotation(
-		lagra:store(), pid(), lexeme(), partial_triple())
+-spec parse_maybe_string_annotation(lagra:store(), pid(), lexeme(), state())
 								   -> ok | error_value().
-parse_maybe_string_annotation(Store, TermSrv, {langtag, _, Lang},
-							  {S, P, {literal, {string, Text}}}) ->
+parse_maybe_string_annotation(
+  Store, TermSrv, {langtag, _, Lang},
+  State = #state{triple={S, P, {literal, {string, Text}}}}) ->
 	parse_dot(Store, TermSrv, next_term(TermSrv),
-			  {S, P, {literal, {string, Text, Lang}}});
-parse_maybe_string_annotation(Store, TermSrv, {type_hats, _, _},
-							  Triple={_S, _P, {literal, {string, _Text}}}) ->
-	parse_type(Store, TermSrv, next_term(TermSrv), Triple);
-parse_maybe_string_annotation(Store, TermSrv, Dot={dot, _, _}, Triple) ->
-	parse_dot(Store, TermSrv, Dot, Triple);
+			  State#state{triple={S, P, {literal, {string, Text, Lang}}}});
+parse_maybe_string_annotation(
+  Store, TermSrv, {type_hats, _, _},
+  State = #state{triple={_S, _P, {literal, {string, _Text}}}}) ->
+	parse_type(Store, TermSrv, next_term(TermSrv), State);
+parse_maybe_string_annotation(Store, TermSrv, Dot={dot, _, _}, State) ->
+	parse_dot(Store, TermSrv, Dot, State);
 parse_maybe_string_annotation(_, _, {_, Pos, _}, _) ->
 	{error, syntax, Pos}.
 
 
--spec parse_type(lagra:store(), pid(), lexeme(), partial_triple())
+-spec parse_type(lagra:store(), pid(), lexeme(), state())
 				-> ok | error_value().
 parse_type(Store, TermSrv, {iriref, Pos, Type},
-		   {S, P, {literal, {string, Text}}}) ->
+		   State = #state{triple={S, P, {literal, {string, Text}}}}) ->
 	TypeIRI = lagra_model:new_iri(Type),
 	case lagra_model:is_absolute_iri(TypeIRI) of
 		true ->
-			parse_dot(Store, TermSrv, next_term(TermSrv),
-					  {S, P, {literal, {typed, Text, TypeIRI}}});
+			NewLiteral = {literal, {typed, Text, Type}},
+			NewTriple = {S, P, NewLiteral},
+			NewState = State#state{triple=NewTriple},
+			parse_dot(Store, TermSrv, next_term(TermSrv), NewState);
 		false ->
 			{error, relative_iri, Pos}
 	end;
@@ -134,24 +154,37 @@ parse_type(_, _, {_, Pos, _}, _) ->
 	{error, syntax, Pos}.
 
 
--spec parse_dot(lagra:store(), pid(), lexeme(), partial_triple())
+-spec parse_dot(lagra:store(), pid(), lexeme(), state())
 			   -> ok | error_value().
-parse_dot(Store, TermSrv, {dot, _, _}, Triple) ->
+parse_dot(Store, TermSrv, {dot, _, _}, State = #state{triple=Triple}) ->
 	ok = lagra:add(Store, Triple),
 	io:format("add ~p~n", [Triple]),
-	parse_eol(Store, TermSrv, next_term(TermSrv), {none, none, none});
+	parse_eol(Store, TermSrv, next_term(TermSrv),
+			  State#state{triple={none, none, none}});
 parse_dot(_, _, {_, Pos, _}, _) ->
 	{error, syntax, Pos}.
 
 
--spec parse_eol(lagra:store(), pid(), lexeme(), partial_triple())
+-spec parse_eol(lagra:store(), pid(), lexeme(), state())
 			   -> ok | error_value().
-parse_eol(Store, TermSrv, {eol, _, _}, Triple={none, none, none}) ->
-	parse_subject(Store, TermSrv, next_term(TermSrv), Triple);
-parse_eol(_Store, _TermSrv, {eof, _, _}, {none, none, none}) ->
+parse_eol(Store, TermSrv, {eol, _, _},
+		  State = #state{triple={none, none, none}}) ->
+	parse_subject(Store, TermSrv, next_term(TermSrv), State);
+parse_eol(_Store, _TermSrv, {eof, _, _}, #state{triple={none, none, none}}) ->
 	ok;
-parse_eol(_, _, {_, Pos, _}, {none, none, none}) ->
+parse_eol(_, _, {_, Pos, _}, #state{triple={none, none, none}}) ->
 	{error, syntax, Pos}.
+
+-spec get_bnode_or_new(lagra:store(), map(), string())
+					  -> {map(), lagra_model:bnode()}.
+get_bnode_or_new(Store, BNodes, Text) ->
+	case maps:get(Text, BNodes, undef) of
+		undef ->
+			BNode = lagra_model:new_bnode(Store),
+			{BNodes#{Text => BNode}, BNode};
+		BNode ->
+			{BNodes, BNode}
+	end.
 
 %%% The lexer is a mini server for parsing terms incrementally. The
 %%% server reads a line at a time from the input, and returns the next
