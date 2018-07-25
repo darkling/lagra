@@ -232,8 +232,8 @@ terms(File, State) ->
 term(File, {[], LnNo, ChNo}) ->
 	io:format("Empty line: reading new one"),
 	Line = case file:read_line(File) of
-			   {ok, L} -> io:format(" ~p~n", [L]), L;
-			   eof -> io:format(" eof~n"), eof;
+			   {ok, L} -> L;
+			   eof -> eof;
 			   {error, Reason} ->
 				   throw(Reason)
 		   end,
@@ -253,8 +253,7 @@ term(File, {Line, LnNo, ChNo}) ->
 		{{comment, Text}, Rest} ->
 			io:format("comm~n"),
 			term(File, {Rest, LnNo, ChNo+length(Text)});
-		X = {{Type, Text}, Rest} ->
-			io:format("Found ~p~n", [X]),
+		{{Type, Text}, Rest} ->
 			{{Type, {LnNo, ChNo}, Text}, {Rest, LnNo, ChNo+length(Text)}}
 	end.
 
