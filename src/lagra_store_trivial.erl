@@ -57,6 +57,12 @@ code_change(_OldVsn, State, _Extra) ->
 
 %% Internals
 
+-spec po_from_s(#state{}, lagra_model:subject()) ->
+					   [{lagra_model:predicate(), lagra_model:object()}].
+po_from_s(#state{quads=Quads}, Subject) ->
+	[{lagra_model:predicate(T), lagra_model:object(T)}
+	 || T <- Quads, lagra_model:subject(T) =:= Subject].
+
 -spec t_from_q(#state{}, lagra_model:quad_pattern()) ->
 					  [lagra_model:triple()].
 t_from_q(#state{quads=Quads}, {Ps, Pp, Po, Pg}) ->
@@ -74,10 +80,3 @@ add(State, {S, P, O}) ->
 	add(State, Quad);
 add(State = #state{quads=Quads}, Quad = {_S, _P, _O, _G}) ->
 	{ok, State#state{quads=[Quad|Quads]}}.
-
-
--spec po_from_s(#state{}, lagra_model:subject()) ->
-					   [{lagra_model:predicate(), lagra_model:object()}].
-po_from_s(#state{quads=Quads}, Subject) ->
-	[{lagra_model:predicate(T), lagra_model:object(T)}
-	 || T <- Quads, lagra_model:subject(T) =:= Subject].
