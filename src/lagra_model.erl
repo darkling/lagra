@@ -9,6 +9,7 @@
 -export([new_triple/3]).
 -export([new_quad/4]).
 -export([subject/1, predicate/1, object/1, graph/1]).
+-export([quad_to_triple/1]).
 
 -export([is_absolute_iri/1]).
 
@@ -115,6 +116,10 @@ graph({_S, _P, _O}) ->
 	"";
 graph({_S, _P, _O, G}) ->
 	G.
+
+-spec quad_to_triple(quad()) -> triple().
+quad_to_triple({S, P, O, _}) ->
+	{S, P, O}.
 
 -spec is_absolute_iri(iri()) -> true | false.
 is_absolute_iri({iri, Text}) ->

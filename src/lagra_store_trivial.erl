@@ -30,6 +30,8 @@ init([]) ->
 
 handle_call({po_from_s, Subject}, _From, State) ->
 	{reply, po_from_s(State, Subject), State};
+handle_call({t_from_q, Pattern}, _From, State) ->
+	{reply, t_from_q(State, Pattern), State};
 handle_call({add_triple, Triple}, _From, State) ->
 	{ok, NewState} = add(State, Triple),
 	{reply, ok, NewState};
@@ -54,6 +56,16 @@ code_change(_OldVsn, State, _Extra) ->
 	{ok, State}.
 
 %% Internals
+
+-spec t_from_q(#state{}, lagra_model:quad_pattern()) ->
+					  [lagra_model:triple()].
+t_from_q(#state{quads=Quads}, {Ps, Pp, Po, Pg}) ->
+	[lagra_model:quad_to_triple(Q)
+	 || {S, P, O, G} = Q <- Quads,
+		(Ps =:= '_') or (Ps =:= S),
+		(Pp =:= '_') or (Pp =:= P),
+		(Po =:= '_') or (Po =:= O),
+		(Pg =:= '_') or (Pg =:= G)].
 
 -spec add(#state{}, lagra_model:triple() | lagra_model:quad()) ->
 				 {ok, #state{}}. %| {error, term()}.
