@@ -40,8 +40,8 @@ destroy_store(Store) ->
 
 -spec parse(store(), file:io_device(), atom(), proplists:proplist())
 		   -> ok | {error, term(), integer()}.
-parse(Store, File, ntriples, _Options) ->
-	lagra_parser_ntriples:parse(Store, File, []).
+parse(Store, File, ntriples, Options) ->
+	lagra_parser_ntriples:parse(Store, File, Options).
 
 -spec parse(store(), file:io_device(), atom())
 		   -> ok | {error, term(), integer()}.

@@ -21,7 +21,9 @@
 
 -record(state,
 		{triple :: partial_triple(),
-		 bnodes :: map()}).
+		 bnodes :: map(),
+		 allow_relative :: boolean()
+		}).
 
 -type partial_triple() :: {lagra_model:subject() | none,
 						   lagra_model:predicate() | none,
@@ -33,9 +35,12 @@
 
 -spec parse(lagra:store(), file:io_device(), proplists:proplist())
 		   -> ok | error_value().
-parse(Store, File, _Options) ->
+parse(Store, File, Options) ->
 	TermSrv = spawn_link(?MODULE, terms, [File, {"", 0, 0}]),
-	State = #state{triple={none, none, none}, bnodes=#{}},
+	State = #state{
+			   triple={none, none, none},
+			   bnodes=#{},
+			   allow_relative=proplists:get_bool(allow_relative, Options)},
 	Result = parse_subject(Store, TermSrv, next_term(TermSrv), State),
 	stop_server(TermSrv),
 	Result.
@@ -56,7 +61,7 @@ parse_subject(Store, TermSrv, {eol, _, _},
 parse_subject(Store, TermSrv, {iriref, Pos, Text},
 			  State = #state{triple={none, none, none}}) ->
 	IRI = lagra_model:new_iri(Text),
-	case lagra_model:is_absolute_iri(IRI) of
+	case lagra_model:is_absolute_iri(IRI) or State#state.allow_relative of
 		true ->
 			parse_predicate(Store, TermSrv, next_term(TermSrv),
 							State#state{triple={IRI, none, none}});
@@ -81,7 +86,7 @@ parse_subject(_, _, Term={_, Pos, _}, #state{triple={none, none, none}}) ->
 parse_predicate(Store, TermSrv, {iriref, Pos, Text},
 				State = #state{triple={S, none, none}}) ->
 	IRI = lagra_model:new_iri(Text),
-	case lagra_model:is_absolute_iri(IRI) of
+	case lagra_model:is_absolute_iri(IRI) or State#state.allow_relative of
 		true ->
 			parse_object(Store, TermSrv, next_term(TermSrv),
 						 State#state{triple={S, IRI, none}});
@@ -97,7 +102,7 @@ parse_predicate(_, _, {_, Pos, _}, #state{triple={_, none, none}}) ->
 parse_object(Store, TermSrv, {iriref, Pos, Text},
 			 State = #state{triple={S, P, none}}) ->
 	IRI = lagra_model:new_iri(Text),
-	case lagra_model:is_absolute_iri(IRI) of
+	case lagra_model:is_absolute_iri(IRI) or State#state.allow_relative of
 		true ->
 			parse_dot(Store, TermSrv, next_term(TermSrv),
 					  State#state{triple={S, P, IRI}});
@@ -141,7 +146,7 @@ parse_maybe_string_annotation(_, _, {_, Pos, _}, _) ->
 parse_type(Store, TermSrv, {iriref, Pos, Type},
 		   State = #state{triple={S, P, {literal, {string, Text}}}}) ->
 	TypeIRI = lagra_model:new_iri(Type),
-	case lagra_model:is_absolute_iri(TypeIRI) of
+	case lagra_model:is_absolute_iri(TypeIRI) or State#state.allow_relative of
 		true ->
 			NewLiteral = {literal, {typed, Text, Type}},
 			NewTriple = {S, P, NewLiteral},
