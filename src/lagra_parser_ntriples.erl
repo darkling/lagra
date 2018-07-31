@@ -163,7 +163,6 @@ parse_type(_, _, {_, Pos, _}, _) ->
 			   -> ok | error_value().
 parse_dot(Store, TermSrv, {dot, _, _}, State = #state{triple=Triple}) ->
 	ok = lagra:add(Store, Triple),
-	io:format("add ~p~n", [Triple]),
 	parse_eol(Store, TermSrv, next_term(TermSrv),
 			  State#state{triple={none, none, none}});
 parse_dot(_, _, {_, Pos, _}, _) ->
@@ -230,7 +229,6 @@ terms(File, State) ->
 				  {lexeme(),                         % Type, Pos, Text = Result
 				   {string(), integer(), integer()}}.% Rest, Ln, Char = State
 term(File, {[], LnNo, ChNo}) ->
-	io:format("Empty line: reading new one"),
 	Line = case file:read_line(File) of
 			   {ok, L} -> L;
 			   eof -> eof;
@@ -239,19 +237,14 @@ term(File, {[], LnNo, ChNo}) ->
 		   end,
 	{{eol, {LnNo, ChNo}, ""}, {Line, LnNo+1, 1}};
 term(_File, {eof, LnNo, ChNo}) ->
-	io:format("EOF"),
 	{{eof, {LnNo, ChNo}, ""}, {"", LnNo, ChNo}};
 term(File, {Line, LnNo, ChNo}) ->
-	io:format("Line with content: '~p'~n", [Line]),
 	case first_match(Line, ?REGEX) of
 		notfound ->
-			io:format("err: ~p~n", [Line]),
 			{{error, {LnNo, ChNo}, Line}, {tl(Line), LnNo, ChNo+1}};
 		{{whitespace, Text}, Rest} ->
-			io:format("ws~n"),
 			term(File, {Rest, LnNo, ChNo+length(Text)});
 		{{comment, Text}, Rest} ->
-			io:format("comm~n"),
 			term(File, {Rest, LnNo, ChNo+length(Text)});
 		{{Type, Text}, Rest} ->
 			{{Type, {LnNo, ChNo}, Text}, {Rest, LnNo, ChNo+length(Text)}}
@@ -262,7 +255,6 @@ term(File, {Line, LnNo, ChNo}) ->
 first_match(_Line, []) ->
 	notfound;
 first_match(Line, [{Tag, Re} | Tail]) ->
-	io:format("Trying ~p on ~p~n", [Tag, Line]),
 	case re:run(Line, "^"++Re++"(.*)", [{capture, all, list}, unicode]) of
 		{match, [_, Found, Rest]} ->
 			{{Tag, Found}, Rest};
