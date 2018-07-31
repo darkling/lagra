@@ -101,8 +101,8 @@ t_from_q(Store, Pattern) ->
 	gen_server:call(Store, {t_from_q, Pattern}).
 
 -spec t_from_t(store(), lagra_model:triple_pattern()) -> [lagra_model:triple()].
-t_from_t(Store, Pattern) ->
-	gen_server:call(Store, {t_from_t, Pattern}).
+t_from_t(Store, {Ps, Pp, Po}) ->
+	gen_server:call(Store, {t_from_q, {Ps, Pp, Po, '_'}}).
 
 
 %%% Test whether Graph1 from Store1 is isomorphic to Graph2 from Store2
