@@ -197,7 +197,9 @@ process_ungrounded_groups(Ungrounded, T1, M1, T2, M2) ->
 						  boolean().
 has_solution(Pair, T1, M1, T2, M2) ->
 	{GM1, GM2, _} = maybe_ground_pair(Pair, {M1, M2, false}),
-	is_isomorphic_to_bnodes(T1, GM1, T2, GM2).
+	ReGM1 = update_node_map(T1, GM1),
+	ReGM2 = update_node_map(T2, GM2),
+	is_isomorphic_to_bnodes(T1, ReGM1, T2, ReGM2).
 
 %%% Given a hash-nodes-nodes group and a pair of maps, update the maps
 %%% and return them, but only if the group contains precisely one node
