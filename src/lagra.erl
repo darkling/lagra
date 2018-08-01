@@ -182,25 +182,14 @@ is_isomorphic_to_bnodes(T1, M1, T2, M2) ->
 process_ungrounded_groups([], _T1, _M1, _T2, _M2) ->
 	%% No ungrounded nodes -- we must have finished, and can succeed
 	true;
-process_ungrounded_groups([{H, {NL1, NL2}}|_]=Ungrounded, T1, M1, T2, M2) ->
-	%% Find the ungrounded and paired nodes, and ground them
-	{GM1, GM2, Modified}
-		= lists:foldl(fun maybe_ground_pair/2,
-					  {M1, M2, false},
-					  Ungrounded),
-	case Modified of
-		true ->
-			%% We changed something, so we can just go around
-			%% again and see if that grounds any more nodes
-			is_isomorphic_to_bnodes(T1, GM1, T2, GM2);
-		false ->
-			%% Nothing changed, so we need to pick a grounded
-			%% and unpaired group, iterate through all the
-			%% combinations and see if one succeeded.
-			Trials = [{H, {[N1], [N2]}} || N1 <- NL1, N2 <- NL2],
-			lists:any(fun (Trial) -> has_solution(Trial, T1, M1, T2, M2) end,
-					  Trials)
-	end.
+process_ungrounded_groups(Ungrounded, T1, M1, T2, M2) ->
+	%% We need to pick a grounded and unpaired group, iterate through
+	%% all the combinations and see if one succeeded.
+	Trials = lists:append(
+			   [[{H, {[N1], [N2]}} || N1 <- NL1, N2 <- NL2]
+				|| {H, {NL1, NL2}} <- Ungrounded]),
+	lists:any(fun (Trial) -> has_solution(Trial, T1, M1, T2, M2) end,
+			  Trials).
 
 -spec has_solution(grouped_node(),
 				   [lagra_model:triple()], node_map(),
