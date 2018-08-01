@@ -1,0 +1,6 @@
+<http://example.com/Letter> <type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+_:a <type> <http://example.com/Letter> .
+_:a <type> _:b .
+_:a <type> _:c .
+_:c <type> _:d .
+_:b <type> _:e .
