@@ -280,7 +280,8 @@ node_signature(Node, Triples, NodeMap) ->
 					  fun (Data, Ctx) -> crypto:hash_update(Ctx, Data) end,
 					  HCtx,
 					  SortedTs),
-			{ungrounded, crypto:hash_final(HCtx2)}
+			H = crypto:hash_final(HCtx2),
+			{ungrounded, H}
 	end.
 
 %%% Group the nodes together by hash: collect together all the nodes
