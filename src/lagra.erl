@@ -7,6 +7,8 @@
 
 -export([add/2]).
 
+-export([find_all_t/2]).
+-export([find_all_q/2]).
 -export([o_from_sp/3]).
 -export([p_from_so/3]).
 -export([s_from_po/3]).
@@ -20,10 +22,6 @@
 %-export([po_from_sg/3]).
 %-export([so_from_pg/3]).
 %-export([sp_from_og/3]).
-
--export([t_from_q/2]).
--export([t_from_t/2]).
-
 %t/q_from_x
 %t/q_from_xy
 %t/q_from_t/q
@@ -77,7 +75,7 @@ add(Store, Quad) when tuple_size(Quad) =:= 4 ->
 			   -> [lagra_model:object()].
 o_from_sp(Store, Subject, Predicate) ->
 	Pattern = {Subject, Predicate, '_'},
-	Triples = gen_server:call(Store, {t_from_t, Pattern}),
+	Triples = gen_server:call(Store, {find_all_t, Pattern}),
 	[O || {_S, _P, O} <- Triples].
 %	gen_server:call(Store, {o_from_sp, Subject, Predicate}).
 
@@ -96,21 +94,29 @@ s_from_po(Store, Predicate, Object) ->
 po_from_s(Store, Subject) ->
 	gen_server:call(Store, {po_from_s, Subject}).
 
--spec t_from_q(store(), lagra_model:quad_pattern()) -> [lagra_model:triple()].
-t_from_q(Store, Pattern) ->
-	gen_server:call(Store, {t_from_q, Pattern}).
+%% -spec find_q(store(), lagra_model:pattern()) ->
+%% 					partial_result(lagra_model:quad()).
+%% -spec find_t(store(), lagra_model:pattern()) ->
+%% 					partial_result(lagra_model:triple()).
 
--spec t_from_t(store(), lagra_model:triple_pattern()) -> [lagra_model:triple()].
-t_from_t(Store, {Ps, Pp, Po}) ->
-	gen_server:call(Store, {t_from_q, {Ps, Pp, Po, '_'}}).
+-spec find_all_q(store(), lagra_model:pattern()) -> [lagra_model:quad()].
+find_all_q(Store, {Sp, Pp, Op}) ->
+	find_all_q(Store, {Sp, Pp, Op, '_'});
+find_all_q(Store, Pattern) when tuple_size(Pattern) =:= 4->
+	gen_server:call(Store, {find_all_q, Pattern}).
 
+-spec find_all_t(store(), lagra_model:pattern()) -> [lagra_model:triple()].
+find_all_t(Store, {Sp, Pp, Op}) ->
+	find_all_t(Store, {Sp, Pp, Op, '_'});
+find_all_t(Store, Pattern) when tuple_size(Pattern) =:= 4->
+	gen_server:call(Store, {find_all_t, Pattern}).
 
 %%% Test whether Graph1 from Store1 is isomorphic to Graph2 from Store2
 -spec isomorphic(store(), lagra_model:graph(), store(), lagra_model:graph())
 				-> true | false.
 isomorphic(Store1, Graph1, Store2, Graph2) ->
-	T1 = t_from_q(Store1, {'_', '_', '_', Graph1}),
-	T2 = t_from_q(Store2, {'_', '_', '_', Graph2}),
+	T1 = find_all_t(Store1, {'_', '_', '_', Graph1}),
+	T2 = find_all_t(Store2, {'_', '_', '_', Graph2}),
 	isomorphic(T1, T2).
 
 %%% Test whether two lists of triples are isomorphic to each other

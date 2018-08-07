@@ -31,9 +31,15 @@
 -type triple() :: {subject(), predicate(), object()}.
 -type quad() :: {subject(), predicate(), object(), graph()}.
 
+-type triple_pattern() :: {subject() | '_', predicate() | '_', object() | '_'}.
+-type quad_pattern() :: {subject() | '_', predicate() | '_', object() | '_',
+						 graph() | '_'}.
+-type pattern() :: triple_pattern() | quad_pattern().
+
 -export_type([literal/0, iri/0, bnode/0, literalnode/0, resource/0]).
 -export_type([subject/0, predicate/0, object/0, graph/0]).
 -export_type([rdfnode/0, triple/0, quad/0]).
+-export_type([pattern/0, triple_pattern/0, quad_pattern/0]).
 
 -spec new_literal(term()) -> literalnode().
 new_literal(Text) when is_list(Text) ->
