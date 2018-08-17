@@ -72,8 +72,8 @@ $uscore(Config) ->
         filename:join(?config(data_dir, Config),
                               \"$last_file\"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, \"urn:nil\"}, Store2, {iri, \"urn:nil\"}).
 "
 				fun_names="${fun_names}, $uscore/1"
@@ -97,8 +97,8 @@ $uscore(Config) ->
         filename:join(?config(data_dir, Config),
                               \"${last_file}\"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, \"urn:nil\"}, Store2, {iri, \"urn:nil\"}).
 "
 				fun_names="${fun_names}, $uscore/1"

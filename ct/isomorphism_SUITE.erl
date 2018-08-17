@@ -42,8 +42,8 @@ jena_iso_00(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_00-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_01(Config) ->
@@ -57,8 +57,8 @@ jena_iso_01(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_01-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_02(Config) ->
@@ -72,8 +72,8 @@ jena_iso_02(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_02-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_03(Config) ->
@@ -87,8 +87,8 @@ jena_iso_03(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_03-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_04(Config) ->
@@ -102,8 +102,8 @@ jena_iso_04(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_04-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_05(Config) ->
@@ -117,8 +117,8 @@ jena_iso_05(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_05-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_06(Config) ->
@@ -132,8 +132,8 @@ jena_iso_06(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_06-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_07(Config) ->
@@ -147,8 +147,8 @@ jena_iso_07(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_07-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_20(Config) ->
@@ -162,8 +162,8 @@ jena_iso_20(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_20-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_21(Config) ->
@@ -177,8 +177,8 @@ jena_iso_21(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_21-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_22(Config) ->
@@ -192,8 +192,8 @@ jena_iso_22(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_22-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_23(Config) ->
@@ -207,8 +207,8 @@ jena_iso_23(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_23-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_24(Config) ->
@@ -222,8 +222,8 @@ jena_iso_24(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_24-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_62(Config) ->
@@ -237,8 +237,8 @@ jena_iso_62(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_62-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_63(Config) ->
@@ -252,8 +252,8 @@ jena_iso_63(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_63-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_65(Config) ->
@@ -267,8 +267,8 @@ jena_iso_65(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_65-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 jena_iso_66(Config) ->
@@ -282,8 +282,8 @@ jena_iso_66(Config) ->
         filename:join(?config(data_dir, Config),
                               "jena-iso_66-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_bad_01(Config) ->
@@ -297,8 +297,8 @@ easyrdf_bad_01(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-bad-01-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_bad_02(Config) ->
@@ -312,8 +312,8 @@ easyrdf_bad_02(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-bad-02-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_bad_03(Config) ->
@@ -327,8 +327,8 @@ easyrdf_bad_03(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-bad-03-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_bad_04(Config) ->
@@ -342,8 +342,8 @@ easyrdf_bad_04(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-bad-04-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_bad_05(Config) ->
@@ -357,8 +357,8 @@ easyrdf_bad_05(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-bad-05-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_bad_06(Config) ->
@@ -372,8 +372,8 @@ easyrdf_bad_06(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-bad-06-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_good_01(Config) ->
@@ -387,8 +387,8 @@ easyrdf_good_01(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-good-01-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_good_02(Config) ->
@@ -402,8 +402,8 @@ easyrdf_good_02(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-good-02-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_good_03(Config) ->
@@ -417,8 +417,8 @@ easyrdf_good_03(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-good-03-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_good_04(Config) ->
@@ -432,8 +432,8 @@ easyrdf_good_04(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-good-04-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_good_05(Config) ->
@@ -447,8 +447,8 @@ easyrdf_good_05(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-good-05-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_good_06(Config) ->
@@ -462,8 +462,8 @@ easyrdf_good_06(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-good-06-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 easyrdf_good_07(Config) ->
@@ -477,8 +477,8 @@ easyrdf_good_07(Config) ->
         filename:join(?config(data_dir, Config),
                               "easyrdf-good-07-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 node_rdf_01(Config) ->
@@ -492,8 +492,8 @@ node_rdf_01(Config) ->
         filename:join(?config(data_dir, Config),
                               "node-rdf-01-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 node_rdf_02(Config) ->
@@ -507,8 +507,8 @@ node_rdf_02(Config) ->
         filename:join(?config(data_dir, Config),
                               "node-rdf-02-a.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_match_test1(Config) ->
@@ -522,8 +522,8 @@ ruby_rdf_match_test1(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-match-test1-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_match_test2(Config) ->
@@ -537,8 +537,8 @@ ruby_rdf_match_test2(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-match-test2-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_match_test3(Config) ->
@@ -552,8 +552,8 @@ ruby_rdf_match_test3(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-match-test3-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_match_test4(Config) ->
@@ -567,8 +567,8 @@ ruby_rdf_match_test4(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-match-test4-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_match_test5(Config) ->
@@ -582,8 +582,8 @@ ruby_rdf_match_test5(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-match-test5-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_match_test6(Config) ->
@@ -597,8 +597,8 @@ ruby_rdf_match_test6(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-match-test6-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_match_test7(Config) ->
@@ -612,8 +612,8 @@ ruby_rdf_match_test7(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-match-test7-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_nomatch_test1(Config) ->
@@ -627,8 +627,8 @@ ruby_rdf_nomatch_test1(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-nomatch-test1-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_nomatch_test2(Config) ->
@@ -642,8 +642,8 @@ ruby_rdf_nomatch_test2(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-nomatch-test2-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_nomatch_test3(Config) ->
@@ -657,8 +657,8 @@ ruby_rdf_nomatch_test3(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-nomatch-test3-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_nomatch_test4(Config) ->
@@ -672,8 +672,8 @@ ruby_rdf_nomatch_test4(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-nomatch-test4-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_nomatch_test5(Config) ->
@@ -687,8 +687,8 @@ ruby_rdf_nomatch_test5(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-nomatch-test5-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 ruby_rdf_nomatch_test6(Config) ->
@@ -702,8 +702,8 @@ ruby_rdf_nomatch_test6(Config) ->
         filename:join(?config(data_dir, Config),
                               "ruby-rdf-nomatch-test6-1.nt"),
                       [read]),
-    ok = lagra:parse(Store1, File1, ntriples, [allow_relative]),
-    ok = lagra:parse(Store2, File2, ntriples, [allow_relative]),
+    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
+    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 

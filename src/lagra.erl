@@ -4,6 +4,8 @@
 -export([destroy_store/1]).
 
 -export([parse/3, parse/4]).
+-export([parse_incremental/2, parse_incremental/3]).
+-export([serialize/3, serialize/4]).
 
 -export([add/2]).
 
@@ -20,8 +22,11 @@
 -type grouped_node() :: {node_map_elt(),
 						 {[lagra_model:rdfnode()],
 						  [lagra_model:rdfnode()]}}.
+-type partial_result(T) :: {ok, [T], parse_state(T)} | {error, term()}.
+-type parse_state(T) :: last | fun (() -> partial_result(T)).
 
 -export_type([store/0]).
+-export_type([partial_result/1, parse_state/1]).
 
 -spec create_store(atom()) -> store().
 create_store(trivial) ->
@@ -36,18 +41,38 @@ create_store(trivial, _Options) ->
 destroy_store(Store) ->
 	supervisor:terminate_child(lagra_store_trivial_sup, Store).
 
--spec parse(store(), file:io_device(), atom(), proplists:proplist())
-		   -> ok | {error, term(), integer()}.
+-spec parse(store(), file:io_device(), atom()) ->
+				   ok | {error, term(), integer()}.
+parse(Store, File, Parser) ->
+	parse(Store, File, Parser, #{}).
+
+-spec parse(store(), file:io_device(), atom(), map()) ->
+				   ok | {error, term(), integer()}.
 parse(Store, File, ntriples, Options) ->
 	lagra_parser_ntriples:parse(Store, File, Options).
 
--spec parse(store(), file:io_device(), atom())
-		   -> ok | {error, term(), integer()}.
-parse(Store, File, Parser) ->
-	parse(Store, File, Parser, []).
+-spec parse_incremental(file:io_device(), atom()) ->
+							   partial_result(lagra_model:triple()).
+parse_incremental(File, Type) ->
+	parse_incremental(File, Type, #{}).
 
--spec add(store(), lagra_model:triple() | lagra_model:quad())
-		 -> ok | {error, term()}.
+-spec parse_incremental(file:io_device(), atom(), map()) ->
+							   partial_result(lagra_model:triple()).
+parse_incremental(File, ntriples, Options) ->
+	lagra_parser_ntriples:parse_incremental(File, Options).
+
+-spec serialize(store(), file:io_device(), atom()) ->
+					   ok | {error, term()}.
+serialize(Store, File, Type) ->
+	serialize(Store, File, Type, []).
+
+-spec serialize(store(), file:io_device(), atom(), proplists:proplist()) ->
+					   ok | {error, term()}.
+serialize(Store, File, ntriples, Options) ->
+	lagra_serializer_ntriples:serialize(Store, File, Options).
+
+-spec add(store(), lagra_model:triple() | lagra_model:quad()) ->
+				 ok | {error, term()}.
 add(Store, Triple) when tuple_size(Triple) =:= 3 ->
 	gen_server:call(Store, {add_triple, Triple});
 add(Store, Quad) when tuple_size(Quad) =:= 4 ->
