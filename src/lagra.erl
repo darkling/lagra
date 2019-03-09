@@ -21,6 +21,15 @@
 %-export([so_from_pg/3]).
 %-export([sp_from_og/3]).
 
+-export([t_from_q/2]).
+-export([t_from_t/2]).
+
+%t/q_from_x
+%t/q_from_xy
+%t/q_from_t/q
+%x_from_yz ?
+%xy_from_z ?
+
 -export([isomorphic/4, isomorphic/2]).
 
 -include_lib("eunit/include/eunit.hrl").
@@ -67,7 +76,10 @@ add(Store, Quad) when tuple_size(Quad) =:= 4 ->
 -spec o_from_sp(store(), lagra_model:subject(), lagra_model:predicate())
 			   -> [lagra_model:object()].
 o_from_sp(Store, Subject, Predicate) ->
-	gen_server:call(Store, {o_from_sp, Subject, Predicate}).
+	Pattern = {Subject, Predicate, '_'},
+	Triples = gen_server:call(Store, {t_from_t, Pattern}),
+	[O || {_S, _P, O} <- Triples].
+%	gen_server:call(Store, {o_from_sp, Subject, Predicate}).
 
 -spec p_from_so(store(), lagra_model:subject(), lagra_model:object())
 			   -> [lagra_model:predicate()].
@@ -79,11 +91,20 @@ p_from_so(Store, Subject, Object) ->
 s_from_po(Store, Predicate, Object) ->
 	gen_server:call(Store, {s_from_po, Predicate, Object}).
 
-
 -spec po_from_s(store(), lagra_model:subject())
 			   -> [{lagra_model:predicate(), lagra_model:object()}].
 po_from_s(Store, Subject) ->
 	gen_server:call(Store, {po_from_s, Subject}).
+
+-spec t_from_q(store(), lagra_model:quad_pattern()) -> [lagra_model:triple()].
+t_from_q(Store, Pattern) ->
+	gen_server:call(Store, {t_from_q, Pattern}).
+
+-spec t_from_t(store(), lagra_model:triple_pattern()) -> [lagra_model:triple()].
+t_from_t(Store, Pattern) ->
+	gen_server:call(Store, {t_from_t, Pattern}).
+
+
 %%% Test whether Graph1 from Store1 is isomorphic to Graph2 from Store2
 -spec isomorphic(store(), lagra_model:graph(), store(), lagra_model:graph())
 				-> true | false.
