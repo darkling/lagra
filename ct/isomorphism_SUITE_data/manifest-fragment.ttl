@@ -1,0 +1,135 @@
+<#jena-iso_00>
+   mf:action "jena-iso_00-a.nt";
+   mf:action "jena-iso_00-b.nt";
+   mf:name "jena-iso_00";
+   a rdft:TestIsomorphismPositive;
+   rdfs:comment "Comparing empty graphs";
+   .
+
+<#jena-iso_01>
+   mf:action "jena-iso_01-a.nt";
+   mf:action "jena-iso_01-b.nt";
+   mf:name "jena-iso_01";
+   a rdft:TestIsomorphismPositive;
+   rdfs:comment "Comparing simple graph with no bnodes";
+   .
+
+<#jena-iso_02>
+   mf:action "jena-iso_02-a.nt";
+   mf:action "jena-iso_02-b.nt";
+   mf:name "jena-iso_02";
+   a rdft:TestIsomorphismNegative;
+   rdfs:comment "Comparing simple graph with no bnodes (negative)";
+   .
+
+<#jena-iso_03>
+   mf:action "jena-iso_03-a.nt";
+   mf:action "jena-iso_03-b.nt";
+   mf:name "jena-iso_03";
+   a rdft:TestIsomorphismNegative;
+   rdfs:comment "Comparing graphs of different sizes";
+   .
+
+<#jena-iso_04>
+   mf:action "jena-iso_04-a.nt";
+   mf:action "jena-iso_04-b.nt";
+   mf:name "jena-iso_04";
+   a rdft:TestIsomorphismNegative;
+   rdfs:comment "Comparing a blank node to a literal";
+   .
+
+<#jena-iso_05>
+   mf:action "jena-iso_05-a.nt";
+   mf:action "jena-iso_05-b.nt";
+   mf:name "jena-iso_05";
+   a rdft:TestIsomorphismPositive;
+   rdfs:comment "Comparing blank nodes with different names";
+   .
+
+<#jena-iso_06>
+   mf:action "jena-iso_06-a.nt";
+   mf:action "jena-iso_06-b.nt";
+   mf:name "jena-iso_06";
+   a rdft:TestIsomorphismPositive;
+   rdfs:comment "Comparing reflexive blank nodes with different names";
+   .
+
+<#jena-iso_07>
+   mf:action "jena-iso_07-a.nt";
+   mf:action "jena-iso_07-b.nt";
+   mf:name "jena-iso_07";
+   a rdft:TestIsomorphismNegative;
+   rdfs:comment "Comparing two blank nodes vs one reflexive one";
+   .
+
+<#jena-iso_20>
+   mf:action "jena-iso_20-a.nt";
+   mf:action "jena-iso_20-b.nt";
+   mf:name "jena-iso_20";
+   a rdft:TestIsomorphismPositive;
+   .
+
+<#jena-iso_21>
+   mf:action "jena-iso_21-a.nt";
+   mf:action "jena-iso_21-b.nt";
+   mf:name "jena-iso_21";
+   a rdft:TestIsomorphismNegative;
+   .
+
+<#jena-iso_22>
+   mf:action "jena-iso_22-a.nt";
+   mf:action "jena-iso_22-b.nt";
+   mf:name "jena-iso_22";
+   a rdft:TestIsomorphismPositive;
+   .
+
+<#jena-iso_23>
+   mf:action "jena-iso_23-a.nt";
+   mf:action "jena-iso_23-b.nt";
+   mf:name "jena-iso_23";
+   a rdft:TestIsomorphismNegative;
+   .
+
+<#jena-iso_24>
+   mf:action "jena-iso_24-a.nt";
+   mf:action "jena-iso_24-b.nt";
+   mf:name "jena-iso_24";
+   a rdft:TestIsomorphismNegative;
+   .
+
+<#jena-iso_62>
+   mf:action "jena-iso_62-a.nt";
+   mf:action "jena-iso_62-b.nt";
+   mf:name "jena-iso_62";
+   a rdft:TestIsomorphismNegative;
+   .
+
+<#jena-iso_63>
+   mf:action "jena-iso_63-a.nt";
+   mf:action "jena-iso_63-b.nt";
+   mf:name "jena-iso_63";
+   a rdft:TestIsomorphismPositive;
+   .
+
+<#jena-iso_64>
+   mf:action "jena-iso_64-a.nt";
+   mf:action "jena-iso_64-b.nt";
+   mf:name "jena-iso_64";
+   a rdft:TestIsomorphismPositive;
+   .
+
+<#jena-iso_65>
+   mf:action "jena-iso_65-a.nt";
+   mf:action "jena-iso_65-b.nt";
+   mf:name "jena-iso_65";
+   a rdft:TestIsomorphismPositive;
+   .
+
+<#jena-iso_66>
+   mf:action "jena-iso_66-a.nt";
+   mf:action "jena-iso_66-b.nt";
+   mf:name "jena-iso_66";
+   a rdft:TestIsomorphismPositive;
+   rdfs:comment "Backtracking. _:a -> _y needs unwinding.";
+   .
+

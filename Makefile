@@ -5,8 +5,12 @@ TEST_DIR = ct
 
 include erlang.mk
 
-.PHONY: parser-tests
-parser-tests: $(subst _data,.erl,$(wildcard ct/parser_*_SUITE_data))
+.PHONY: test-suites
+test-suites: $(subst _data,.erl,$(wildcard ct/parser_*_SUITE_data)) \
+             ct/isomorphism_SUITE.erl
 
 ct/parser_%_SUITE.erl: ct/parser_%_SUITE_data/manifest.ttl scripts/gen-parser-test-suite.sh
 	scripts/gen-parser-test-suite.sh $< $(notdir $(subst .erl,,$@)) >$@
+
+ct/isomorphism_SUITE.erl: ct/isomorphism_SUITE_data/manifest.ttl scripts/gen-parser-test-suite.sh
+	scripts/gen-parser-test-suite.sh $< $(notdir $(subst .erl,,$@)) 2 >$@
