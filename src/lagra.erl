@@ -233,7 +233,6 @@ isomorphic(Store1, Graph1, Store2, Graph2) ->
 				   -> true | false.
 isomorphic(T1, T2) when length(T1) =/= length(T2) ->
 	% If the lists of triples are different sizes, we can fail immediately
-	io:format("Different sized graphs~n"),
 	false;
 isomorphic(T1, T2) ->
 	NonB1 = [T || T <- T1, not is_blank_triple(T)],
