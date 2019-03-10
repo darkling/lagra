@@ -1,5 +1,5 @@
 PROJECT = lagra
-PROJECT_DESCRIPTION = New project
+PROJECT_DESCRIPTION = RDF library for Erlang
 PROJECT_VERSION = 0.1.0
 TEST_DIR = ct
 
