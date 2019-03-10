@@ -2,7 +2,7 @@
 -export([new_literal/1, new_literal/2]).
 -export([new_literal_typed/2]).
 -export([new_iri/1]).
--export([new_bnode/1]).
+-export([new_bnode/0]).
 -export([literal_value/1]).
 -export([literal_locale/1]).
 -export([literal_type/1]).
@@ -61,9 +61,9 @@ new_literal_typed(Value, Type) when is_list(Type) ->
 new_iri(String) when is_list(String) ->
 	{iri, String}.
 
--spec new_bnode(lagra:store()) -> bnode().
-new_bnode(Store) ->
-	gen_server:call(Store, {new_bnode}).
+-spec new_bnode() -> bnode().
+new_bnode() ->
+	lagra_bnode:new().
 
 -spec literal_value(literal() | literalnode()) -> term().
 literal_value({literal, Lit}) ->

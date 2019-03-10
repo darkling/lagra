@@ -13,7 +13,6 @@
 -export([code_change/3]).
 
 -record(state, {quads                      :: [lagra_model:quad()],
-				bnode_id = 1               :: integer(),
 				default = {iri, "urn:nil"} :: lagra_model:graph()
 	   }).
 
@@ -38,8 +37,6 @@ handle_call({add_triple, Triple}, _From, State) ->
 handle_call({add_quad, Quad}, _From, State) ->
 	{ok, NewState} = add(State, Quad),
 	{reply, ok, NewState};
-handle_call({new_bnode}, _From, State = #state{bnode_id=Id}) ->
-	{reply, {bnode, integer_to_list(Id)}, State#state{bnode_id=Id+1}};
 handle_call(_Request, _From, State) ->
 	{reply, ignored, State}.
 
