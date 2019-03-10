@@ -7,3 +7,7 @@ logs/
 ebin/
 *.beam
 *.orig
+doc/*.html
+doc/*.css
+doc/edoc-info
+doc/erlang.png

@@ -1,3 +1,4 @@
+%% @private
 -module(lagra_parser_ntriples_parser).
 -behaviour(gen_server).
 

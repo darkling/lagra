@@ -1,3 +1,4 @@
+%% @private
 -module(lagra_app).
 -behaviour(application).
 

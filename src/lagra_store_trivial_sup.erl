@@ -1,3 +1,4 @@
+%% @private
 -module(lagra_store_trivial_sup).
 -behaviour(supervisor).
 

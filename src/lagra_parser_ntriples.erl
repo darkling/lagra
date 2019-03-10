@@ -1,3 +1,4 @@
+%% @private
 -module(lagra_parser_ntriples).
 -export([parse/3, parse_incremental/2]).
 

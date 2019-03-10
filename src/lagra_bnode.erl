@@ -1,3 +1,4 @@
+%% @private
 -module(lagra_bnode).
 -behaviour(gen_server).
 

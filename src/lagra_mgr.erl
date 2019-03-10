@@ -1,3 +1,4 @@
+%% @private
 -module(lagra_mgr).
 -behaviour(gen_server).
 

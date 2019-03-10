@@ -1,3 +1,4 @@
+%% @private
 -module(lagra_parsers_sup).
 -behaviour(supervisor).
 

@@ -1,3 +1,4 @@
+%% @private
 -module(lagra_sup).
 -behaviour(supervisor).
 

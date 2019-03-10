@@ -1,3 +1,15 @@
+%% @author Hugo Mills <hugo@carfax.org.uk>
+
+%% @doc The primary entry point for lagra.
+%%
+%%   The lagra module contains functions for parsing and serialising
+%%   RDF documents, storing them, and manipulating them.
+%%
+%%   All of these functions operate on a <i>triplestore</i>. The only
+%%   kind of triplestore currently implemented is the
+%%   `trivial' triplestore, which is an in-memory store
+%%   suitable only for small documents.
+
 -module(lagra).
 
 -export([create_store/1, create_store/2]).
@@ -28,34 +40,110 @@
 -export_type([store/0]).
 -export_type([partial_result/1, parse_state/1]).
 
+%% @equiv create_store(Type, #{})
+%% @spec (Type :: trivial) -> store()
 -spec create_store(atom()) -> store().
 create_store(trivial) ->
 	create_store(trivial, []).
 
--spec create_store(atom(), proplists:proplist()) -> store().
+%% @doc Create a lagra triplestore.
+%%
+%% @param Type The type of the triplestore. Types defined are
+%%             `trivial'.
+%%
+%% @param Options A map of options for the triplestore. For a
+%%                `trivial' triplestore, no options are available, and
+%%                the map should be empty..
+%%
+%% @returns A reference to the created store.
+%%
+%% @spec (Type :: trivial, Options :: map()) -> store()
+-spec create_store(atom(), map()) -> store().
 create_store(trivial, _Options) ->
 	{ok, Child} = supervisor:start_child(lagra_store_trivial_sup, []),
 	Child.
 
+%% @doc Destroy a lagra triplestore.
+%%
+%%   For in-memory stores, discards the store completely. For
+%%   persistent disk-based stores, simply discards the handle to the
+%%   store. The store can be accessed again by connecting to it using
+%%   create_store/2.
+%%
+%% @param Store The store to destroy
+%%
+%% @returns `ok'
 -spec destroy_store(store()) -> term().
 destroy_store(Store) ->
 	supervisor:terminate_child(lagra_store_trivial_sup, Store).
 
+%% @equiv parse(Store, File, Parser, #{})
 -spec parse(store(), file:io_device(), atom()) ->
 				   ok | {error, term(), integer()}.
 parse(Store, File, Parser) ->
 	parse(Store, File, Parser, #{}).
 
+%% @doc Parse an open file-like object into a triplestore.
+%%
+%%   Reads the contents of `File' into `Store', reading it using the
+%%   `Parser', with `Options' passed to the parser.
+%%
+%% @spec (Store :: store(), File :: file:io_device(),
+%%        Type :: ntriples, Options :: map()) -> ok | {error, term(), integer()}
+%%
+%% @param Store The lagra triplestore to put the triples in
+%%
+%% @param File An open file-like object
+%%
+%% @param Parser The parser to use. Defined parsers are `ntriples'.
+%%
+%% @param Options The options to pass to the parser. For `ntriples',
+%% the options are:
+%%
+%% `allow_relative => boolean()': Allow parsing relative URIs. This is
+%% forbidden by the NTriples standard, but may be useful for parsing
+%% some kinds of input, such as test suites. Default: `false'.
+%%
+%% @returns `ok | {error, atom(), location()}'
 -spec parse(store(), file:io_device(), atom(), map()) ->
 				   ok | {error, term(), integer()}.
 parse(Store, File, ntriples, Options) ->
 	lagra_parser_ntriples:parse(Store, File, Options).
 
+%% @equiv parse_incremental(File, Type, #{})
 -spec parse_incremental(file:io_device(), atom()) ->
 							   partial_result(lagra_model:triple()).
 parse_incremental(File, Type) ->
 	parse_incremental(File, Type, #{}).
 
+%% @doc Parse an open file-like object incrementally.
+%%
+%%   Reads the contents of `File', returning a partial list of the
+%%   triples, and a continuation function to continue the parsing.
+%%
+%% @spec (File :: file:io_device(), Type :: ntriples, Options :: map())
+%%          -> partial_result(lagra_model:triple())
+%%
+%% @param File An open file-like object
+%%
+%% @param Parser The parser to use. Defined parsers are `ntriples'.
+%%
+%% @param Options The options to pass to the parser. All parsers
+%% support the following options:
+%%
+%% `batch => integer()': The maximum number of triples to return on
+%% each call. Default: `1000'.
+%%
+%% For individual parsers' options, see the `Options' parameter of
+%% parse/4.
+%%
+%% @returns `{ok, Triples, Continuation}'
+%%
+%%   where `Triples' is a list of triples, and the `Continuation' is
+%%   either the atom `last', indicating that there are no more triples
+%%   in the `File', or it is a function with arity zero which will
+%%   read the next batch of triples from the `File', returning a
+%%   similar result to this function.
 -spec parse_incremental(file:io_device(), atom(), map()) ->
 							   partial_result(lagra_model:triple()).
 parse_incremental(File, ntriples, Options) ->
@@ -71,6 +159,13 @@ serialize(Store, File, Type) ->
 serialize(Store, File, ntriples, Options) ->
 	lagra_serializer_ntriples:serialize(Store, File, Options).
 
+%% @doc Add a triple or quad to a triplestore.
+%%
+%% @param Store The triplestore to add the triple to.
+%%
+%% @param Triple The triple (or quad) to add.
+%%
+%% @returns `ok | {error, term()}'
 -spec add(store(), lagra_model:triple() | lagra_model:quad()) ->
 				 ok | {error, term()}.
 add(Store, Triple) when tuple_size(Triple) =:= 3 ->
@@ -83,19 +178,49 @@ add(Store, Quad) when tuple_size(Quad) =:= 4 ->
 %% -spec find_t(store(), lagra_model:pattern()) ->
 %% 					partial_result(lagra_model:triple()).
 
+%% @doc Return all quads in a triplestore matching a specific pattern.
+%%
+%% @param Store The triplestore to search.
+%%
+%% @param Pattern A triple or quad pattern to match.
+%%
+%%   Patterns are a 3-tuple or 4-tuple, containing either an exact RDF
+%%   node to match on, or the atom ``'_''' as a wildcard. A 3-tuple
+%%   pattern will match triples in any graph context within the
+%%   triplestore.
 -spec find_all_q(store(), lagra_model:pattern()) -> [lagra_model:quad()].
+find_all_q(Store, Pattern) when tuple_size(Pattern) =:= 4 ->
+	gen_server:call(Store, {find_all_q, Pattern});
 find_all_q(Store, {Sp, Pp, Op}) ->
-	find_all_q(Store, {Sp, Pp, Op, '_'});
-find_all_q(Store, Pattern) when tuple_size(Pattern) =:= 4->
-	gen_server:call(Store, {find_all_q, Pattern}).
+	find_all_q(Store, {Sp, Pp, Op, '_'}).
 
+%% @doc Return all quads in a triplestore matching a specific pattern.
+%%
+%% @param Store The triplestore to search.
+%%
+%% @param Pattern A triple or quad pattern to match.
+%%
+%%   Patterns are a 3-tuple or 4-tuple, containing either an exact RDF
+%%   node to match on, or the atom ``'_''' as a wildcard. A 3-tuple
+%%   pattern will match triples in any graph context within the
+%%   triplestore.
 -spec find_all_t(store(), lagra_model:pattern()) -> [lagra_model:triple()].
+find_all_t(Store, Pattern) when tuple_size(Pattern) =:= 4 ->
+	gen_server:call(Store, {find_all_t, Pattern});
 find_all_t(Store, {Sp, Pp, Op}) ->
-	find_all_t(Store, {Sp, Pp, Op, '_'});
-find_all_t(Store, Pattern) when tuple_size(Pattern) =:= 4->
-	gen_server:call(Store, {find_all_t, Pattern}).
+	find_all_t(Store, {Sp, Pp, Op, '_'}).
 
-%%% Test whether Graph1 from Store1 is isomorphic to Graph2 from Store2
+%% @doc Test whether Graph1 in Store1 is isomorphic to Graph2 in Store2
+%%
+%% @param Store1 The first triplestore to compare
+%%
+%% @param Graph1 The IRI of the graph in the first triplestore to compare
+%%
+%% @param Store2 The second triplestore to compare
+%%
+%% @param Graph2 The IRI of the graph in the second triplestore to compare
+%%
+%% @returns `true | false'
 -spec isomorphic(store(), lagra_model:graph(), store(), lagra_model:graph())
 				-> true | false.
 isomorphic(Store1, Graph1, Store2, Graph2) ->
@@ -103,7 +228,7 @@ isomorphic(Store1, Graph1, Store2, Graph2) ->
 	T2 = find_all_t(Store2, {'_', '_', '_', Graph2}),
 	isomorphic(T1, T2).
 
-%%% Test whether two lists of triples are isomorphic to each other
+%% @doc Test whether two lists of triples are isomorphic to each other.
 -spec isomorphic([lagra_model:triple()], [lagra_model:triple()])
 				   -> true | false.
 isomorphic(T1, T2) when length(T1) =/= length(T2) ->
