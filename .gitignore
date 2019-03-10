@@ -6,3 +6,4 @@ _rel/
 logs/
 ebin/
 *.beam
+*.orig
