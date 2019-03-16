@@ -29,6 +29,7 @@
 -include_lib("eunit/include/eunit.hrl").
 
 -type store() :: pid().
+-type store_type() :: trivial.
 -type node_map_elt() :: {grounded | ungrounded, binary()}.
 -type node_map() :: #{lagra_model:rdfnode() => node_map_elt()}.
 -type grouped_node() :: {node_map_elt(),
@@ -42,7 +43,7 @@
 
 %% @equiv create_store(Type, #{})
 %% @spec (Type :: trivial) -> store()
--spec create_store(atom()) -> store().
+-spec create_store(store_type()) -> store().
 create_store(trivial) ->
 	create_store(trivial, []).
 
@@ -58,7 +59,7 @@ create_store(trivial) ->
 %% @returns A reference to the created store.
 %%
 %% @spec (Type :: trivial, Options :: map()) -> store()
--spec create_store(atom(), map()) -> store().
+-spec create_store(store_type(), map()) -> store().
 create_store(trivial, _Options) ->
 	{ok, Child} = supervisor:start_child(lagra_store_trivial_sup, #{}),
 	Child.
