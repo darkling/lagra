@@ -45,7 +45,7 @@
 %% @spec (Type :: trivial) -> store()
 -spec create_store(store_type()) -> store().
 create_store(trivial) ->
-	create_store(trivial, []).
+	create_store(trivial, #{}).
 
 %% @doc Create a lagra triplestore.
 %%
