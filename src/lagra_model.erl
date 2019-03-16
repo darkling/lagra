@@ -85,9 +85,9 @@ literal_locale({string, _, Locale}) ->
 literal_type({literal, Lit}) ->
 	literal_type(Lit);
 literal_type({string, _}) ->
-	"xsd:string";
+	"http://www.w3.org/2001/XMLSchema#string";
 literal_type({string, _, _}) ->
-	"xsd:string";
+	"http://www.w3.org/2001/XMLSchema#string";
 literal_type({typed, _, Type}) ->
 	Type.
 
