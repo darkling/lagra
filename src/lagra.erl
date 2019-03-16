@@ -61,7 +61,7 @@ create_store(trivial) ->
 %% @spec (Type :: trivial, Options :: map()) -> store()
 -spec create_store(store_type(), map()) -> store().
 create_store(trivial, _Options) ->
-	{ok, Child} = supervisor:start_child(lagra_store_trivial_sup, #{}),
+	{ok, Child} = supervisor:start_child(lagra_store_trivial_sup, []),
 	Child.
 
 %% @doc Destroy a lagra triplestore.
