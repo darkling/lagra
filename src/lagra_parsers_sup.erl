@@ -16,6 +16,13 @@ new_parser(ntriples, File, Options) ->
 			?MODULE,
 			[[lagra_parser_ntriples_parser,
 			 lagra_parser_ntriples_lexer,
+			 File, Options]]);
+new_parser(turtle, File, Options) ->
+	{ok, _Manager, _Parser}
+		= supervisor:start_child(
+			?MODULE,
+			[[lagra_parser_turtle_parser,
+			 lagra_parser_turtle_lexer,
 			 File, Options]]).
 
 stop_parser(Manager) ->

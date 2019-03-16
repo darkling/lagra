@@ -37,6 +37,7 @@
 						  [lagra_model:rdfnode()]}}.
 -type partial_result(T) :: {ok, [T], parse_state(T)} | {error, term()}.
 -type parse_state(T) :: last | fun (() -> partial_result(T)).
+-type parser_type() :: ntriples | turtle.
 
 -export_type([store/0]).
 -export_type([partial_result/1, parse_state/1]).
@@ -79,7 +80,7 @@ destroy_store(Store) ->
 	supervisor:terminate_child(lagra_store_trivial_sup, Store).
 
 %% @equiv parse(Store, File, Parser, #{})
--spec parse(store(), file:io_device(), atom()) ->
+-spec parse(store(), file:io_device(), parser_type()) ->
 				   ok | {error, term(), integer()}.
 parse(Store, File, Parser) ->
 	parse(Store, File, Parser, #{}).
@@ -90,13 +91,15 @@ parse(Store, File, Parser) ->
 %%   `Parser', with `Options' passed to the parser.
 %%
 %% @spec (Store :: store(), File :: file:io_device(),
-%%        Type :: ntriples, Options :: map()) -> ok | {error, term(), integer()}
+%%        Type :: parser_type(), Options :: map())
+%%          -> ok | {error, term(), integer()}
 %%
 %% @param Store The lagra triplestore to put the triples in
 %%
 %% @param File An open file-like object
 %%
-%% @param Parser The parser to use. Defined parsers are `ntriples'.
+%% @param Parser The parser to use. Defined parsers are `ntriples' and
+%%   `turtle'.
 %%
 %% @param Options The options to pass to the parser. For `ntriples',
 %% the options are:
@@ -105,14 +108,20 @@ parse(Store, File, Parser) ->
 %% forbidden by the NTriples standard, but may be useful for parsing
 %% some kinds of input, such as test suites. Default: `false'.
 %%
+%% For `turtle', the options are:
+%%
+%% `base => string()': The base IRI to prefix relative IRIs with.
+%%
 %% @returns `ok | {error, atom(), location()}'
--spec parse(store(), file:io_device(), atom(), map()) ->
+-spec parse(store(), file:io_device(), parser_type(), map()) ->
 				   ok | {error, term(), integer()}.
 parse(Store, File, ntriples, Options) ->
-	lagra_parser_ntriples:parse(Store, File, Options).
+	lagra_parser_ntriples:parse(Store, File, Options);
+parse(Store, File, turtle, Options) ->
+	lagra_parser_turtle:parse(Store, File, Options).
 
 %% @equiv parse_incremental(File, Type, #{})
--spec parse_incremental(file:io_device(), atom()) ->
+-spec parse_incremental(file:io_device(), parser_type()) ->
 							   partial_result(lagra_model:triple()).
 parse_incremental(File, Type) ->
 	parse_incremental(File, Type, #{}).
@@ -122,12 +131,13 @@ parse_incremental(File, Type) ->
 %%   Reads the contents of `File', returning a partial list of the
 %%   triples, and a continuation function to continue the parsing.
 %%
-%% @spec (File :: file:io_device(), Type :: ntriples, Options :: map())
+%% @spec (File :: file:io_device(), Type :: parser_type(), Options :: map())
 %%          -> partial_result(lagra_model:triple())
 %%
 %% @param File An open file-like object
 %%
-%% @param Parser The parser to use. Defined parsers are `ntriples'.
+%% @param Parser The parser to use. Defined parsers are `ntriples' and
+%%   `turtle'.
 %%
 %% @param Options The options to pass to the parser. All parsers
 %% support the following options:
@@ -145,10 +155,12 @@ parse_incremental(File, Type) ->
 %%   in the `File', or it is a function with arity zero which will
 %%   read the next batch of triples from the `File', returning a
 %%   similar result to this function.
--spec parse_incremental(file:io_device(), atom(), map()) ->
+-spec parse_incremental(file:io_device(), parser_type(), map()) ->
 							   partial_result(lagra_model:triple()).
 parse_incremental(File, ntriples, Options) ->
-	lagra_parser_ntriples:parse_incremental(File, Options).
+	lagra_parser_ntriples:parse_incremental(File, Options);
+parse_incremental(File, turtle, Options) ->
+	lagra_parser_turtle:parse_incremental(File, Options).
 
 -spec serialize(store(), file:io_device(), atom()) ->
 					   ok | {error, term()}.

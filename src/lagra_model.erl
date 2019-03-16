@@ -6,6 +6,7 @@
 -export([literal_value/1]).
 -export([literal_locale/1]).
 -export([literal_type/1]).
+-export([iri_to_text/1]).
 -export([new_triple/3]).
 -export([new_quad/4]).
 -export([subject/1, predicate/1, object/1, graph/1]).
@@ -92,6 +93,10 @@ literal_type({string, _, _}) ->
 	"http://www.w3.org/2001/XMLSchema#string";
 literal_type({typed, _, Type}) ->
 	Type.
+
+-spec iri_to_text(iri()) -> string().
+iri_to_text({iri, Location}) ->
+	Location.
 
 -spec new_triple(subject(), predicate(), object()) -> triple().
 new_triple(S, P, O) ->
