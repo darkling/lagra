@@ -79,26 +79,6 @@ $uscore(Config) ->
 			fun_names+=($uscore)
 			;;
 
-		TestTurtleNegativeEval)
-			funs="${funs}
-$uscore(Config) ->
-    Store1 = ?config(store1, Config),
-    Store2 = ?config(store2, Config),
-    {ok, File1} = file:open(
-        filename:join(?config(data_dir, Config),
-                              \"${file}\"),
-                      [read, {encoding, utf8}]),
-    {ok, File2} = file:open(
-        filename:join(?config(data_dir, Config),
-                              \"${result}\"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>\"http://www.w3.org/2013/TurtleTests/${file}\"}),
-    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    false = lagra:isomorphic(Store1, {iri, \"urn:nil\"}, Store2, {iri, \"urn:nil\"}).
-"
-			fun_names+=($uscore)
-			;;
-
 		TestTurtlePositiveSyntax)
 			funs="${funs}
 $uscore(Config) ->
@@ -111,7 +91,7 @@ $uscore(Config) ->
 			fun_names+=($uscore)
 			;;
 
-		TestTurtleNegativeSyntax)
+		TestTurtleNegativeEval|TestTurtleNegativeSyntax)
 			funs="${funs}
 $uscore(Config) ->
     Store = ?config(store1, Config),

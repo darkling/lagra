@@ -3252,64 +3252,36 @@ turtle_subm_27(Config) ->
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_eval_bad_01(Config) ->
-    Store1 = ?config(store1, Config),
-    Store2 = ?config(store2, Config),
-    {ok, File1} = file:open(
+    Store = ?config(store1, Config),
+    {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-bad-01.ttl"),
                       [read, {encoding, utf8}]),
-    {ok, File2} = file:open(
-        filename:join(?config(data_dir, Config),
-                              ""),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-eval-bad-01.ttl"}),
-    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_eval_bad_02(Config) ->
-    Store1 = ?config(store1, Config),
-    Store2 = ?config(store2, Config),
-    {ok, File1} = file:open(
+    Store = ?config(store1, Config),
+    {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-bad-02.ttl"),
                       [read, {encoding, utf8}]),
-    {ok, File2} = file:open(
-        filename:join(?config(data_dir, Config),
-                              ""),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-eval-bad-02.ttl"}),
-    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_eval_bad_03(Config) ->
-    Store1 = ?config(store1, Config),
-    Store2 = ?config(store2, Config),
-    {ok, File1} = file:open(
+    Store = ?config(store1, Config),
+    {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-bad-03.ttl"),
                       [read, {encoding, utf8}]),
-    {ok, File2} = file:open(
-        filename:join(?config(data_dir, Config),
-                              ""),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-eval-bad-03.ttl"}),
-    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_eval_bad_04(Config) ->
-    Store1 = ?config(store1, Config),
-    Store2 = ?config(store2, Config),
-    {ok, File1} = file:open(
+    Store = ?config(store1, Config),
+    {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-bad-04.ttl"),
                       [read, {encoding, utf8}]),
-    {ok, File2} = file:open(
-        filename:join(?config(data_dir, Config),
-                              ""),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-eval-bad-04.ttl"}),
-    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    {error, _, _} = lagra:parse(Store, File, turtle).
 
 comment_following_localName(Config) ->
     Store1 = ?config(store1, Config),
