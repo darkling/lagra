@@ -84,11 +84,11 @@ code_change(_OldVsn, State, _Extra) ->
                                                      % Type, Pos, Text = Result
 				   {string(), integer(), integer()}}.% Rest, Ln, Char = State
 term(File, [], LnNo, ChNo) ->
-	Line = case file:read_line(File) of
-			   {ok, L} -> L;
+	Line = case io:get_line(File, "") of
 			   eof -> eof;
 			   {error, Reason} ->
-				   throw(Reason)
+				   throw(Reason);
+			   L -> L
 		   end,
 	{{eol, {LnNo, ChNo}, ""}, {Line, LnNo+1, 1}};
 term(_File, eof, LnNo, ChNo) ->
