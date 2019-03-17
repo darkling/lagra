@@ -174,9 +174,10 @@ parse_maybe_string_annotation({_, Pos, _}, _) ->
 parse_type({iriref, Pos, Type},
 		   State = #state{triple={S, P, {literal, {string, Text}}}}) ->
 	TypeIRI = lagra_model:new_iri(Type),
+	ConvertedValue = lagra_parser_common:list_to_type(Text, Type),
 	case lagra_model:is_absolute_iri(TypeIRI) or State#state.allow_relative of
 		true ->
-			NewLiteral = {literal, {typed, Text, Type}},
+			NewLiteral = lagra_model:new_literal_typed(ConvertedValue, Type),
 			NewTriple = {S, P, NewLiteral},
 			NewState = State#state{triple=NewTriple},
 			parse_dot(next_term(NewState), NewState);

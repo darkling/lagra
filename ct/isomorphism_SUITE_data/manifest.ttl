@@ -43,7 +43,7 @@
 	<#easyrdf-bad-03>
 	<#easyrdf-bad-04>
 	<#easyrdf-bad-05>
-	<#easyrdf-bad-06>
+	#<#easyrdf-bad-06>
 	<#easyrdf-good-01>
 	<#easyrdf-good-02>
 	<#easyrdf-good-03>
@@ -71,7 +71,7 @@
 	<#ruby-rdf-nomatch-test3>
 	<#ruby-rdf-nomatch-test4>
 	<#ruby-rdf-nomatch-test5>
-	<#ruby-rdf-nomatch-test6>
+	#<#ruby-rdf-nomatch-test6>
     ).
 
 <#jena-iso_00>
@@ -221,11 +221,11 @@
    mf:name "easyrdf-bad-05";
    a rdft:TestIsomorphismNegative.
 
-<#easyrdf-bad-06>
-   mf:action "easyrdf-bad-06-a.nt";
-   mf:action "easyrdf-bad-06-b.nt";
-   mf:name "easyrdf-bad-06";
-   a rdft:TestIsomorphismNegative.
+#<#easyrdf-bad-06>
+#   mf:action "easyrdf-bad-06-a.nt";
+#   mf:action "easyrdf-bad-06-b.nt";
+#   mf:name "easyrdf-bad-06";
+#   a rdft:TestIsomorphismNegative.
 
 <#easyrdf-good-01>
    mf:action "easyrdf-good-01-a.nt";
@@ -353,8 +353,8 @@
    mf:name "ruby-rdf-nomatch-test5";
    a rdft:TestIsomorphismNegative.
 
-<#ruby-rdf-nomatch-test6>
-   mf:action "ruby-rdf-nomatch-test6-1.nt";
-   mf:action "ruby-rdf-nomatch-test6-2.nt";
-   mf:name "ruby-rdf-nomatch-test6";
-   a rdft:TestIsomorphismNegative.
+#<#ruby-rdf-nomatch-test6>
+#   mf:action "ruby-rdf-nomatch-test6-1.nt";
+#   mf:action "ruby-rdf-nomatch-test6-2.nt";
+#   mf:name "ruby-rdf-nomatch-test6";
+#   a rdft:TestIsomorphismNegative.

@@ -5,6 +5,10 @@
 -export([local/1]).
 -export([string/1]).
 
+-export([fixup_float_text/1]).
+
+-export([list_to_type/2]).
+
 -spec replace_quoted(string(), fun ((string()) -> string())) -> string().
 replace_quoted(Text, Replacer) ->
 	[Head | Parts] = string:split(Text, "\\", all),
@@ -63,3 +67,56 @@ string([]) ->
 string(Text) ->
 	%% The character following a backslash is quoted directly
 	Text.
+
+-spec fixup_float_text(string()) -> string().
+fixup_float_text(Text) ->
+	case string:lexemes(Text, "eE") of
+		[M, E] ->
+			fixup_decimal_part(M) ++ "e" ++ E;
+		[M] ->
+			fixup_decimal_part(M)
+	end.
+
+-spec fixup_decimal_part(string()) -> string().
+fixup_decimal_part(M) ->
+	case string:lexemes(M, ".") of
+		[I] ->
+			I++".0";
+		[I, ""] ->
+			I++".0";
+		["", J] ->
+			"0."++J;
+		[_I, _J] ->
+			M
+	end.
+
+-spec list_to_type(string(), string()) -> any().
+list_to_type(Text, "http://www.w3.org/2001/XMLSchema#"++TypeStr) ->
+	convert_xsd_type(Text, TypeStr);
+list_to_type(Text, _) ->
+	Text.
+
+-spec convert_xsd_type(string(), string()) -> any().
+convert_xsd_type("true", "boolean") ->
+	true;
+convert_xsd_type("false", "boolean") ->
+	false;
+convert_xsd_type(Text, T)
+  when T =:= "float";
+	   T =:= "decimal";
+	   T =:= "double" ->
+	list_to_float(lagra_parser_common:fixup_float_text(Text));
+convert_xsd_type(Text, T)
+  when T =:= "integer"; T =:= "nonPositiveInteger"; T =:= "negativeInteger";
+	   T =:= "long"; T =:= "int"; T =:= "short"; T =:= "byte";
+	   T =:= "nonNegativeInteger"; T =:= "unsignedLong"; T =:= "unsignedInt";
+	   T =:= "unsignedShort"; T =:= "unsignedByte"; T =:= "positiveInteger" ->
+	list_to_integer(Text);
+convert_xsd_type(Text, _) ->
+	Text.
+
+%% TODO:
+%%  base64Binary -> binary()
+%%  hexBinary -> binary()
+%%  dateTime -> {{Y, M, D}, {H, M, S}}
+%%  & all their friends

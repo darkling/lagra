@@ -7,7 +7,49 @@
 
 %% The test suite is generated from the test manifest file ct/isomorphism_SUITE_data/manifest.ttl
 
--export([jena_iso_00/1, jena_iso_01/1, jena_iso_02/1, jena_iso_03/1, jena_iso_04/1, jena_iso_05/1, jena_iso_06/1, jena_iso_07/1, jena_iso_20/1, jena_iso_21/1, jena_iso_22/1, jena_iso_23/1, jena_iso_24/1, jena_iso_62/1, jena_iso_63/1, jena_iso_65/1, jena_iso_66/1, easyrdf_bad_01/1, easyrdf_bad_02/1, easyrdf_bad_03/1, easyrdf_bad_04/1, easyrdf_bad_05/1, easyrdf_bad_06/1, easyrdf_good_01/1, easyrdf_good_02/1, easyrdf_good_03/1, easyrdf_good_04/1, easyrdf_good_05/1, easyrdf_good_06/1, easyrdf_good_07/1, node_rdf_01/1, node_rdf_02/1, ruby_rdf_match_test1/1, ruby_rdf_match_test2/1, ruby_rdf_match_test3/1, ruby_rdf_match_test4/1, ruby_rdf_match_test5/1, ruby_rdf_match_test6/1, ruby_rdf_match_test7/1, ruby_rdf_nomatch_test1/1, ruby_rdf_nomatch_test2/1, ruby_rdf_nomatch_test3/1, ruby_rdf_nomatch_test4/1, ruby_rdf_nomatch_test5/1, ruby_rdf_nomatch_test6/1]).
+-export([jena_iso_00/1]).
+-export([jena_iso_01/1]).
+-export([jena_iso_02/1]).
+-export([jena_iso_03/1]).
+-export([jena_iso_04/1]).
+-export([jena_iso_05/1]).
+-export([jena_iso_06/1]).
+-export([jena_iso_07/1]).
+-export([jena_iso_20/1]).
+-export([jena_iso_21/1]).
+-export([jena_iso_22/1]).
+-export([jena_iso_23/1]).
+-export([jena_iso_24/1]).
+-export([jena_iso_62/1]).
+-export([jena_iso_63/1]).
+-export([jena_iso_65/1]).
+-export([jena_iso_66/1]).
+-export([easyrdf_bad_01/1]).
+-export([easyrdf_bad_02/1]).
+-export([easyrdf_bad_03/1]).
+-export([easyrdf_bad_04/1]).
+-export([easyrdf_bad_05/1]).
+-export([easyrdf_good_01/1]).
+-export([easyrdf_good_02/1]).
+-export([easyrdf_good_03/1]).
+-export([easyrdf_good_04/1]).
+-export([easyrdf_good_05/1]).
+-export([easyrdf_good_06/1]).
+-export([easyrdf_good_07/1]).
+-export([node_rdf_01/1]).
+-export([node_rdf_02/1]).
+-export([ruby_rdf_match_test1/1]).
+-export([ruby_rdf_match_test2/1]).
+-export([ruby_rdf_match_test3/1]).
+-export([ruby_rdf_match_test4/1]).
+-export([ruby_rdf_match_test5/1]).
+-export([ruby_rdf_match_test6/1]).
+-export([ruby_rdf_match_test7/1]).
+-export([ruby_rdf_nomatch_test1/1]).
+-export([ruby_rdf_nomatch_test2/1]).
+-export([ruby_rdf_nomatch_test3/1]).
+-export([ruby_rdf_nomatch_test4/1]).
+-export([ruby_rdf_nomatch_test5/1]).
 -export([init_per_suite/1, end_per_suite/1]).
 -export([init_per_testcase/2, end_per_testcase/2]).
 
@@ -361,21 +403,6 @@ easyrdf_bad_05(Config) ->
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
-easyrdf_bad_06(Config) ->
-    Store1 = ?config(store1, Config),
-    Store2 = ?config(store2, Config),
-    {ok, File1} = file:open(
-        filename:join(?config(data_dir, Config),
-                              "easyrdf-bad-06-b.nt"),
-                      [read]),
-    {ok, File2} = file:open(
-        filename:join(?config(data_dir, Config),
-                              "easyrdf-bad-06-a.nt"),
-                      [read]),
-    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
-    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
-
 easyrdf_good_01(Config) ->
     Store1 = ?config(store1, Config),
     Store2 = ?config(store2, Config),
@@ -691,22 +718,6 @@ ruby_rdf_nomatch_test5(Config) ->
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
-ruby_rdf_nomatch_test6(Config) ->
-    Store1 = ?config(store1, Config),
-    Store2 = ?config(store2, Config),
-    {ok, File1} = file:open(
-        filename:join(?config(data_dir, Config),
-                              "ruby-rdf-nomatch-test6-2.nt"),
-                      [read]),
-    {ok, File2} = file:open(
-        filename:join(?config(data_dir, Config),
-                              "ruby-rdf-nomatch-test6-1.nt"),
-                      [read]),
-    ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
-    ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    false = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
-
 
 all() ->
-    [jena_iso_00, jena_iso_01, jena_iso_02, jena_iso_03, jena_iso_04, jena_iso_05, jena_iso_06, jena_iso_07, jena_iso_20, jena_iso_21, jena_iso_22, jena_iso_23, jena_iso_24, jena_iso_62, jena_iso_63, jena_iso_65, jena_iso_66, easyrdf_bad_01, easyrdf_bad_02, easyrdf_bad_03, easyrdf_bad_04, easyrdf_bad_05, easyrdf_bad_06, easyrdf_good_01, easyrdf_good_02, easyrdf_good_03, easyrdf_good_04, easyrdf_good_05, easyrdf_good_06, easyrdf_good_07, node_rdf_01, node_rdf_02, ruby_rdf_match_test1, ruby_rdf_match_test2, ruby_rdf_match_test3, ruby_rdf_match_test4, ruby_rdf_match_test5, ruby_rdf_match_test6, ruby_rdf_match_test7, ruby_rdf_nomatch_test1, ruby_rdf_nomatch_test2, ruby_rdf_nomatch_test3, ruby_rdf_nomatch_test4, ruby_rdf_nomatch_test5, ruby_rdf_nomatch_test6].
-
+    [jena_iso_00,jena_iso_01,jena_iso_02,jena_iso_03,jena_iso_04,jena_iso_05,jena_iso_06,jena_iso_07,jena_iso_20,jena_iso_21,jena_iso_22,jena_iso_23,jena_iso_24,jena_iso_62,jena_iso_63,jena_iso_65,jena_iso_66,easyrdf_bad_01,easyrdf_bad_02,easyrdf_bad_03,easyrdf_bad_04,easyrdf_bad_05,easyrdf_good_01,easyrdf_good_02,easyrdf_good_03,easyrdf_good_04,easyrdf_good_05,easyrdf_good_06,easyrdf_good_07,node_rdf_01,node_rdf_02,ruby_rdf_match_test1,ruby_rdf_match_test2,ruby_rdf_match_test3,ruby_rdf_match_test4,ruby_rdf_match_test5,ruby_rdf_match_test6,ruby_rdf_match_test7,ruby_rdf_nomatch_test1,ruby_rdf_nomatch_test2,ruby_rdf_nomatch_test3,ruby_rdf_nomatch_test4,ruby_rdf_nomatch_test5].
