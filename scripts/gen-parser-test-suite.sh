@@ -2,7 +2,6 @@
 
 manifest="$1"
 suite="$2"
-graphs="${3:-1}"
 
 function get_config()
 {
@@ -38,7 +37,7 @@ while read testid file uscore type result; do
 		TestNTriplesPositiveSyntax)
 			funs="${funs}
 $uscore(Config) ->
-    Store = ?config(store, Config),
+    Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), \"$file\"),
     io:format(\"Filename = ~p~n\", [Filename]),
     {ok, File} = file:open(Filename, [read]),
@@ -50,7 +49,7 @@ $uscore(Config) ->
 		TestNTriplesNegativeSyntax)
 			funs="${funs}
 $uscore(Config) ->
-    Store = ?config(store, Config),
+    Store = ?config(store1, Config),
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               \"$file\"),
@@ -103,7 +102,7 @@ $uscore(Config) ->
 		TestTurtlePositiveSyntax)
 			funs="${funs}
 $uscore(Config) ->
-    Store = ?config(store, Config),
+    Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), \"$file\"),
     io:format(\"Filename = ~p~n\", [Filename]),
     {ok, File} = file:open(Filename, [read]),
@@ -115,7 +114,7 @@ $uscore(Config) ->
 		TestTurtleNegativeSyntax)
 			funs="${funs}
 $uscore(Config) ->
-    Store = ?config(store, Config),
+    Store = ?config(store1, Config),
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               \"$file\"),
@@ -210,23 +209,6 @@ end_per_suite(_Config) ->
     application:stop(lagra),
     ok.
 
-EOF
-
-case "${graphs}" in
-	1)
-		cat <<EOF
-init_per_testcase(_, Config) ->
-    Store = lagra:create_store(trivial),
-    [{store, Store}|Config].
-
-end_per_testcase(_, Config) ->
-    Store = ?config(store, Config),
-    lagra:destroy_store(Store).
-
-EOF
-		;;
-	2)
-		cat <<EOF
 init_per_testcase(_, Config) ->
     Store1 = lagra:create_store(trivial),
     Store2 = lagra:create_store(trivial),
@@ -238,10 +220,6 @@ end_per_testcase(_, Config) ->
     lagra:destroy_store(Store1),
 	lagra:destroy_store(Store2).
 
-EOF
-esac
-
-cat <<EOF
 ${funs}
 
 all() ->

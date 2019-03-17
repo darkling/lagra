@@ -13,4 +13,4 @@ ct/parser_%_SUITE.erl: ct/parser_%_SUITE_data/manifest.ttl scripts/gen-parser-te
 	scripts/gen-parser-test-suite.sh $< $(notdir $(subst .erl,,$@)) >$@
 
 ct/isomorphism_SUITE.erl: ct/isomorphism_SUITE_data/manifest.ttl scripts/gen-parser-test-suite.sh
-	scripts/gen-parser-test-suite.sh $< $(notdir $(subst .erl,,$@)) 2 >$@
+	scripts/gen-parser-test-suite.sh $< $(notdir $(subst .erl,,$@)) >$@
