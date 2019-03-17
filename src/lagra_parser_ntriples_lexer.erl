@@ -101,6 +101,16 @@ term(File, Line, LnNo, ChNo) ->
 			term(File, Rest, LnNo, ChNo+length(Text));
 		{{comment, Text}, Rest} ->
 			term(File, Rest, LnNo, ChNo+length(Text));
+		{{string_literal_quote, Text}, Rest} ->
+			QText = lagra_parser_common:replace_quoted(
+					  Text, fun lagra_parser_common:string/1),
+			{{string_literal_quote, {LnNo, ChNo}, QText},
+			 {Rest, LnNo, ChNo+length(Text)}};
+		{{iriref, Text}, Rest} ->
+			QText = lagra_parser_common:replace_quoted(
+					  Text, fun lagra_parser_common:iri/1),
+			{{iriref, {LnNo, ChNo}, QText},
+			 {Rest, LnNo, ChNo+length(Text)}};
 		{{Type, Text}, Rest} ->
 			{{Type, {LnNo, ChNo}, Text}, {Rest, LnNo, ChNo+length(Text)}}
 	end.
