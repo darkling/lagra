@@ -47,7 +47,9 @@ new_literal(Text) when is_list(Text) ->
 new_literal(Int) when is_integer(Int) ->
 	{literal, {typed, Int, "http://www.w3.org/2001/XMLSchema#integer"}};
 new_literal(Float) when is_float(Float) ->
-	{literal, {typed, Float, "http://www.w3.org/2001/XMLSchema#float"}}.
+	{literal, {typed, Float, "http://www.w3.org/2001/XMLSchema#float"}};
+new_literal(Bool) when is_boolean(Bool) ->
+	{literal, {typed, Bool, "http://www.w3.org/2001/XMLSchema#boolean"}}.
 
 -spec new_literal(string(), string()) -> literalnode().
 new_literal(Text, Locale) when is_list(Text), is_list(Locale) ->
