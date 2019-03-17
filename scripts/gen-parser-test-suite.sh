@@ -40,7 +40,7 @@ $uscore(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), \"$file\"),
     io:format(\"Filename = ~p~n\", [Filename]),
-    {ok, File} = file:open(Filename, [read]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
     ok = lagra:parse(Store, File, ntriples).
 "
 			fun_names+=($uscore)
@@ -53,7 +53,7 @@ $uscore(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               \"$file\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 "
 			fun_names+=($uscore)
@@ -67,11 +67,11 @@ $uscore(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               \"${file}\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               \"${result}\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>\"http://www.w3.org/2013/TurtleTests/${file}\"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, \"urn:nil\"}, Store2, {iri, \"urn:nil\"}).
@@ -87,11 +87,11 @@ $uscore(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               \"${file}\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               \"${result}\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>\"http://www.w3.org/2013/TurtleTests/${file}\"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, \"urn:nil\"}, Store2, {iri, \"urn:nil\"}).
@@ -105,7 +105,7 @@ $uscore(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), \"$file\"),
     io:format(\"Filename = ~p~n\", [Filename]),
-    {ok, File} = file:open(Filename, [read]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
     ok = lagra:parse(Store, File, turtle).
 "
 			fun_names+=($uscore)
@@ -118,7 +118,7 @@ $uscore(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               \"$file\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 "
 			fun_names+=($uscore)
@@ -133,11 +133,11 @@ $uscore(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               \"$file\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               \"$last_file\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     true = lagra:isomorphic(Store1, {iri, \"urn:nil\"}, Store2, {iri, \"urn:nil\"}).
@@ -158,11 +158,11 @@ $uscore(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               \"${file}\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               \"${last_file}\"),
-                      [read]),
+                      [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, ntriples, #{allow_relative=>true}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
     false = lagra:isomorphic(Store1, {iri, \"urn:nil\"}, Store2, {iri, \"urn:nil\"}).

@@ -334,8 +334,6 @@ iRI_subject(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRI_subject.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 iRI_with_four_digit_numeric_escape(Config) ->
@@ -351,8 +349,6 @@ iRI_with_four_digit_numeric_escape(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRI_with_four_digit_numeric_escape.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 iRI_with_eight_digit_numeric_escape(Config) ->
@@ -368,8 +364,6 @@ iRI_with_eight_digit_numeric_escape(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRI_with_eight_digit_numeric_escape.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 iRI_with_all_punctuation(Config) ->
@@ -385,8 +379,6 @@ iRI_with_all_punctuation(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRI_with_all_punctuation.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 bareword_a_predicate(Config) ->
@@ -402,8 +394,6 @@ bareword_a_predicate(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/bareword_a_predicate.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 old_style_prefix(Config) ->
@@ -419,8 +409,6 @@ old_style_prefix(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/old_style_prefix.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 sPARQL_style_prefix(Config) ->
@@ -436,8 +424,6 @@ sPARQL_style_prefix(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/SPARQL_style_prefix.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 prefixed_IRI_predicate(Config) ->
@@ -453,8 +439,6 @@ prefixed_IRI_predicate(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefixed_IRI_predicate.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 prefixed_IRI_object(Config) ->
@@ -470,8 +454,6 @@ prefixed_IRI_object(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefixed_IRI_object.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 prefix_only_IRI(Config) ->
@@ -487,8 +469,6 @@ prefix_only_IRI(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefix_only_IRI.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 prefix_with_PN_CHARS_BASE_character_boundaries(Config) ->
@@ -504,8 +484,6 @@ prefix_with_PN_CHARS_BASE_character_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefix_with_PN_CHARS_BASE_character_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 prefix_with_non_leading_extras(Config) ->
@@ -521,8 +499,6 @@ prefix_with_non_leading_extras(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefix_with_non_leading_extras.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries(Config) ->
@@ -538,8 +514,6 @@ localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries(Config) ->
@@ -555,8 +529,6 @@ localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 localName_with_nfc_PN_CHARS_BASE_character_boundaries(Config) ->
@@ -572,8 +544,6 @@ localName_with_nfc_PN_CHARS_BASE_character_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_nfc_PN_CHARS_BASE_character_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 default_namespace_IRI(Config) ->
@@ -589,8 +559,6 @@ default_namespace_IRI(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/default_namespace_IRI.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 prefix_reassigned_and_used(Config) ->
@@ -606,8 +574,6 @@ prefix_reassigned_and_used(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefix_reassigned_and_used.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 reserved_escaped_localName(Config) ->
@@ -623,8 +589,6 @@ reserved_escaped_localName(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/reserved_escaped_localName.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 percent_escaped_localName(Config) ->
@@ -640,8 +604,6 @@ percent_escaped_localName(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/percent_escaped_localName.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 hYPHEN_MINUS_in_localName(Config) ->
@@ -657,8 +619,6 @@ hYPHEN_MINUS_in_localName(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/HYPHEN_MINUS_in_localName.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 underscore_in_localName(Config) ->
@@ -674,8 +634,6 @@ underscore_in_localName(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/underscore_in_localName.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 localname_with_COLON(Config) ->
@@ -691,8 +649,6 @@ localname_with_COLON(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localname_with_COLON.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 localName_with_leading_underscore(Config) ->
@@ -708,8 +664,6 @@ localName_with_leading_underscore(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_leading_underscore.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 localName_with_leading_digit(Config) ->
@@ -725,8 +679,6 @@ localName_with_leading_digit(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_leading_digit.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 localName_with_non_leading_extras(Config) ->
@@ -742,8 +694,6 @@ localName_with_non_leading_extras(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_non_leading_extras.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 old_style_base(Config) ->
@@ -759,8 +709,6 @@ old_style_base(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/old_style_base.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 sPARQL_style_base(Config) ->
@@ -776,8 +724,6 @@ sPARQL_style_base(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/SPARQL_style_base.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 labeled_blank_node_subject(Config) ->
@@ -793,8 +739,6 @@ labeled_blank_node_subject(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_subject.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 labeled_blank_node_object(Config) ->
@@ -810,8 +754,6 @@ labeled_blank_node_object(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_object.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 labeled_blank_node_with_PN_CHARS_BASE_character_boundaries(Config) ->
@@ -827,8 +769,6 @@ labeled_blank_node_with_PN_CHARS_BASE_character_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_PN_CHARS_BASE_character_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 labeled_blank_node_with_leading_underscore(Config) ->
@@ -844,8 +784,6 @@ labeled_blank_node_with_leading_underscore(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_leading_underscore.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 labeled_blank_node_with_leading_digit(Config) ->
@@ -861,8 +799,6 @@ labeled_blank_node_with_leading_digit(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_leading_digit.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 labeled_blank_node_with_non_leading_extras(Config) ->
@@ -878,8 +814,6 @@ labeled_blank_node_with_non_leading_extras(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_non_leading_extras.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 anonymous_blank_node_subject(Config) ->
@@ -895,8 +829,6 @@ anonymous_blank_node_subject(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/anonymous_blank_node_subject.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 anonymous_blank_node_object(Config) ->
@@ -912,8 +844,6 @@ anonymous_blank_node_object(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/anonymous_blank_node_object.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 sole_blankNodePropertyList(Config) ->
@@ -929,8 +859,6 @@ sole_blankNodePropertyList(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/sole_blankNodePropertyList.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 blankNodePropertyList_as_subject(Config) ->
@@ -946,8 +874,6 @@ blankNodePropertyList_as_subject(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_as_subject.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 blankNodePropertyList_as_object(Config) ->
@@ -963,8 +889,6 @@ blankNodePropertyList_as_object(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_as_object.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 blankNodePropertyList_with_multiple_triples(Config) ->
@@ -980,8 +904,6 @@ blankNodePropertyList_with_multiple_triples(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_with_multiple_triples.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 nested_blankNodePropertyLists(Config) ->
@@ -997,8 +919,6 @@ nested_blankNodePropertyLists(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/nested_blankNodePropertyLists.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 blankNodePropertyList_containing_collection(Config) ->
@@ -1014,8 +934,6 @@ blankNodePropertyList_containing_collection(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_containing_collection.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 collection_subject(Config) ->
@@ -1031,8 +949,6 @@ collection_subject(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/collection_subject.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 collection_object(Config) ->
@@ -1048,8 +964,6 @@ collection_object(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/collection_object.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 empty_collection(Config) ->
@@ -1065,8 +979,6 @@ empty_collection(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/empty_collection.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 nested_collection(Config) ->
@@ -1082,8 +994,6 @@ nested_collection(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/nested_collection.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 first(Config) ->
@@ -1099,8 +1009,6 @@ first(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/first.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 last(Config) ->
@@ -1116,8 +1024,6 @@ last(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/last.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL1(Config) ->
@@ -1133,8 +1039,6 @@ lITERAL1(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL1_ascii_boundaries(Config) ->
@@ -1150,8 +1054,6 @@ lITERAL1_ascii_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1_ascii_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL1_with_UTF8_boundaries(Config) ->
@@ -1167,8 +1069,6 @@ lITERAL1_with_UTF8_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1_with_UTF8_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL1_all_controls(Config) ->
@@ -1184,8 +1084,6 @@ lITERAL1_all_controls(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1_all_controls.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL1_all_punctuation(Config) ->
@@ -1201,8 +1099,6 @@ lITERAL1_all_punctuation(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1_all_punctuation.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG1(Config) ->
@@ -1218,8 +1114,6 @@ lITERAL_LONG1(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG1_ascii_boundaries(Config) ->
@@ -1235,8 +1129,6 @@ lITERAL_LONG1_ascii_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_ascii_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG1_with_UTF8_boundaries(Config) ->
@@ -1252,8 +1144,6 @@ lITERAL_LONG1_with_UTF8_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_UTF8_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG1_with_1_squote(Config) ->
@@ -1269,8 +1159,6 @@ lITERAL_LONG1_with_1_squote(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_1_squote.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG1_with_2_squotes(Config) ->
@@ -1286,8 +1174,6 @@ lITERAL_LONG1_with_2_squotes(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_2_squotes.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL2(Config) ->
@@ -1303,8 +1189,6 @@ lITERAL2(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL2.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL2_ascii_boundaries(Config) ->
@@ -1320,8 +1204,6 @@ lITERAL2_ascii_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL2_ascii_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL2_with_UTF8_boundaries(Config) ->
@@ -1337,8 +1219,6 @@ lITERAL2_with_UTF8_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL2_with_UTF8_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG2(Config) ->
@@ -1354,8 +1234,6 @@ lITERAL_LONG2(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG2_ascii_boundaries(Config) ->
@@ -1371,8 +1249,6 @@ lITERAL_LONG2_ascii_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_ascii_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG2_with_UTF8_boundaries(Config) ->
@@ -1388,8 +1264,6 @@ lITERAL_LONG2_with_UTF8_boundaries(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_UTF8_boundaries.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG2_with_1_squote(Config) ->
@@ -1405,8 +1279,6 @@ lITERAL_LONG2_with_1_squote(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_1_squote.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG2_with_2_squotes(Config) ->
@@ -1422,8 +1294,6 @@ lITERAL_LONG2_with_2_squotes(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_2_squotes.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_CHARACTER_TABULATION(Config) ->
@@ -1439,8 +1309,6 @@ literal_with_CHARACTER_TABULATION(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_CHARACTER_TABULATION.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_BACKSPACE(Config) ->
@@ -1456,8 +1324,6 @@ literal_with_BACKSPACE(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_BACKSPACE.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_LINE_FEED(Config) ->
@@ -1473,8 +1339,6 @@ literal_with_LINE_FEED(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_LINE_FEED.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_CARRIAGE_RETURN(Config) ->
@@ -1490,8 +1354,6 @@ literal_with_CARRIAGE_RETURN(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_CARRIAGE_RETURN.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_FORM_FEED(Config) ->
@@ -1507,8 +1369,6 @@ literal_with_FORM_FEED(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_FORM_FEED.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_REVERSE_SOLIDUS(Config) ->
@@ -1524,8 +1384,6 @@ literal_with_REVERSE_SOLIDUS(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_REVERSE_SOLIDUS.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_escaped_CHARACTER_TABULATION(Config) ->
@@ -1541,8 +1399,6 @@ literal_with_escaped_CHARACTER_TABULATION(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_CHARACTER_TABULATION.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_escaped_BACKSPACE(Config) ->
@@ -1558,8 +1414,6 @@ literal_with_escaped_BACKSPACE(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_BACKSPACE.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_escaped_LINE_FEED(Config) ->
@@ -1575,8 +1429,6 @@ literal_with_escaped_LINE_FEED(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_LINE_FEED.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_escaped_CARRIAGE_RETURN(Config) ->
@@ -1592,8 +1444,6 @@ literal_with_escaped_CARRIAGE_RETURN(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_CARRIAGE_RETURN.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_escaped_FORM_FEED(Config) ->
@@ -1609,8 +1459,6 @@ literal_with_escaped_FORM_FEED(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_FORM_FEED.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_numeric_escape4(Config) ->
@@ -1626,8 +1474,6 @@ literal_with_numeric_escape4(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_numeric_escape4.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_with_numeric_escape8(Config) ->
@@ -1643,8 +1489,6 @@ literal_with_numeric_escape8(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_numeric_escape8.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 iRIREF_datatype(Config) ->
@@ -1660,8 +1504,6 @@ iRIREF_datatype(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRIREF_datatype.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 prefixed_name_datatype(Config) ->
@@ -1677,8 +1519,6 @@ prefixed_name_datatype(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefixed_name_datatype.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 bareword_integer(Config) ->
@@ -1694,8 +1534,6 @@ bareword_integer(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/bareword_integer.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 bareword_decimal(Config) ->
@@ -1711,8 +1549,6 @@ bareword_decimal(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/bareword_decimal.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 bareword_double(Config) ->
@@ -1728,8 +1564,6 @@ bareword_double(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/bareword_double.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 double_lower_case_e(Config) ->
@@ -1745,8 +1579,6 @@ double_lower_case_e(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/double_lower_case_e.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 negative_numeric(Config) ->
@@ -1762,8 +1594,6 @@ negative_numeric(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/negative_numeric.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 positive_numeric(Config) ->
@@ -1779,8 +1609,6 @@ positive_numeric(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/positive_numeric.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 numeric_with_leading_0(Config) ->
@@ -1796,8 +1624,6 @@ numeric_with_leading_0(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/numeric_with_leading_0.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_true(Config) ->
@@ -1813,8 +1639,6 @@ literal_true(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_true.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 literal_false(Config) ->
@@ -1830,8 +1654,6 @@ literal_false(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_false.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 langtagged_non_LONG(Config) ->
@@ -1847,8 +1669,6 @@ langtagged_non_LONG(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/langtagged_non_LONG.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 langtagged_LONG(Config) ->
@@ -1864,8 +1684,6 @@ langtagged_LONG(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/langtagged_LONG.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lantag_with_subtag(Config) ->
@@ -1881,8 +1699,6 @@ lantag_with_subtag(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/lantag_with_subtag.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 objectList_with_two_objects(Config) ->
@@ -1898,8 +1714,6 @@ objectList_with_two_objects(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/objectList_with_two_objects.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 predicateObjectList_with_two_objectLists(Config) ->
@@ -1915,8 +1729,6 @@ predicateObjectList_with_two_objectLists(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/predicateObjectList_with_two_objectLists.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 repeated_semis_at_end(Config) ->
@@ -1932,8 +1744,6 @@ repeated_semis_at_end(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/repeated_semis_at_end.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 repeated_semis_not_at_end(Config) ->
@@ -1949,8 +1759,6 @@ repeated_semis_not_at_end(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/repeated_semis_not_at_end.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_syntax_file_01(Config) ->
@@ -3021,8 +2829,6 @@ turtle_eval_struct_01(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-eval-struct-01.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_eval_struct_02(Config) ->
@@ -3038,8 +2844,6 @@ turtle_eval_struct_02(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-eval-struct-02.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_01(Config) ->
@@ -3055,8 +2859,6 @@ turtle_subm_01(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-01.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_02(Config) ->
@@ -3072,8 +2874,6 @@ turtle_subm_02(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-02.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_03(Config) ->
@@ -3089,8 +2889,6 @@ turtle_subm_03(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-03.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_04(Config) ->
@@ -3106,8 +2904,6 @@ turtle_subm_04(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-04.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_05(Config) ->
@@ -3123,8 +2919,6 @@ turtle_subm_05(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-05.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_06(Config) ->
@@ -3140,8 +2934,6 @@ turtle_subm_06(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-06.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_07(Config) ->
@@ -3157,8 +2949,6 @@ turtle_subm_07(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-07.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_08(Config) ->
@@ -3174,8 +2964,6 @@ turtle_subm_08(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-08.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_09(Config) ->
@@ -3191,8 +2979,6 @@ turtle_subm_09(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-09.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_10(Config) ->
@@ -3208,8 +2994,6 @@ turtle_subm_10(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-10.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_11(Config) ->
@@ -3225,8 +3009,6 @@ turtle_subm_11(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-11.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_12(Config) ->
@@ -3242,8 +3024,6 @@ turtle_subm_12(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-12.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_13(Config) ->
@@ -3259,8 +3039,6 @@ turtle_subm_13(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-13.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_14(Config) ->
@@ -3276,8 +3054,6 @@ turtle_subm_14(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-14.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_15(Config) ->
@@ -3293,8 +3069,6 @@ turtle_subm_15(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-15.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_16(Config) ->
@@ -3310,8 +3084,6 @@ turtle_subm_16(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-16.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_17(Config) ->
@@ -3327,8 +3099,6 @@ turtle_subm_17(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-17.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_18(Config) ->
@@ -3344,8 +3114,6 @@ turtle_subm_18(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-18.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_19(Config) ->
@@ -3361,8 +3129,6 @@ turtle_subm_19(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-19.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_20(Config) ->
@@ -3378,8 +3144,6 @@ turtle_subm_20(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-20.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_21(Config) ->
@@ -3395,8 +3159,6 @@ turtle_subm_21(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-21.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_22(Config) ->
@@ -3412,8 +3174,6 @@ turtle_subm_22(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-22.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_23(Config) ->
@@ -3429,8 +3189,6 @@ turtle_subm_23(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-23.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_24(Config) ->
@@ -3446,8 +3204,6 @@ turtle_subm_24(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-24.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_25(Config) ->
@@ -3463,8 +3219,6 @@ turtle_subm_25(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-25.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_26(Config) ->
@@ -3480,8 +3234,6 @@ turtle_subm_26(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-26.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_subm_27(Config) ->
@@ -3497,8 +3249,6 @@ turtle_subm_27(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-27.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_eval_bad_01(Config) ->
@@ -3574,8 +3324,6 @@ comment_following_localName(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/comment_following_localName.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 number_sign_following_localName(Config) ->
@@ -3591,8 +3339,6 @@ number_sign_following_localName(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/number_sign_following_localName.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 comment_following_PNAME_NS(Config) ->
@@ -3608,8 +3354,6 @@ comment_following_PNAME_NS(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/comment_following_PNAME_NS.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 number_sign_following_PNAME_NS(Config) ->
@@ -3625,8 +3369,6 @@ number_sign_following_PNAME_NS(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/number_sign_following_PNAME_NS.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 lITERAL_LONG2_with_REVERSE_SOLIDUS(Config) ->
@@ -3642,8 +3384,6 @@ lITERAL_LONG2_with_REVERSE_SOLIDUS(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_REVERSE_SOLIDUS.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_syntax_LITERAL2_with_langtag_and_datatype(Config) ->
@@ -3667,8 +3407,6 @@ two_LITERAL_LONG2s(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/two_LITERAL_LONG2s.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 langtagged_LONG_with_subtag(Config) ->
@@ -3684,8 +3422,6 @@ langtagged_LONG_with_subtag(Config) ->
                       [read, {encoding, utf8}]),
     ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/langtagged_LONG_with_subtag.ttl"}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-	io:format("ttl:~p~n", [lagra:find_all_t(Store1, {'_', '_', '_'})]),
-	io:format("ref:~p~n", [lagra:find_all_t(Store2, {'_', '_', '_'})]),
     true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
 
 turtle_syntax_bad_blank_label_dot_end(Config) ->
