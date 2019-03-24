@@ -56,22 +56,6 @@
 	# https://github.com/awwright/node-rdf/blob/master/test/graph-test-lib.js
 	<#node-rdf-01>
 	<#node-rdf-02>
-
-	# Tests from ruby RDF:
-	# https://github.com/ruby-rdf/rdf-isomorphic/tree/develop/spec
-	<#ruby-rdf-match-test1>
-	<#ruby-rdf-match-test2>
-	<#ruby-rdf-match-test3>
-	<#ruby-rdf-match-test4>
-	<#ruby-rdf-match-test5>
-	<#ruby-rdf-match-test6>
-	<#ruby-rdf-match-test7>
-	<#ruby-rdf-nomatch-test1>
-	<#ruby-rdf-nomatch-test2>
-	<#ruby-rdf-nomatch-test3>
-	<#ruby-rdf-nomatch-test4>
-	<#ruby-rdf-nomatch-test5>
-	#<#ruby-rdf-nomatch-test6>
     ).
 
 <#jena-iso_00>
@@ -280,81 +264,3 @@
    mf:action "node-rdf-02-b.nt";
    mf:name "node-rdf-02";
    a rdft:TestIsomorphismNegative.
-
-<#ruby-rdf-match-test1>
-   mf:action "ruby-rdf-match-test1-1.nt";
-   mf:action "ruby-rdf-match-test1-2.nt";
-   mf:name "ruby-rdf-match-test1";
-   a rdft:TestIsomorphismPositive.
-
-<#ruby-rdf-match-test2>
-   mf:action "ruby-rdf-match-test2-1.nt";
-   mf:action "ruby-rdf-match-test2-2.nt";
-   mf:name "ruby-rdf-match-test2";
-   a rdft:TestIsomorphismPositive.
-
-<#ruby-rdf-match-test3>
-   mf:action "ruby-rdf-match-test3-1.nt";
-   mf:action "ruby-rdf-match-test3-2.nt";
-   mf:name "ruby-rdf-match-test3";
-   a rdft:TestIsomorphismPositive.
-
-<#ruby-rdf-match-test4>
-   mf:action "ruby-rdf-match-test4-1.nt";
-   mf:action "ruby-rdf-match-test4-2.nt";
-   mf:name "ruby-rdf-match-test4";
-   a rdft:TestIsomorphismPositive.
-
-<#ruby-rdf-match-test5>
-   mf:action "ruby-rdf-match-test5-1.nt";
-   mf:action "ruby-rdf-match-test5-2.nt";
-   mf:name "ruby-rdf-match-test5";
-   a rdft:TestIsomorphismPositive.
-
-<#ruby-rdf-match-test6>
-   mf:action "ruby-rdf-match-test6-1.nt";
-   mf:action "ruby-rdf-match-test6-2.nt";
-   mf:name "ruby-rdf-match-test6";
-   a rdft:TestIsomorphismPositive.
-
-<#ruby-rdf-match-test7>
-   mf:action "ruby-rdf-match-test7-1.nt";
-   mf:action "ruby-rdf-match-test7-2.nt";
-   mf:name "ruby-rdf-match-test7";
-   a rdft:TestIsomorphismPositive.
-
-<#ruby-rdf-nomatch-test1>
-   mf:action "ruby-rdf-nomatch-test1-1.nt";
-   mf:action "ruby-rdf-nomatch-test1-2.nt";
-   mf:name "ruby-rdf-nomatch-test1";
-   a rdft:TestIsomorphismNegative.
-
-<#ruby-rdf-nomatch-test2>
-   mf:action "ruby-rdf-nomatch-test2-1.nt";
-   mf:action "ruby-rdf-nomatch-test2-2.nt";
-   mf:name "ruby-rdf-nomatch-test2";
-   a rdft:TestIsomorphismNegative.
-
-<#ruby-rdf-nomatch-test3>
-   mf:action "ruby-rdf-nomatch-test3-1.nt";
-   mf:action "ruby-rdf-nomatch-test3-2.nt";
-   mf:name "ruby-rdf-nomatch-test3";
-   a rdft:TestIsomorphismNegative.
-
-<#ruby-rdf-nomatch-test4>
-   mf:action "ruby-rdf-nomatch-test4-1.nt";
-   mf:action "ruby-rdf-nomatch-test4-2.nt";
-   mf:name "ruby-rdf-nomatch-test4";
-   a rdft:TestIsomorphismNegative.
-
-<#ruby-rdf-nomatch-test5>
-   mf:action "ruby-rdf-nomatch-test5-1.nt";
-   mf:action "ruby-rdf-nomatch-test5-2.nt";
-   mf:name "ruby-rdf-nomatch-test5";
-   a rdft:TestIsomorphismNegative.
-
-#<#ruby-rdf-nomatch-test6>
-#   mf:action "ruby-rdf-nomatch-test6-1.nt";
-#   mf:action "ruby-rdf-nomatch-test6-2.nt";
-#   mf:name "ruby-rdf-nomatch-test6";
-#   a rdft:TestIsomorphismNegative.
