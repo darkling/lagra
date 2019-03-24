@@ -109,7 +109,7 @@ parse_subject({blank_node_label, _, Text},
 	parse_predicate(next_term(NewState), NewState);
 parse_subject({eof, _, _}, #state{triple={none, none, none}}) ->
 	eof;
-parse_subject(Term={_, Pos, _}, #state{triple={none, none, none}}) ->
+parse_subject({_, Pos, _}, #state{triple={none, none, none}}) ->
 	{error, syntax, Pos}.
 
 
