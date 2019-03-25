@@ -102,126 +102,126 @@ nt_syntax_file_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-file-01.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_file_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-file-02.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_file_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-file-03.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_uri_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-uri-01.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_uri_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-uri-02.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_uri_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-uri-03.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_uri_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-uri-04.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_string_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-string-01.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_string_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-string-02.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_string_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-string-03.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_str_esc_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-str-esc-01.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_str_esc_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-str-esc-02.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_str_esc_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-str-esc-03.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bnode_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-bnode-01.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bnode_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-bnode-02.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bnode_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-bnode-03.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_datatypes_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-datatypes-01.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_datatypes_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-datatypes-02.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_01(Config) ->
@@ -229,7 +229,7 @@ nt_syntax_bad_uri_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-01.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_02(Config) ->
@@ -237,7 +237,7 @@ nt_syntax_bad_uri_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-02.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_03(Config) ->
@@ -245,7 +245,7 @@ nt_syntax_bad_uri_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-03.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_04(Config) ->
@@ -253,7 +253,7 @@ nt_syntax_bad_uri_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-04.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_05(Config) ->
@@ -261,7 +261,7 @@ nt_syntax_bad_uri_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-05.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_06(Config) ->
@@ -269,7 +269,7 @@ nt_syntax_bad_uri_06(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-06.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_07(Config) ->
@@ -277,7 +277,7 @@ nt_syntax_bad_uri_07(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-07.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_08(Config) ->
@@ -285,7 +285,7 @@ nt_syntax_bad_uri_08(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-08.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_uri_09(Config) ->
@@ -293,7 +293,7 @@ nt_syntax_bad_uri_09(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-uri-09.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_prefix_01(Config) ->
@@ -301,7 +301,7 @@ nt_syntax_bad_prefix_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-prefix-01.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_base_01(Config) ->
@@ -309,7 +309,7 @@ nt_syntax_bad_base_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-base-01.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_struct_01(Config) ->
@@ -317,7 +317,7 @@ nt_syntax_bad_struct_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-struct-01.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_struct_02(Config) ->
@@ -325,7 +325,7 @@ nt_syntax_bad_struct_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-struct-02.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_lang_01(Config) ->
@@ -333,7 +333,7 @@ nt_syntax_bad_lang_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-lang-01.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_esc_01(Config) ->
@@ -341,7 +341,7 @@ nt_syntax_bad_esc_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-esc-01.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_esc_02(Config) ->
@@ -349,7 +349,7 @@ nt_syntax_bad_esc_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-esc-02.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_esc_03(Config) ->
@@ -357,7 +357,7 @@ nt_syntax_bad_esc_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-esc-03.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_string_01(Config) ->
@@ -365,7 +365,7 @@ nt_syntax_bad_string_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-string-01.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_string_02(Config) ->
@@ -373,7 +373,7 @@ nt_syntax_bad_string_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-string-02.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_string_03(Config) ->
@@ -381,7 +381,7 @@ nt_syntax_bad_string_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-string-03.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_string_04(Config) ->
@@ -389,7 +389,7 @@ nt_syntax_bad_string_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-string-04.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_string_05(Config) ->
@@ -397,7 +397,7 @@ nt_syntax_bad_string_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-string-05.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_string_06(Config) ->
@@ -405,7 +405,7 @@ nt_syntax_bad_string_06(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-string-06.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_string_07(Config) ->
@@ -413,7 +413,7 @@ nt_syntax_bad_string_07(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-string-07.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_num_01(Config) ->
@@ -421,7 +421,7 @@ nt_syntax_bad_num_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-num-01.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_num_02(Config) ->
@@ -429,7 +429,7 @@ nt_syntax_bad_num_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-num-02.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_bad_num_03(Config) ->
@@ -437,168 +437,168 @@ nt_syntax_bad_num_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "nt-syntax-bad-num-03.nt"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, ntriples).
 
 nt_syntax_subm_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "nt-syntax-subm-01.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 comment_following_triple(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "comment_following_triple.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_ascii_boundaries(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_ascii_boundaries.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_UTF8_boundaries(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_UTF8_boundaries.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_all_controls(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_all_controls.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_all_punctuation(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_all_punctuation.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_squote(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_squote.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_2_squotes(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_2_squotes.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_dquote(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_dquote.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_2_dquotes(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_2_dquotes.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_REVERSE_SOLIDUS2(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_REVERSE_SOLIDUS2.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_CHARACTER_TABULATION(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_CHARACTER_TABULATION.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_BACKSPACE(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_BACKSPACE.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_LINE_FEED(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_LINE_FEED.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_CARRIAGE_RETURN(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_CARRIAGE_RETURN.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_FORM_FEED(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_FORM_FEED.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_REVERSE_SOLIDUS(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_REVERSE_SOLIDUS.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_numeric_escape4(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_numeric_escape4.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 literal_with_numeric_escape8(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "literal_with_numeric_escape8.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 langtagged_string(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "langtagged_string.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 lantag_with_subtag(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "lantag_with_subtag.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 minimal_whitespace(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "minimal_whitespace.nt"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, ntriples).
 
 

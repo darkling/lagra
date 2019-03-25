@@ -14,12 +14,12 @@
 
 -export([is_absolute_iri/1]).
 
--type literal() :: {string, string()}            % untyped string
-                 | {string, string(), string()}  % string plus locale
-                 | {typed, term(), string()}.    % typed non-string term
+-type literal() :: {string, binary()}            % untyped string
+                 | {string, binary(), binary()}  % string plus locale
+                 | {typed, term(), binary()}.    % typed non-string term
 
--type iri() :: {iri, string()}.
--type bnode() :: {bnode, string()}.
+-type iri() :: {iri, binary()}.
+-type bnode() :: {bnode, binary()}.
 -type literalnode() :: {literal, literal()}.
 -type resource() :: iri() | bnode().
 -type rdfnode() :: resource() | literalnode().
@@ -43,26 +43,30 @@
 -export_type([pattern/0, triple_pattern/0, quad_pattern/0]).
 
 -spec new_literal(term()) -> literalnode().
-new_literal(Text) when is_list(Text) ->
+new_literal(Text) when is_binary(Text) ->
 	{literal, {string, Text}};
+new_literal(Text) when is_list(Text) ->
+	{literal, {string, unicode:characters_to_binary(Text)}};
 new_literal(Int) when is_integer(Int) ->
-	{literal, {typed, Int, "http://www.w3.org/2001/XMLSchema#integer"}};
+	{literal, {typed, Int, <<"http://www.w3.org/2001/XMLSchema#integer">>}};
 new_literal(Float) when is_float(Float) ->
-	{literal, {typed, Float, "http://www.w3.org/2001/XMLSchema#float"}};
+	{literal, {typed, Float, <<"http://www.w3.org/2001/XMLSchema#double">>}};
 new_literal(Bool) when is_boolean(Bool) ->
-	{literal, {typed, Bool, "http://www.w3.org/2001/XMLSchema#boolean"}}.
+	{literal, {typed, Bool, <<"http://www.w3.org/2001/XMLSchema#boolean">>}}.
 
--spec new_literal(string(), string()) -> literalnode().
-new_literal(Text, Locale) when is_list(Text), is_list(Locale) ->
-	{literal, {string, Text, Locale}}.
+-spec new_literal(unicode:chardata(), unicode:chardata()) -> literalnode().
+new_literal(Text, Locale) ->
+	{literal, {string,
+			   unicode:characters_to_binary(Text),
+			   unicode:characters_to_binary(Locale)}}.
 
--spec new_literal_typed(term(), string()) -> literalnode().
-new_literal_typed(Value, Type) when is_list(Type) ->
-	{literal, {typed, Value, Type}}.
+-spec new_literal_typed(term(), unicode:chardata()) -> literalnode().
+new_literal_typed(Value, Type) ->
+	{literal, {typed, Value, unicode:characters_to_binary(Type)}}.
 
--spec new_iri(string()) -> iri().
-new_iri(String) when is_list(String) ->
-	{iri, String}.
+-spec new_iri(unicode:chardata()) -> iri().
+new_iri(String) ->
+	{iri, unicode:characters_to_binary(String)}.
 
 -spec new_bnode() -> bnode().
 new_bnode() ->
@@ -88,9 +92,9 @@ literal_locale({string, _, Locale}) ->
 literal_type({literal, Lit}) ->
 	literal_type(Lit);
 literal_type({string, _}) ->
-	"http://www.w3.org/2001/XMLSchema#string";
+	<<"http://www.w3.org/2001/XMLSchema#string">>;
 literal_type({string, _, _}) ->
-	"http://www.w3.org/2001/XMLSchema#string";
+	<<"http://www.w3.org/2001/XMLSchema#string">>;
 literal_type({typed, _, Type}) ->
 	Type.
 

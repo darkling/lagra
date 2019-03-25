@@ -7,7 +7,7 @@
 						   lagra_model:object() | none}.
 
 -type pos() :: {integer(), integer()}.
--type lexeme() :: {atom(), pos(), string()}.
+-type lexeme() :: {atom(), pos(), unicode:chardata()}.
 -type error_value() :: {error, atom(), pos()}.
 -type parse_result() :: eof
 					  | error_value()
@@ -36,18 +36,18 @@
 		 bnodes :: map(),
 		 prefixes :: map(),
 		 base :: uri_string:uri_map(),
-		 ns :: string(),
+		 ns :: unicode:chardata(),
 		 next :: parser_fun1(),
 		 pop :: parser_fun() | none
 		}).
 -type state() :: #state{}.
 
--define(RDF, "http://www.w3.org/1999/02/22-rdf-syntax-ns#").
--define(RDFTYPE, lagra_model:new_iri(?RDF++"type")).
--define(COLL_FIRST, lagra_model:new_iri(?RDF++"first")).
--define(COLL_REST, lagra_model:new_iri(?RDF++"rest")).
--define(COLL_END, lagra_model:new_iri(?RDF++"nil")).
--define(XSD(T), "http://www.w3.org/2001/XMLSchema#"++T).
+-define(RDF, <<"http://www.w3.org/1999/02/22-rdf-syntax-ns#">>).
+-define(RDFTYPE, lagra_model:new_iri(<<?RDF/binary, "type">>)).
+-define(COLL_FIRST, lagra_model:new_iri(<<?RDF/binary, "first">>)).
+-define(COLL_REST, lagra_model:new_iri(<<?RDF/binary, "rest">>)).
+-define(COLL_END, lagra_model:new_iri(<<?RDF/binary, "nil">>)).
+-define(XSD(T), <<"http://www.w3.org/2001/XMLSchema#", T/binary>>).
 
 %% API.
 
@@ -64,7 +64,7 @@ triple(Parser) ->
 %% gen_server.
 
 init([Options]) ->
-	Base = case maps:get(base, Options, "") of
+	Base = case maps:get(base, Options, <<"">>) of
 			   {iri, Text} -> Text;
 			   Text ->        Text
 		   end,
@@ -75,7 +75,7 @@ init([Options]) ->
 				   bnodes=#{},
 				   prefixes=#{},
 				   base=uri_string:parse(Base),
-				   ns="",
+				   ns= <<"">>,
 				   next=fun p000s/1,
 				   pop=none},
 	{ok, State}.
@@ -132,11 +132,11 @@ p000s(_State) ->
 	{error, state, {0, 0}}.
 
 -spec p000(lexeme(), state()) -> parse_result().
-p000({prefix, _, [$@|_]}, State) ->
+p000({prefix, _, <<$@, _/binary>>}, State) ->
 	p009(next_term(State), State, fun p014_011/2);
 p000({prefix, _, _}, State) ->
 	p009(next_term(State), State, fun p000/2);
-p000({base, _, [$@|_]}, State) ->
+p000({base, _, <<$@, _/binary>>}, State) ->
 	p013(next_term(State), State, fun p014_011/2);
 p000({base, _, _}, State) ->
 	p013(next_term(State), State, fun p000/2);
@@ -159,10 +159,10 @@ p000({anon, _, _}, State) ->
 	BNode = lagra_model:new_bnode(),
 	NewState = State#state{triple = {BNode, none, none}},
 	p033(next_term(NewState), NewState);
-p000({punc, _, "("}, State) ->
+p000({punc, _, <<"(">>}, State) ->
 	p090(next_term(State), State);
 % triples ::= blankNodePropertyList predicateObjectList?
-p000({punc, _, "["}, State) ->
+p000({punc, _, <<"[">>}, State) ->
 	p091(next_term(State), State);
 p000({eof, _, _}, _State) ->
 	eof;
@@ -179,7 +179,7 @@ p033(Term, State) ->
 %% p025 -- return from the predicateObjectList as part of the
 %% "triples" production, go round for another statement.
 -spec p025(lexeme(), state()) -> parse_result().
-p025({punc, _, "."}, State) ->
+p025({punc, _, <<".">>}, State) ->
 	NewState = pop(State),
 	p000(next_term(NewState), NewState);
 p025({_, Pos, _}, _State) ->
@@ -195,7 +195,7 @@ p091(Term, State) ->
 
 %% p023 -- return from a blankNodePropertyList as a subject
 -spec p023(lexeme(), state()) -> parse_result().
-p023({punc, _, "]"}, State=#state{triple={S, _, _}}) ->
+p023({punc, _, <<"]">>}, State=#state{triple={S, _, _}}) ->
 	NewState = State#state{triple={S, none, none}},
 	p037(next_term(NewState), NewState);
 p023({_, Pos, _}, _State) ->
@@ -203,7 +203,7 @@ p023({_, Pos, _}, _State) ->
 
 %% p037 -- optionally end "bnode" branch of "triples" production
 -spec p037(lexeme(), state()) -> parse_result().
-p037({punc, _, "."}, State) ->
+p037({punc, _, <<".">>}, State) ->
 	p000(next_term(State), State);
 p037(Term, State) ->
 	p033(Term, State).
@@ -211,7 +211,7 @@ p037(Term, State) ->
 %% p090 -- start a collection as subject, pushing into the "collection"
 %% substate if it's not a trivial empty list
 -spec p090(lexeme(), state()) -> parse_result().
-p090({punc, _, ")"}, State) ->
+p090({punc, _, <<")">>}, State) ->
 	NewState = State#state{triple={?COLL_END, none, none}},
 	p033(next_term(NewState), NewState);
 p090(Term, State0) ->
@@ -257,10 +257,10 @@ p131(Term, State=#state{triple=Triple}) ->
 
 %% p102 -- optionally exit the "predicateObjectList" substate
 -spec p102(lexeme(), state()) -> parse_result().
-p102({punc, _, ","}, State=#state{triple={S, P, _}}) ->
+p102({punc, _, <<",">>}, State=#state{triple={S, P, _}}) ->
 	NewState = State#state{triple={S, P, none}},
 	p130(next_term(NewState), NewState);
-p102({punc, _, ";"}, State=#state{triple={S, _, _}}) ->
+p102({punc, _, <<";">>}, State=#state{triple={S, _, _}}) ->
 	NewState = State#state{triple={S, none, none}},
 	p103(next_term(NewState), NewState);
 p102(Term, State=#state{pop=Cont}) ->
@@ -298,7 +298,7 @@ p139(Term, State=#state{triple=Triple}) ->
 
 %% p140 -- handle repeated objects
 -spec p140(lexeme(), state()) -> parse_result().
-p140({punc, _, ","}, State=#state{triple={S, P, _}}) ->
+p140({punc, _, <<",">>}, State=#state{triple={S, P, _}}) ->
 	NewState = State#state{triple={S, P, none}},
 	p138(next_term(NewState), NewState);
 p140(Term, State) ->
@@ -322,7 +322,7 @@ p200({anon, _, _},
 	BNode = lagra_model:new_bnode(),
 	NewState = State#state{triple={S, P, BNode}},
 	Cont(next_term(NewState), NewState);
-p200({punc, _, "["},
+p200({punc, _, <<"[">>},
 	 State = #state{triple={_S, _P, none}}) ->
 	p291(State);
 p200({bnode_label, _, Text},
@@ -333,7 +333,7 @@ p200({bnode_label, _, Text},
 	NewState = State#state{triple={S, P, BNode},
 						   bnodes=NewMap},
 	Cont(next_term(NewState), NewState);
-p200({punc, _, "("},
+p200({punc, _, <<"(">>},
 	 State = #state{triple={_S, _P, none}}) ->
 	p290(next_term(State), State);
 p200({string, _, Text},
@@ -343,7 +343,7 @@ p200({string, _, Text},
 p200({integer, _, Text},
 	 State = #state{triple={S, P, none},
 					pop=Cont}) ->
-	O = lagra_model:new_literal(list_to_integer(Text)),
+	O = lagra_model:new_literal(binary_to_integer(Text)),
 	NewState = State#state{triple = {S, P, O}},
 	Cont(next_term(NewState), NewState);
 p200({Type, _, Text},
@@ -355,17 +355,18 @@ p200({Type, _, Text},
 	% where necessary so that list_to_float/1 will work right.
 	F = lagra_parser_common:fixup_float_text(Text),
 	TypeIRI = case Type of
-				  double -> ?XSD("double");
-				  decimal -> ?XSD("decimal")
+				  double -> ?XSD(<<"double">>);
+				  decimal -> ?XSD(<<"decimal">>)
 			  end,
-	O = lagra_model:new_literal_typed(list_to_float(F), TypeIRI),
+	O = lagra_model:new_literal_typed(binary_to_float(F), TypeIRI),
 	NewState = State#state{triple = {S, P, O}},
 	Cont(next_term(NewState), NewState);
 p200({boolean, _, Text},
 	 State = #state{triple={S, P, none},
 					pop=Cont}) ->
-	O = lagra_model:new_literal_typed(list_to_existing_atom(Text),
-									  ?XSD("boolean")),
+	O = lagra_model:new_literal_typed(
+		  list_to_existing_atom(unicode:characters_to_list(Text)),
+		  ?XSD(<<"boolean">>)),
 	NewState = State#state{triple={S, P, O}},
 	Cont(next_term(NewState), NewState);
 p200({_, Pos, _}, #state{triple={_, _, none}}) ->
@@ -397,7 +398,7 @@ p221({IriType, _, _} = Term,
 	TypeIriRaw = lagra_model:iri_to_text(
 				   make_iri(Term, NSmap, State#state.base)),
 	Text = lagra_model:literal_value(O),
-	ConvertedValue = lagra_parser_common:list_to_type(Text, TypeIriRaw),
+	ConvertedValue = lagra_parser_common:binary_to_type(Text, TypeIriRaw),
 	NewLiteral = lagra_model:new_literal_typed(ConvertedValue, TypeIriRaw),
 	NewState = State#state{triple={S, P, NewLiteral}},
 	Cont(next_term(NewState), NewState);
@@ -417,7 +418,7 @@ p291(State = #state{triple={S, P, _}}) ->
 
 %% p210 -- return from predicateObjectList inside a bnode
 -spec p210(lexeme(), state()) -> parse_result().
-p210({punc, _, "]"}, State) ->
+p210({punc, _, <<"]">>}, State) ->
 	PState = pop(State),
 	Cont = PState#state.pop,
 	Cont(next_term(PState), PState);
@@ -427,7 +428,7 @@ p210({_, Pos, _}, _State) ->
 %% p290 -- push down to objectlist inside ( ... ) as an object,
 %% or return a nil list
 -spec p290(lexeme(), state()) -> parse_result().
-p290({punc, _, ")"},
+p290({punc, _, <<")">>},
 	 State=#state{triple={S, P, none},
 				  pop=Cont}) ->
 	NewTriple = {S, P, ?COLL_END},
@@ -467,7 +468,7 @@ p502(Term, State=#state{triple=Triple}) ->
 %% object (set up the next two triples, and push down to object
 %% substate)
 -spec p503(lexeme(), state()) -> parse_result().
-p503({punc, _, ")"}, State=#state{triple={S, _, _}}) ->
+p503({punc, _, <<")">>}, State=#state{triple={S, _, _}}) ->
 	Triple = {S, ?COLL_REST, ?COLL_END},
 	NewState = State#state{next=State#state.pop},
 	{Triple, NewState};
@@ -514,13 +515,13 @@ p010({iri, _, Text},
 	 Cont) ->
 	NewPrefixes = Prefixes#{NS => Text},
 	Cont(next_term(State),
-		 State#state{prefixes=NewPrefixes, ns=""});
+		 State#state{prefixes=NewPrefixes, ns= <<"">>});
 p010({_, Pos, _}, _, _) ->
 	{error, syntax, Pos}.
 
 %% Parse the dot at the end of the @-directives
 -spec p014_011(lexeme(), state()) -> parse_result().
-p014_011({punc, _, "."}, State) ->
+p014_011({punc, _, <<".">>}, State) ->
 	p000(next_term(State), State);
 p014_011({_, Pos, _}, _) ->
 	{error, syntax, Pos}.
@@ -566,7 +567,7 @@ resolve_prefix({pfxname_ln, Pos, Text}, NSmap) ->
 	[NS, Suffix] = string:split(Text, ":"),
 	case NSmap of
 		#{NS := Prefix} ->
-			lagra_model:new_iri(Prefix ++ Suffix);
+			lagra_model:new_iri(<<Prefix/binary, Suffix/binary>>);
 		_ ->
 			throw({error, noprefix, Pos})
 	end.
@@ -588,7 +589,7 @@ resolve_relative_iri_map(#{scheme := _} = IRI, _Base) ->
 	IRI;
 resolve_relative_iri_map(#{host := _} = IRI0, Base) ->
 	IRI0#{scheme => maps:get(scheme, Base)};
-resolve_relative_iri_map(#{path := ""} = IRI0, Base) ->
+resolve_relative_iri_map(#{path := <<"">>} = IRI0, Base) ->
 	IRI1 = IRI0#{scheme => maps:get(scheme, Base),
 				 host => maps:get(host, Base),
 				 path => maps:get(path, Base)},
@@ -596,7 +597,7 @@ resolve_relative_iri_map(#{path := ""} = IRI0, Base) ->
 		none -> IRI1;
 		Q ->    IRI1#{query => Q}
 	end;
-resolve_relative_iri_map(#{path := [$/|_]} = IRI0, Base) ->
+resolve_relative_iri_map(#{path := <<$/, _/binary>>} = IRI0, Base) ->
 	IRI0#{scheme => maps:get(scheme, Base),
 		  host => maps:get(host, Base)};
 resolve_relative_iri_map(#{path := IRIPath} = IRI0,
@@ -614,18 +615,18 @@ resolve_relative_iri_map(#{path := IRIPath} = IRI0,
 									maps:get(host, Base, has_no_host))},
 	  [return_map]).
 
--spec merge_iri_paths(unicode:charlist(), unicode:charlist(),
-					  unicode:charlist() | has_no_host) ->
-							 unicode:charlist().
-merge_iri_paths(IRIPath, "", BaseHost)
+-spec merge_iri_paths(unicode:chardata(), unicode:chardata(),
+					  unicode:chardata() | has_no_host) ->
+							 unicode:chardata().
+merge_iri_paths(IRIPath, <<"">>, BaseHost)
   when BaseHost =/= has_no_host ->
-	"/" ++ IRIPath;
+	<<"/", IRIPath/binary>>;
 merge_iri_paths(IRIPath, BasePath, _) ->
 	case string:split(BasePath, "/", trailing) of
 		[Head, _Tail] ->
-			Head ++ "/" ++ IRIPath;
+			<<Head/binary, "/", IRIPath/binary>>;
 		[_NoSlash] ->
-			"/" ++ IRIPath
+			<<"/", IRIPath/binary>>
 	end.
 
 %% This graph represents the state transitions of the parser.

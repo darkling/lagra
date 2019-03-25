@@ -14,7 +14,7 @@
 -export([terminate/2]).
 -export([code_change/3]).
 
--record(state, {suffix :: string(),
+-record(state, {suffix :: binary(),
 				serial :: integer()
 			   }).
 -type state() :: #state{}.
@@ -33,7 +33,7 @@ new() ->
 
 init([]) ->
 	{ok, #state{serial=14776336+rand:uniform(458066416),
-				suffix="-"++random_string()}}.
+				suffix=random_string()}}.
 
 handle_call(new, _From, State) ->
 	{BNode, NewState} = new_bnode(State),
@@ -54,25 +54,25 @@ code_change(_OldVsn, State, _Extra) ->
 
 -spec new_bnode(state()) -> {lagra_model:bnode(), state()}.
 new_bnode(State = #state{serial=916132832}) ->  % 62^5
-	new_bnode(State#state{serial=0, suffix="-"++random_string()});
+	new_bnode(State#state{serial=0, suffix=random_string()});
 new_bnode(State = #state{serial=Serial, suffix=Suffix}) ->
-	BNode = {bnode, b62enc(Serial) ++ Suffix},
+	BNode = {bnode, <<(b62enc(Serial))/binary, "-", Suffix/binary>>},
 	NewState = State#state{serial=Serial+1},
 	{BNode, NewState}.
 
--spec random_string() -> string().
+-spec random_string() -> binary().
 random_string() ->
-	[b62char(rand:uniform(62)-1) || _ <- lists:seq(1, 11)].
+	list_to_binary([b62char(rand:uniform(62)-1) || _ <- lists:seq(1, 11)]).
 
--spec b62enc(integer()) -> string().
+-spec b62enc(integer()) -> binary().
 b62enc(N) ->
-	b62enc(N, []).
+	b62enc(N, <<>>).
 
--spec b62enc(integer(), string()) -> string().
+-spec b62enc(integer(), binary()) -> binary().
 b62enc(N, Acc) when N < 62 ->
-	[b62char(N) | Acc];
+	<<(b62char(N)):8, Acc/binary>>;
 b62enc(N, Acc) ->
-	b62enc(N div 62, [b62char(N rem 62) | Acc]).
+	b62enc(N div 62, <<(b62char(N rem 62)):8, Acc/binary>>).
 
 -spec b62char(integer()) -> integer().
 b62char(N) when  0 =< N, N < 10 -> $0 + N;

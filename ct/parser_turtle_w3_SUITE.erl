@@ -327,14 +327,14 @@ iRI_subject(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_subject.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRI_subject.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/IRI_subject.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 iRI_with_four_digit_numeric_escape(Config) ->
     Store1 = ?config(store1, Config),
@@ -342,14 +342,14 @@ iRI_with_four_digit_numeric_escape(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_with_four_digit_numeric_escape.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRI_with_four_digit_numeric_escape.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/IRI_with_four_digit_numeric_escape.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 iRI_with_eight_digit_numeric_escape(Config) ->
     Store1 = ?config(store1, Config),
@@ -357,14 +357,14 @@ iRI_with_eight_digit_numeric_escape(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_with_eight_digit_numeric_escape.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRI_with_eight_digit_numeric_escape.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/IRI_with_eight_digit_numeric_escape.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 iRI_with_all_punctuation(Config) ->
     Store1 = ?config(store1, Config),
@@ -372,14 +372,14 @@ iRI_with_all_punctuation(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_with_all_punctuation.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_with_all_punctuation.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRI_with_all_punctuation.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/IRI_with_all_punctuation.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 bareword_a_predicate(Config) ->
     Store1 = ?config(store1, Config),
@@ -387,14 +387,14 @@ bareword_a_predicate(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "bareword_a_predicate.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "bareword_a_predicate.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/bareword_a_predicate.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/bareword_a_predicate.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 old_style_prefix(Config) ->
     Store1 = ?config(store1, Config),
@@ -402,14 +402,14 @@ old_style_prefix(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "old_style_prefix.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/old_style_prefix.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/old_style_prefix.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 sPARQL_style_prefix(Config) ->
     Store1 = ?config(store1, Config),
@@ -417,14 +417,14 @@ sPARQL_style_prefix(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "SPARQL_style_prefix.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/SPARQL_style_prefix.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/SPARQL_style_prefix.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 prefixed_IRI_predicate(Config) ->
     Store1 = ?config(store1, Config),
@@ -432,14 +432,14 @@ prefixed_IRI_predicate(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "prefixed_IRI_predicate.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefixed_IRI_predicate.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/prefixed_IRI_predicate.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 prefixed_IRI_object(Config) ->
     Store1 = ?config(store1, Config),
@@ -447,14 +447,14 @@ prefixed_IRI_object(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "prefixed_IRI_object.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefixed_IRI_object.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/prefixed_IRI_object.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 prefix_only_IRI(Config) ->
     Store1 = ?config(store1, Config),
@@ -462,14 +462,14 @@ prefix_only_IRI(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "prefix_only_IRI.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefix_only_IRI.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/prefix_only_IRI.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 prefix_with_PN_CHARS_BASE_character_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -477,14 +477,14 @@ prefix_with_PN_CHARS_BASE_character_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "prefix_with_PN_CHARS_BASE_character_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefix_with_PN_CHARS_BASE_character_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/prefix_with_PN_CHARS_BASE_character_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 prefix_with_non_leading_extras(Config) ->
     Store1 = ?config(store1, Config),
@@ -492,14 +492,14 @@ prefix_with_non_leading_extras(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "prefix_with_non_leading_extras.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefix_with_non_leading_extras.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/prefix_with_non_leading_extras.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -507,14 +507,14 @@ localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -522,14 +522,14 @@ localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 localName_with_nfc_PN_CHARS_BASE_character_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -537,14 +537,14 @@ localName_with_nfc_PN_CHARS_BASE_character_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_nfc_PN_CHARS_BASE_character_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_nfc_PN_CHARS_BASE_character_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_nfc_PN_CHARS_BASE_character_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/localName_with_nfc_PN_CHARS_BASE_character_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 default_namespace_IRI(Config) ->
     Store1 = ?config(store1, Config),
@@ -552,14 +552,14 @@ default_namespace_IRI(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "default_namespace_IRI.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/default_namespace_IRI.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/default_namespace_IRI.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 prefix_reassigned_and_used(Config) ->
     Store1 = ?config(store1, Config),
@@ -567,14 +567,14 @@ prefix_reassigned_and_used(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "prefix_reassigned_and_used.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "prefix_reassigned_and_used.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefix_reassigned_and_used.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/prefix_reassigned_and_used.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 reserved_escaped_localName(Config) ->
     Store1 = ?config(store1, Config),
@@ -582,14 +582,14 @@ reserved_escaped_localName(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "reserved_escaped_localName.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "reserved_escaped_localName.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/reserved_escaped_localName.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/reserved_escaped_localName.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 percent_escaped_localName(Config) ->
     Store1 = ?config(store1, Config),
@@ -597,14 +597,14 @@ percent_escaped_localName(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "percent_escaped_localName.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "percent_escaped_localName.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/percent_escaped_localName.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/percent_escaped_localName.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 hYPHEN_MINUS_in_localName(Config) ->
     Store1 = ?config(store1, Config),
@@ -612,14 +612,14 @@ hYPHEN_MINUS_in_localName(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "HYPHEN_MINUS_in_localName.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "HYPHEN_MINUS_in_localName.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/HYPHEN_MINUS_in_localName.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/HYPHEN_MINUS_in_localName.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 underscore_in_localName(Config) ->
     Store1 = ?config(store1, Config),
@@ -627,14 +627,14 @@ underscore_in_localName(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "underscore_in_localName.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "underscore_in_localName.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/underscore_in_localName.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/underscore_in_localName.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 localname_with_COLON(Config) ->
     Store1 = ?config(store1, Config),
@@ -642,14 +642,14 @@ localname_with_COLON(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "localname_with_COLON.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "localname_with_COLON.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localname_with_COLON.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/localname_with_COLON.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 localName_with_leading_underscore(Config) ->
     Store1 = ?config(store1, Config),
@@ -657,14 +657,14 @@ localName_with_leading_underscore(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_leading_underscore.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_leading_underscore.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_leading_underscore.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/localName_with_leading_underscore.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 localName_with_leading_digit(Config) ->
     Store1 = ?config(store1, Config),
@@ -672,14 +672,14 @@ localName_with_leading_digit(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_leading_digit.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_leading_digit.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_leading_digit.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/localName_with_leading_digit.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 localName_with_non_leading_extras(Config) ->
     Store1 = ?config(store1, Config),
@@ -687,14 +687,14 @@ localName_with_non_leading_extras(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_non_leading_extras.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "localName_with_non_leading_extras.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/localName_with_non_leading_extras.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/localName_with_non_leading_extras.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 old_style_base(Config) ->
     Store1 = ?config(store1, Config),
@@ -702,14 +702,14 @@ old_style_base(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "old_style_base.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/old_style_base.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/old_style_base.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 sPARQL_style_base(Config) ->
     Store1 = ?config(store1, Config),
@@ -717,14 +717,14 @@ sPARQL_style_base(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "SPARQL_style_base.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/SPARQL_style_base.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/SPARQL_style_base.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 labeled_blank_node_subject(Config) ->
     Store1 = ?config(store1, Config),
@@ -732,14 +732,14 @@ labeled_blank_node_subject(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_subject.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_subject.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_subject.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/labeled_blank_node_subject.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 labeled_blank_node_object(Config) ->
     Store1 = ?config(store1, Config),
@@ -747,14 +747,14 @@ labeled_blank_node_object(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_object.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_object.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_object.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/labeled_blank_node_object.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 labeled_blank_node_with_PN_CHARS_BASE_character_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -762,14 +762,14 @@ labeled_blank_node_with_PN_CHARS_BASE_character_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_with_PN_CHARS_BASE_character_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_object.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_PN_CHARS_BASE_character_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_PN_CHARS_BASE_character_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 labeled_blank_node_with_leading_underscore(Config) ->
     Store1 = ?config(store1, Config),
@@ -777,14 +777,14 @@ labeled_blank_node_with_leading_underscore(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_with_leading_underscore.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_object.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_leading_underscore.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_leading_underscore.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 labeled_blank_node_with_leading_digit(Config) ->
     Store1 = ?config(store1, Config),
@@ -792,14 +792,14 @@ labeled_blank_node_with_leading_digit(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_with_leading_digit.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_object.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_leading_digit.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_leading_digit.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 labeled_blank_node_with_non_leading_extras(Config) ->
     Store1 = ?config(store1, Config),
@@ -807,14 +807,14 @@ labeled_blank_node_with_non_leading_extras(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_with_non_leading_extras.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_object.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_non_leading_extras.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/labeled_blank_node_with_non_leading_extras.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 anonymous_blank_node_subject(Config) ->
     Store1 = ?config(store1, Config),
@@ -822,14 +822,14 @@ anonymous_blank_node_subject(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "anonymous_blank_node_subject.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_subject.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/anonymous_blank_node_subject.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/anonymous_blank_node_subject.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 anonymous_blank_node_object(Config) ->
     Store1 = ?config(store1, Config),
@@ -837,14 +837,14 @@ anonymous_blank_node_object(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "anonymous_blank_node_object.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_object.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/anonymous_blank_node_object.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/anonymous_blank_node_object.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 sole_blankNodePropertyList(Config) ->
     Store1 = ?config(store1, Config),
@@ -852,14 +852,14 @@ sole_blankNodePropertyList(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "sole_blankNodePropertyList.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "labeled_blank_node_subject.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/sole_blankNodePropertyList.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/sole_blankNodePropertyList.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 blankNodePropertyList_as_subject(Config) ->
     Store1 = ?config(store1, Config),
@@ -867,14 +867,14 @@ blankNodePropertyList_as_subject(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "blankNodePropertyList_as_subject.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "blankNodePropertyList_as_subject.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_as_subject.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_as_subject.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 blankNodePropertyList_as_object(Config) ->
     Store1 = ?config(store1, Config),
@@ -882,14 +882,14 @@ blankNodePropertyList_as_object(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "blankNodePropertyList_as_object.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "blankNodePropertyList_as_object.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_as_object.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_as_object.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 blankNodePropertyList_with_multiple_triples(Config) ->
     Store1 = ?config(store1, Config),
@@ -897,14 +897,14 @@ blankNodePropertyList_with_multiple_triples(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "blankNodePropertyList_with_multiple_triples.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "blankNodePropertyList_with_multiple_triples.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_with_multiple_triples.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_with_multiple_triples.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 nested_blankNodePropertyLists(Config) ->
     Store1 = ?config(store1, Config),
@@ -912,14 +912,14 @@ nested_blankNodePropertyLists(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "nested_blankNodePropertyLists.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "nested_blankNodePropertyLists.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/nested_blankNodePropertyLists.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/nested_blankNodePropertyLists.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 blankNodePropertyList_containing_collection(Config) ->
     Store1 = ?config(store1, Config),
@@ -927,14 +927,14 @@ blankNodePropertyList_containing_collection(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "blankNodePropertyList_containing_collection.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "blankNodePropertyList_containing_collection.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_containing_collection.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/blankNodePropertyList_containing_collection.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 collection_subject(Config) ->
     Store1 = ?config(store1, Config),
@@ -942,14 +942,14 @@ collection_subject(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "collection_subject.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "collection_subject.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/collection_subject.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/collection_subject.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 collection_object(Config) ->
     Store1 = ?config(store1, Config),
@@ -957,14 +957,14 @@ collection_object(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "collection_object.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "collection_object.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/collection_object.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/collection_object.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 empty_collection(Config) ->
     Store1 = ?config(store1, Config),
@@ -972,14 +972,14 @@ empty_collection(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "empty_collection.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "empty_collection.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/empty_collection.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/empty_collection.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 nested_collection(Config) ->
     Store1 = ?config(store1, Config),
@@ -987,14 +987,14 @@ nested_collection(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "nested_collection.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "nested_collection.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/nested_collection.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/nested_collection.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 first(Config) ->
     Store1 = ?config(store1, Config),
@@ -1002,14 +1002,14 @@ first(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "first.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "first.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/first.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/first.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 last(Config) ->
     Store1 = ?config(store1, Config),
@@ -1017,14 +1017,14 @@ last(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "last.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "last.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/last.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/last.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL1(Config) ->
     Store1 = ?config(store1, Config),
@@ -1032,14 +1032,14 @@ lITERAL1(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL1.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL1_ascii_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -1047,14 +1047,14 @@ lITERAL1_ascii_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1_ascii_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1_ascii_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1_ascii_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL1_ascii_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL1_with_UTF8_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -1062,14 +1062,14 @@ lITERAL1_with_UTF8_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1_with_UTF8_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_with_UTF8_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1_with_UTF8_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL1_with_UTF8_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL1_all_controls(Config) ->
     Store1 = ?config(store1, Config),
@@ -1077,14 +1077,14 @@ lITERAL1_all_controls(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1_all_controls.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1_all_controls.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1_all_controls.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL1_all_controls.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL1_all_punctuation(Config) ->
     Store1 = ?config(store1, Config),
@@ -1092,14 +1092,14 @@ lITERAL1_all_punctuation(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1_all_punctuation.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1_all_punctuation.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL1_all_punctuation.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL1_all_punctuation.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG1(Config) ->
     Store1 = ?config(store1, Config),
@@ -1107,14 +1107,14 @@ lITERAL_LONG1(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG1.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG1_ascii_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -1122,14 +1122,14 @@ lITERAL_LONG1_ascii_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG1_ascii_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG1_ascii_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_ascii_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_ascii_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG1_with_UTF8_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -1137,14 +1137,14 @@ lITERAL_LONG1_with_UTF8_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG1_with_UTF8_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_with_UTF8_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_UTF8_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_UTF8_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG1_with_1_squote(Config) ->
     Store1 = ?config(store1, Config),
@@ -1152,14 +1152,14 @@ lITERAL_LONG1_with_1_squote(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG1_with_1_squote.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG1_with_1_squote.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_1_squote.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_1_squote.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG1_with_2_squotes(Config) ->
     Store1 = ?config(store1, Config),
@@ -1167,14 +1167,14 @@ lITERAL_LONG1_with_2_squotes(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG1_with_2_squotes.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG1_with_2_squotes.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_2_squotes.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG1_with_2_squotes.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL2(Config) ->
     Store1 = ?config(store1, Config),
@@ -1182,14 +1182,14 @@ lITERAL2(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL2.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL2.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL2.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL2_ascii_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -1197,14 +1197,14 @@ lITERAL2_ascii_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL2_ascii_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL2_ascii_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL2_ascii_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL2_ascii_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL2_with_UTF8_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -1212,14 +1212,14 @@ lITERAL2_with_UTF8_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL2_with_UTF8_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_with_UTF8_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL2_with_UTF8_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL2_with_UTF8_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG2(Config) ->
     Store1 = ?config(store1, Config),
@@ -1227,14 +1227,14 @@ lITERAL_LONG2(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL1.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG2_ascii_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -1242,14 +1242,14 @@ lITERAL_LONG2_ascii_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_ascii_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_ascii_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_ascii_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_ascii_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG2_with_UTF8_boundaries(Config) ->
     Store1 = ?config(store1, Config),
@@ -1257,14 +1257,14 @@ lITERAL_LONG2_with_UTF8_boundaries(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_with_UTF8_boundaries.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_with_UTF8_boundaries.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_UTF8_boundaries.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_UTF8_boundaries.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG2_with_1_squote(Config) ->
     Store1 = ?config(store1, Config),
@@ -1272,14 +1272,14 @@ lITERAL_LONG2_with_1_squote(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_with_1_squote.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_with_1_squote.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_1_squote.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_1_squote.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG2_with_2_squotes(Config) ->
     Store1 = ?config(store1, Config),
@@ -1287,14 +1287,14 @@ lITERAL_LONG2_with_2_squotes(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_with_2_squotes.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_with_2_squotes.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_2_squotes.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_2_squotes.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_CHARACTER_TABULATION(Config) ->
     Store1 = ?config(store1, Config),
@@ -1302,14 +1302,14 @@ literal_with_CHARACTER_TABULATION(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_CHARACTER_TABULATION.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_CHARACTER_TABULATION.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_CHARACTER_TABULATION.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_CHARACTER_TABULATION.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_BACKSPACE(Config) ->
     Store1 = ?config(store1, Config),
@@ -1317,14 +1317,14 @@ literal_with_BACKSPACE(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_BACKSPACE.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_BACKSPACE.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_BACKSPACE.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_BACKSPACE.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_LINE_FEED(Config) ->
     Store1 = ?config(store1, Config),
@@ -1332,14 +1332,14 @@ literal_with_LINE_FEED(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_LINE_FEED.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_LINE_FEED.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_LINE_FEED.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_LINE_FEED.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_CARRIAGE_RETURN(Config) ->
     Store1 = ?config(store1, Config),
@@ -1347,14 +1347,14 @@ literal_with_CARRIAGE_RETURN(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_CARRIAGE_RETURN.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_CARRIAGE_RETURN.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_CARRIAGE_RETURN.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_CARRIAGE_RETURN.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_FORM_FEED(Config) ->
     Store1 = ?config(store1, Config),
@@ -1362,14 +1362,14 @@ literal_with_FORM_FEED(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_FORM_FEED.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_FORM_FEED.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_FORM_FEED.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_FORM_FEED.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_REVERSE_SOLIDUS(Config) ->
     Store1 = ?config(store1, Config),
@@ -1377,14 +1377,14 @@ literal_with_REVERSE_SOLIDUS(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_REVERSE_SOLIDUS.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_REVERSE_SOLIDUS.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_REVERSE_SOLIDUS.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_REVERSE_SOLIDUS.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_escaped_CHARACTER_TABULATION(Config) ->
     Store1 = ?config(store1, Config),
@@ -1392,14 +1392,14 @@ literal_with_escaped_CHARACTER_TABULATION(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_escaped_CHARACTER_TABULATION.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_CHARACTER_TABULATION.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_CHARACTER_TABULATION.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_escaped_CHARACTER_TABULATION.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_escaped_BACKSPACE(Config) ->
     Store1 = ?config(store1, Config),
@@ -1407,14 +1407,14 @@ literal_with_escaped_BACKSPACE(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_escaped_BACKSPACE.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_BACKSPACE.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_BACKSPACE.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_escaped_BACKSPACE.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_escaped_LINE_FEED(Config) ->
     Store1 = ?config(store1, Config),
@@ -1422,14 +1422,14 @@ literal_with_escaped_LINE_FEED(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_escaped_LINE_FEED.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_LINE_FEED.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_LINE_FEED.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_escaped_LINE_FEED.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_escaped_CARRIAGE_RETURN(Config) ->
     Store1 = ?config(store1, Config),
@@ -1437,14 +1437,14 @@ literal_with_escaped_CARRIAGE_RETURN(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_escaped_CARRIAGE_RETURN.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_CARRIAGE_RETURN.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_CARRIAGE_RETURN.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_escaped_CARRIAGE_RETURN.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_escaped_FORM_FEED(Config) ->
     Store1 = ?config(store1, Config),
@@ -1452,14 +1452,14 @@ literal_with_escaped_FORM_FEED(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_escaped_FORM_FEED.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_FORM_FEED.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_escaped_FORM_FEED.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_escaped_FORM_FEED.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_numeric_escape4(Config) ->
     Store1 = ?config(store1, Config),
@@ -1467,14 +1467,14 @@ literal_with_numeric_escape4(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_numeric_escape4.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_numeric_escape4.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_numeric_escape4.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_numeric_escape4.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_with_numeric_escape8(Config) ->
     Store1 = ?config(store1, Config),
@@ -1482,14 +1482,14 @@ literal_with_numeric_escape8(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_numeric_escape8.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_with_numeric_escape4.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_with_numeric_escape8.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_with_numeric_escape8.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 iRIREF_datatype(Config) ->
     Store1 = ?config(store1, Config),
@@ -1497,14 +1497,14 @@ iRIREF_datatype(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRIREF_datatype.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRIREF_datatype.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/IRIREF_datatype.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/IRIREF_datatype.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 prefixed_name_datatype(Config) ->
     Store1 = ?config(store1, Config),
@@ -1512,14 +1512,14 @@ prefixed_name_datatype(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "prefixed_name_datatype.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRIREF_datatype.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/prefixed_name_datatype.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/prefixed_name_datatype.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 bareword_integer(Config) ->
     Store1 = ?config(store1, Config),
@@ -1527,14 +1527,14 @@ bareword_integer(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "bareword_integer.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRIREF_datatype.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/bareword_integer.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/bareword_integer.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 bareword_decimal(Config) ->
     Store1 = ?config(store1, Config),
@@ -1542,14 +1542,14 @@ bareword_decimal(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "bareword_decimal.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "bareword_decimal.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/bareword_decimal.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/bareword_decimal.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 bareword_double(Config) ->
     Store1 = ?config(store1, Config),
@@ -1557,14 +1557,14 @@ bareword_double(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "bareword_double.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "bareword_double.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/bareword_double.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/bareword_double.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 double_lower_case_e(Config) ->
     Store1 = ?config(store1, Config),
@@ -1572,14 +1572,14 @@ double_lower_case_e(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "double_lower_case_e.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "double_lower_case_e.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/double_lower_case_e.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/double_lower_case_e.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 negative_numeric(Config) ->
     Store1 = ?config(store1, Config),
@@ -1587,14 +1587,14 @@ negative_numeric(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "negative_numeric.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "negative_numeric.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/negative_numeric.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/negative_numeric.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 positive_numeric(Config) ->
     Store1 = ?config(store1, Config),
@@ -1602,14 +1602,14 @@ positive_numeric(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "positive_numeric.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "positive_numeric.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/positive_numeric.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/positive_numeric.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 numeric_with_leading_0(Config) ->
     Store1 = ?config(store1, Config),
@@ -1617,14 +1617,14 @@ numeric_with_leading_0(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "numeric_with_leading_0.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "numeric_with_leading_0.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/numeric_with_leading_0.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/numeric_with_leading_0.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_true(Config) ->
     Store1 = ?config(store1, Config),
@@ -1632,14 +1632,14 @@ literal_true(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_true.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_true.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_true.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_true.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 literal_false(Config) ->
     Store1 = ?config(store1, Config),
@@ -1647,14 +1647,14 @@ literal_false(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_false.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "literal_false.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/literal_false.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/literal_false.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 langtagged_non_LONG(Config) ->
     Store1 = ?config(store1, Config),
@@ -1662,14 +1662,14 @@ langtagged_non_LONG(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "langtagged_non_LONG.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "langtagged_non_LONG.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/langtagged_non_LONG.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/langtagged_non_LONG.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 langtagged_LONG(Config) ->
     Store1 = ?config(store1, Config),
@@ -1677,14 +1677,14 @@ langtagged_LONG(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "langtagged_LONG.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "langtagged_non_LONG.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/langtagged_LONG.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/langtagged_LONG.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lantag_with_subtag(Config) ->
     Store1 = ?config(store1, Config),
@@ -1692,14 +1692,14 @@ lantag_with_subtag(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "lantag_with_subtag.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "lantag_with_subtag.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/lantag_with_subtag.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/lantag_with_subtag.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 objectList_with_two_objects(Config) ->
     Store1 = ?config(store1, Config),
@@ -1707,14 +1707,14 @@ objectList_with_two_objects(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "objectList_with_two_objects.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "objectList_with_two_objects.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/objectList_with_two_objects.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/objectList_with_two_objects.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 predicateObjectList_with_two_objectLists(Config) ->
     Store1 = ?config(store1, Config),
@@ -1722,14 +1722,14 @@ predicateObjectList_with_two_objectLists(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "predicateObjectList_with_two_objectLists.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "predicateObjectList_with_two_objectLists.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/predicateObjectList_with_two_objectLists.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/predicateObjectList_with_two_objectLists.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 repeated_semis_at_end(Config) ->
     Store1 = ?config(store1, Config),
@@ -1737,14 +1737,14 @@ repeated_semis_at_end(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "repeated_semis_at_end.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "predicateObjectList_with_two_objectLists.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/repeated_semis_at_end.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/repeated_semis_at_end.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 repeated_semis_not_at_end(Config) ->
     Store1 = ?config(store1, Config),
@@ -1752,524 +1752,524 @@ repeated_semis_not_at_end(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "repeated_semis_not_at_end.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "repeated_semis_not_at_end.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/repeated_semis_not_at_end.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/repeated_semis_not_at_end.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_syntax_file_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-file-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_file_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-file-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_file_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-file-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_uri_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-uri-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_uri_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-uri-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_uri_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-uri-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_uri_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-uri-04.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_base_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-base-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_base_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-base-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_base_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-base-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_base_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-base-04.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-04.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_05(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-05.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_06(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-06.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_07(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-07.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_08(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-08.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_prefix_09(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-prefix-09.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-04.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_05(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-05.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_06(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-06.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_07(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-07.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_08(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-08.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_09(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-09.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_10(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-10.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_string_11(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-string-11.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_str_esc_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-str-esc-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_str_esc_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-str-esc-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_str_esc_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-str-esc-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_pname_esc_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-pname-esc-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_pname_esc_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-pname-esc-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_pname_esc_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-pname-esc-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-04.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_05(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-05.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_06(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-06.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_07(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-07.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_08(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-08.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_09(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-09.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bnode_10(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-bnode-10.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-04.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_05(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-05.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_06(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-06.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_07(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-07.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_08(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-08.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_09(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-09.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_10(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-10.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_number_11(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-number-11.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_datatypes_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-datatypes-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_datatypes_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-datatypes-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_kw_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-kw-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_kw_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-kw-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_kw_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-kw-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_struct_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-struct-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_struct_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-struct-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_struct_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-struct-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_struct_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-struct-04.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_struct_05(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-struct-05.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_lists_01(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-lists-01.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_lists_02(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-lists-02.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_lists_03(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-lists-03.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_lists_04(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-lists-04.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_lists_05(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-lists-05.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_uri_01(Config) ->
@@ -2277,7 +2277,7 @@ turtle_syntax_bad_uri_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-uri-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_uri_02(Config) ->
@@ -2285,7 +2285,7 @@ turtle_syntax_bad_uri_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-uri-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_uri_03(Config) ->
@@ -2293,7 +2293,7 @@ turtle_syntax_bad_uri_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-uri-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_uri_04(Config) ->
@@ -2301,7 +2301,7 @@ turtle_syntax_bad_uri_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-uri-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_uri_05(Config) ->
@@ -2309,7 +2309,7 @@ turtle_syntax_bad_uri_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-uri-05.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_prefix_01(Config) ->
@@ -2317,7 +2317,7 @@ turtle_syntax_bad_prefix_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-prefix-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_prefix_02(Config) ->
@@ -2325,7 +2325,7 @@ turtle_syntax_bad_prefix_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-prefix-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_prefix_03(Config) ->
@@ -2333,7 +2333,7 @@ turtle_syntax_bad_prefix_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-prefix-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_prefix_04(Config) ->
@@ -2341,7 +2341,7 @@ turtle_syntax_bad_prefix_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-prefix-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_prefix_05(Config) ->
@@ -2349,7 +2349,7 @@ turtle_syntax_bad_prefix_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-prefix-05.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_base_01(Config) ->
@@ -2357,7 +2357,7 @@ turtle_syntax_bad_base_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-base-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_base_02(Config) ->
@@ -2365,7 +2365,7 @@ turtle_syntax_bad_base_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-base-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_base_03(Config) ->
@@ -2373,7 +2373,7 @@ turtle_syntax_bad_base_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-base-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_01(Config) ->
@@ -2381,7 +2381,7 @@ turtle_syntax_bad_struct_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_02(Config) ->
@@ -2389,7 +2389,7 @@ turtle_syntax_bad_struct_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_03(Config) ->
@@ -2397,7 +2397,7 @@ turtle_syntax_bad_struct_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_04(Config) ->
@@ -2405,7 +2405,7 @@ turtle_syntax_bad_struct_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_05(Config) ->
@@ -2413,7 +2413,7 @@ turtle_syntax_bad_struct_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-05.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_06(Config) ->
@@ -2421,7 +2421,7 @@ turtle_syntax_bad_struct_06(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-06.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_07(Config) ->
@@ -2429,7 +2429,7 @@ turtle_syntax_bad_struct_07(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-07.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_kw_01(Config) ->
@@ -2437,7 +2437,7 @@ turtle_syntax_bad_kw_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-kw-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_kw_02(Config) ->
@@ -2445,7 +2445,7 @@ turtle_syntax_bad_kw_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-kw-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_kw_03(Config) ->
@@ -2453,7 +2453,7 @@ turtle_syntax_bad_kw_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-kw-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_kw_04(Config) ->
@@ -2461,7 +2461,7 @@ turtle_syntax_bad_kw_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-kw-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_kw_05(Config) ->
@@ -2469,7 +2469,7 @@ turtle_syntax_bad_kw_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-kw-05.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_01(Config) ->
@@ -2477,7 +2477,7 @@ turtle_syntax_bad_n3_extras_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_02(Config) ->
@@ -2485,7 +2485,7 @@ turtle_syntax_bad_n3_extras_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_03(Config) ->
@@ -2493,7 +2493,7 @@ turtle_syntax_bad_n3_extras_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_04(Config) ->
@@ -2501,7 +2501,7 @@ turtle_syntax_bad_n3_extras_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_05(Config) ->
@@ -2509,7 +2509,7 @@ turtle_syntax_bad_n3_extras_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-05.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_06(Config) ->
@@ -2517,7 +2517,7 @@ turtle_syntax_bad_n3_extras_06(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-06.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_07(Config) ->
@@ -2525,7 +2525,7 @@ turtle_syntax_bad_n3_extras_07(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-07.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_08(Config) ->
@@ -2533,7 +2533,7 @@ turtle_syntax_bad_n3_extras_08(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-08.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_09(Config) ->
@@ -2541,7 +2541,7 @@ turtle_syntax_bad_n3_extras_09(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-09.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_10(Config) ->
@@ -2549,7 +2549,7 @@ turtle_syntax_bad_n3_extras_10(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-10.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_11(Config) ->
@@ -2557,7 +2557,7 @@ turtle_syntax_bad_n3_extras_11(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-11.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_12(Config) ->
@@ -2565,7 +2565,7 @@ turtle_syntax_bad_n3_extras_12(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-12.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_n3_extras_13(Config) ->
@@ -2573,7 +2573,7 @@ turtle_syntax_bad_n3_extras_13(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-n3-extras-13.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_08(Config) ->
@@ -2581,7 +2581,7 @@ turtle_syntax_bad_struct_08(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-08.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_09(Config) ->
@@ -2589,7 +2589,7 @@ turtle_syntax_bad_struct_09(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-09.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_10(Config) ->
@@ -2597,7 +2597,7 @@ turtle_syntax_bad_struct_10(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-10.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_11(Config) ->
@@ -2605,7 +2605,7 @@ turtle_syntax_bad_struct_11(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-11.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_12(Config) ->
@@ -2613,7 +2613,7 @@ turtle_syntax_bad_struct_12(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-12.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_13(Config) ->
@@ -2621,7 +2621,7 @@ turtle_syntax_bad_struct_13(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-13.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_14(Config) ->
@@ -2629,7 +2629,7 @@ turtle_syntax_bad_struct_14(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-14.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_15(Config) ->
@@ -2637,7 +2637,7 @@ turtle_syntax_bad_struct_15(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-15.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_16(Config) ->
@@ -2645,7 +2645,7 @@ turtle_syntax_bad_struct_16(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-16.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_struct_17(Config) ->
@@ -2653,7 +2653,7 @@ turtle_syntax_bad_struct_17(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-struct-17.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_lang_01(Config) ->
@@ -2661,7 +2661,7 @@ turtle_syntax_bad_lang_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-lang-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_esc_01(Config) ->
@@ -2669,7 +2669,7 @@ turtle_syntax_bad_esc_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-esc-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_esc_02(Config) ->
@@ -2677,7 +2677,7 @@ turtle_syntax_bad_esc_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-esc-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_esc_03(Config) ->
@@ -2685,7 +2685,7 @@ turtle_syntax_bad_esc_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-esc-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_esc_04(Config) ->
@@ -2693,7 +2693,7 @@ turtle_syntax_bad_esc_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-esc-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_pname_01(Config) ->
@@ -2701,7 +2701,7 @@ turtle_syntax_bad_pname_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-pname-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_pname_02(Config) ->
@@ -2709,7 +2709,7 @@ turtle_syntax_bad_pname_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-pname-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_pname_03(Config) ->
@@ -2717,7 +2717,7 @@ turtle_syntax_bad_pname_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-pname-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_string_01(Config) ->
@@ -2725,7 +2725,7 @@ turtle_syntax_bad_string_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-string-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_string_02(Config) ->
@@ -2733,7 +2733,7 @@ turtle_syntax_bad_string_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-string-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_string_03(Config) ->
@@ -2741,7 +2741,7 @@ turtle_syntax_bad_string_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-string-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_string_04(Config) ->
@@ -2749,7 +2749,7 @@ turtle_syntax_bad_string_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-string-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_string_05(Config) ->
@@ -2757,7 +2757,7 @@ turtle_syntax_bad_string_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-string-05.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_string_06(Config) ->
@@ -2765,7 +2765,7 @@ turtle_syntax_bad_string_06(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-string-06.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_string_07(Config) ->
@@ -2773,7 +2773,7 @@ turtle_syntax_bad_string_07(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-string-07.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_num_01(Config) ->
@@ -2781,7 +2781,7 @@ turtle_syntax_bad_num_01(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-num-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_num_02(Config) ->
@@ -2789,7 +2789,7 @@ turtle_syntax_bad_num_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-num-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_num_03(Config) ->
@@ -2797,7 +2797,7 @@ turtle_syntax_bad_num_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-num-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_num_04(Config) ->
@@ -2805,7 +2805,7 @@ turtle_syntax_bad_num_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-num-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_num_05(Config) ->
@@ -2813,7 +2813,7 @@ turtle_syntax_bad_num_05(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-num-05.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_eval_struct_01(Config) ->
@@ -2822,14 +2822,14 @@ turtle_eval_struct_01(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-struct-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-struct-01.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-eval-struct-01.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-eval-struct-01.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_eval_struct_02(Config) ->
     Store1 = ?config(store1, Config),
@@ -2837,14 +2837,14 @@ turtle_eval_struct_02(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-struct-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-struct-02.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-eval-struct-02.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-eval-struct-02.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_01(Config) ->
     Store1 = ?config(store1, Config),
@@ -2852,14 +2852,14 @@ turtle_subm_01(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-01.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-01.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-01.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_02(Config) ->
     Store1 = ?config(store1, Config),
@@ -2867,14 +2867,14 @@ turtle_subm_02(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-02.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-02.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-02.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_03(Config) ->
     Store1 = ?config(store1, Config),
@@ -2882,14 +2882,14 @@ turtle_subm_03(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-03.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-03.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-03.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_04(Config) ->
     Store1 = ?config(store1, Config),
@@ -2897,14 +2897,14 @@ turtle_subm_04(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-04.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-04.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-04.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_05(Config) ->
     Store1 = ?config(store1, Config),
@@ -2912,14 +2912,14 @@ turtle_subm_05(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-05.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-05.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-05.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-05.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_06(Config) ->
     Store1 = ?config(store1, Config),
@@ -2927,14 +2927,14 @@ turtle_subm_06(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-06.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-06.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-06.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-06.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_07(Config) ->
     Store1 = ?config(store1, Config),
@@ -2942,14 +2942,14 @@ turtle_subm_07(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-07.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-07.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-07.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-07.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_08(Config) ->
     Store1 = ?config(store1, Config),
@@ -2957,14 +2957,14 @@ turtle_subm_08(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-08.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-08.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-08.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-08.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_09(Config) ->
     Store1 = ?config(store1, Config),
@@ -2972,14 +2972,14 @@ turtle_subm_09(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-09.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-09.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-09.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-09.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_10(Config) ->
     Store1 = ?config(store1, Config),
@@ -2987,14 +2987,14 @@ turtle_subm_10(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-10.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-10.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-10.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-10.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_11(Config) ->
     Store1 = ?config(store1, Config),
@@ -3002,14 +3002,14 @@ turtle_subm_11(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-11.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-11.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-11.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-11.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_12(Config) ->
     Store1 = ?config(store1, Config),
@@ -3017,14 +3017,14 @@ turtle_subm_12(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-12.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-12.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-12.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-12.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_13(Config) ->
     Store1 = ?config(store1, Config),
@@ -3032,14 +3032,14 @@ turtle_subm_13(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-13.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-13.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-13.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-13.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_14(Config) ->
     Store1 = ?config(store1, Config),
@@ -3047,14 +3047,14 @@ turtle_subm_14(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-14.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-14.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-14.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-14.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_15(Config) ->
     Store1 = ?config(store1, Config),
@@ -3062,14 +3062,14 @@ turtle_subm_15(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-15.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-15.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-15.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-15.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_16(Config) ->
     Store1 = ?config(store1, Config),
@@ -3077,14 +3077,14 @@ turtle_subm_16(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-16.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-16.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-16.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-16.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_17(Config) ->
     Store1 = ?config(store1, Config),
@@ -3092,14 +3092,14 @@ turtle_subm_17(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-17.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-17.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-17.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-17.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_18(Config) ->
     Store1 = ?config(store1, Config),
@@ -3107,14 +3107,14 @@ turtle_subm_18(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-18.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-18.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-18.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-18.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_19(Config) ->
     Store1 = ?config(store1, Config),
@@ -3122,14 +3122,14 @@ turtle_subm_19(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-19.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-19.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-19.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-19.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_20(Config) ->
     Store1 = ?config(store1, Config),
@@ -3137,14 +3137,14 @@ turtle_subm_20(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-20.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-20.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-20.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-20.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_21(Config) ->
     Store1 = ?config(store1, Config),
@@ -3152,14 +3152,14 @@ turtle_subm_21(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-21.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-21.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-21.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-21.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_22(Config) ->
     Store1 = ?config(store1, Config),
@@ -3167,14 +3167,14 @@ turtle_subm_22(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-22.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-22.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-22.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-22.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_23(Config) ->
     Store1 = ?config(store1, Config),
@@ -3182,14 +3182,14 @@ turtle_subm_23(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-23.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-23.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-23.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-23.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_24(Config) ->
     Store1 = ?config(store1, Config),
@@ -3197,14 +3197,14 @@ turtle_subm_24(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-24.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-24.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-24.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-24.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_25(Config) ->
     Store1 = ?config(store1, Config),
@@ -3212,14 +3212,14 @@ turtle_subm_25(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-25.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-25.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-25.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-25.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_26(Config) ->
     Store1 = ?config(store1, Config),
@@ -3227,14 +3227,14 @@ turtle_subm_26(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-26.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-26.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-26.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-26.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_subm_27(Config) ->
     Store1 = ?config(store1, Config),
@@ -3242,21 +3242,21 @@ turtle_subm_27(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-27.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-subm-27.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/turtle-subm-27.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/turtle-subm-27.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_eval_bad_01(Config) ->
     Store = ?config(store1, Config),
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-bad-01.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_eval_bad_02(Config) ->
@@ -3264,7 +3264,7 @@ turtle_eval_bad_02(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-bad-02.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_eval_bad_03(Config) ->
@@ -3272,7 +3272,7 @@ turtle_eval_bad_03(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-bad-03.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_eval_bad_04(Config) ->
@@ -3280,7 +3280,7 @@ turtle_eval_bad_04(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-eval-bad-04.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 comment_following_localName(Config) ->
@@ -3289,14 +3289,14 @@ comment_following_localName(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "comment_following_localName.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "IRI_spo.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/comment_following_localName.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/comment_following_localName.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 number_sign_following_localName(Config) ->
     Store1 = ?config(store1, Config),
@@ -3304,14 +3304,14 @@ number_sign_following_localName(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "number_sign_following_localName.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "number_sign_following_localName.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/number_sign_following_localName.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/number_sign_following_localName.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 comment_following_PNAME_NS(Config) ->
     Store1 = ?config(store1, Config),
@@ -3319,14 +3319,14 @@ comment_following_PNAME_NS(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "comment_following_PNAME_NS.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "comment_following_PNAME_NS.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/comment_following_PNAME_NS.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/comment_following_PNAME_NS.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 number_sign_following_PNAME_NS(Config) ->
     Store1 = ?config(store1, Config),
@@ -3334,14 +3334,14 @@ number_sign_following_PNAME_NS(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "number_sign_following_PNAME_NS.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "number_sign_following_PNAME_NS.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/number_sign_following_PNAME_NS.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/number_sign_following_PNAME_NS.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 lITERAL_LONG2_with_REVERSE_SOLIDUS(Config) ->
     Store1 = ?config(store1, Config),
@@ -3349,21 +3349,21 @@ lITERAL_LONG2_with_REVERSE_SOLIDUS(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_with_REVERSE_SOLIDUS.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "LITERAL_LONG2_with_REVERSE_SOLIDUS.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_REVERSE_SOLIDUS.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/LITERAL_LONG2_with_REVERSE_SOLIDUS.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_syntax_LITERAL2_with_langtag_and_datatype(Config) ->
     Store = ?config(store1, Config),
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-LITERAL2_with_langtag_and_datatype.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 two_LITERAL_LONG2s(Config) ->
@@ -3372,14 +3372,14 @@ two_LITERAL_LONG2s(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "two_LITERAL_LONG2s.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "two_LITERAL_LONG2s.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/two_LITERAL_LONG2s.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/two_LITERAL_LONG2s.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 langtagged_LONG_with_subtag(Config) ->
     Store1 = ?config(store1, Config),
@@ -3387,21 +3387,21 @@ langtagged_LONG_with_subtag(Config) ->
     {ok, File1} = file:open(
         filename:join(?config(data_dir, Config),
                               "langtagged_LONG_with_subtag.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {ok, File2} = file:open(
         filename:join(?config(data_dir, Config),
                               "langtagged_LONG_with_subtag.nt"),
-                      [read, {encoding, utf8}]),
-    ok = lagra:parse(Store1, File1, turtle, #{base=>"http://www.w3.org/2013/TurtleTests/langtagged_LONG_with_subtag.ttl"}),
+                      [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store1, File1, turtle, #{base=><<"http://www.w3.org/2013/TurtleTests/langtagged_LONG_with_subtag.ttl">>}),
     ok = lagra:parse(Store2, File2, ntriples, #{allow_relative=>true}),
-    true = lagra:isomorphic(Store1, {iri, "urn:nil"}, Store2, {iri, "urn:nil"}).
+    true = lagra:isomorphic(Store1, {iri, <<"urn:nil">>}, Store2, {iri, <<"urn:nil">>}).
 
 turtle_syntax_bad_blank_label_dot_end(Config) ->
     Store = ?config(store1, Config),
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-blank-label-dot-end.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_number_dot_in_anon(Config) ->
@@ -3409,7 +3409,7 @@ turtle_syntax_bad_number_dot_in_anon(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-number-dot-in-anon.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_ln_dash_start(Config) ->
@@ -3417,7 +3417,7 @@ turtle_syntax_bad_ln_dash_start(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-ln-dash-start.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_ln_escape(Config) ->
@@ -3425,7 +3425,7 @@ turtle_syntax_bad_ln_escape(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-ln-escape.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_ln_escape_start(Config) ->
@@ -3433,7 +3433,7 @@ turtle_syntax_bad_ln_escape_start(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-ln-escape-start.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_ns_dot_end(Config) ->
@@ -3441,7 +3441,7 @@ turtle_syntax_bad_ns_dot_end(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-ns-dot-end.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_ns_dot_start(Config) ->
@@ -3449,7 +3449,7 @@ turtle_syntax_bad_ns_dot_start(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-ns-dot-start.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_missing_ns_dot_end(Config) ->
@@ -3457,7 +3457,7 @@ turtle_syntax_bad_missing_ns_dot_end(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-missing-ns-dot-end.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_bad_missing_ns_dot_start(Config) ->
@@ -3465,35 +3465,35 @@ turtle_syntax_bad_missing_ns_dot_start(Config) ->
     {ok, File} = file:open(
         filename:join(?config(data_dir, Config),
                               "turtle-syntax-bad-missing-ns-dot-start.ttl"),
-                      [read, {encoding, utf8}]),
+                      [read, {encoding, utf8}, binary]),
     {error, _, _} = lagra:parse(Store, File, turtle).
 
 turtle_syntax_ln_dots(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-ln-dots.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_ln_colons(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-ln-colons.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_ns_dots(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-ns-dots.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 turtle_syntax_blank_label(Config) ->
     Store = ?config(store1, Config),
     Filename = filename:join(?config(data_dir, Config), "turtle-syntax-blank-label.ttl"),
     io:format("Filename = ~p~n", [Filename]),
-    {ok, File} = file:open(Filename, [read, {encoding, utf8}]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, File, turtle).
 
 

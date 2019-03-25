@@ -83,7 +83,7 @@
 -export([code_change/3]).
 
 -record(state, {file     :: file:io_device(),
-				rest     :: unicode:charlist() | eof,
+				rest     :: unicode:chardata() | eof,
 				line_num :: integer(),
 				char_num :: integer()
 			   }).
@@ -102,7 +102,7 @@ next_term(TermSrv) ->
 
 init([File, _Options]) ->
 	{ok, #state{file=File,
-				rest=[],
+				rest= <<"">>,
 				line_num=0,
 				char_num=1}}.
 
@@ -130,11 +130,13 @@ code_change(_OldVsn, State, _Extra) ->
 %%% server reads a line at a time from the input, and returns the next
 %%% token on that line.
 
--spec term(file:io_device(), string() | eof, integer(), integer()) ->
+-spec term(file:io_device(), unicode:chardata() | eof, integer(), integer()) ->
 				  {lagra_parser_turtle_parser:lexeme(),
                                                      % Type, Pos, Text = Result
-				   {string(), integer(), integer()}}.% Rest, Ln, Char = State
-term(File, [], LnNo, _ChNo) ->
+				   {unicode:chardata(), integer(), integer()}}.
+                                                     % Rest, Ln, Char = State
+term(File, Empty, LnNo, _ChNo)
+  when Empty =:= ""; Empty =:= <<"">> ->
 	Line = case io:get_line(File, "") of
 			   eof -> eof;
 			   {error, Reason} ->
@@ -143,72 +145,69 @@ term(File, [], LnNo, _ChNo) ->
 		   end,
 	term(File, Line, LnNo+1, 1);
 term(_File, eof, LnNo, ChNo) ->
-	{{eof, {LnNo, ChNo}, ""}, {"", LnNo, ChNo}};
+	{{eof, {LnNo, ChNo}, <<"">>}, {<<"">>, LnNo, ChNo}};
 term(File, Line, LnNo, ChNo) ->
 	case first_match(Line, ?REGEX) of
 		notfound ->
-			{{error, {LnNo, ChNo}, Line}, {tl(Line), LnNo, ChNo+1}};
+			{{error, {LnNo, ChNo}, Line},
+			 {string:slice(Line, 1), LnNo, ChNo+1}};
 		{{whitespace, Text}, Rest} ->
-			term(File, Rest, LnNo, ChNo+length(Text));
+			term(File, Rest, LnNo, ChNo+string:length(Text));
 		{{comment, Text}, Rest} ->
-			term(File, Rest, LnNo, ChNo+length(Text));
-		{{longstring, "\"\"\""}, _Rest} ->
+			term(File, Rest, LnNo, ChNo+string:length(Text));
+		{{longstring, <<"\"\"\"">>}, _Rest} ->
 			match_longstring(File, Line, LnNo, ChNo, 0,
 							 ?STRING_LITERAL_LONG_QUOTE);
-		{{longstring, "'''"}, _Rest} ->
+		{{longstring, <<"'''">>}, _Rest} ->
 			match_longstring(File, Line, LnNo, ChNo, 0,
 							 ?STRING_LITERAL_LONG_SINGLE_QUOTE);
 		{{iri, Text}, Rest} ->
-			QText = lagra_parser_common:replace_quoted(
-					  Text, fun lagra_parser_common:iri/1),
+			QText = lagra_parser_common:replace_quoted_iri(Text),
 			case string:take(QText, ?IRIREF_CHARS, true) of
-				{_, ""} ->
+				{_, <<"">>} ->
 					{{iri, {LnNo, ChNo}, QText},
-					 {Rest, LnNo, ChNo+length(Text)}};
+					 {Rest, LnNo, ChNo+string:length(Text)}};
 				_ ->
 					{{error, {LnNo, ChNo}, QText},
-					 {Rest, LnNo, ChNo+length(Text)}}
+					 {Rest, LnNo, ChNo+string:length(Text)}}
 			end;
 		{{pfxname_ln, Text}, Rest} ->
-			QText = lagra_parser_common:replace_quoted(
-					  Text, fun lagra_parser_common:local/1),
+			QText = lagra_parser_common:replace_quoted_local(Text),
 			{{pfxname_ln, {LnNo, ChNo}, QText},
-			 {Rest, LnNo, ChNo+length(Text)}};
+			 {Rest, LnNo, ChNo+string:length(Text)}};
 		{{string, Text}, Rest} ->
-			QText = lagra_parser_common:replace_quoted(
-					  Text, fun lagra_parser_common:string/1),
+			QText = lagra_parser_common:replace_quoted_string(Text),
 			{{string, {LnNo, ChNo}, QText},
-			 {Rest, LnNo, ChNo+length(Text)}};
+			 {Rest, LnNo, ChNo+string:length(Text)}};
 		{{Type, Text}, Rest} ->
 			{{Type, {LnNo, ChNo}, Text},
-			 {Rest, LnNo, ChNo+length(Text)}}
+			 {Rest, LnNo, ChNo+string:length(Text)}}
 	end.
 
--spec first_match(string(), [{atom(), string()}]) ->
-						 notfound | {{atom(), string()}, string()}.
+-spec first_match(unicode:chardata(), [{atom(), unicode:chardata()}]) ->
+						 notfound | {{atom(), unicode:chardata()},
+									 unicode:chardata()}.
 first_match(_Line, []) ->
 	notfound;
 first_match(Line, [{Tag, Re} | Tail]) ->
 	case re:run(Line, "^"++Re++"(.*)",
-				[{capture, all, list}, unicode, dotall]) of
+				[{capture, all, binary}, unicode, dotall]) of
 		{match, [_, Found, Rest]} ->
 			{{Tag, Found}, Rest};
 		nomatch -> first_match(Line, Tail)
 	end.
 
--spec match_longstring(file:io_device(), string() | eof,
-					   integer(), integer(), integer(),
-					   string()) ->
+-spec match_longstring(file:io_device(), unicode:chardata() | eof,
+					   integer(), integer(), integer(), string()) ->
 							  {lagra_parser_turtle_parser:lexeme(),
-							   {string(), integer(), integer()}}.
+							   {unicode:chardata(), integer(), integer()}}.
 match_longstring(File, Line, LnNo, ChNo, LnCount, Re) ->
 	% Read lines from File until the regex matches at the start of the
 	% string, or we hit EOF.
-	case re:run(Line, "^"++Re++"(.*)",
-				[{capture, all, list}, unicode, dotall]) of
+	case re:run(Line, ["^", Re, "(.*)"],
+				[{capture, all, binary}, unicode, dotall]) of
 		{match, [_, Found, Rest]} ->
-			QText = lagra_parser_common:replace_quoted(
-					  Found, fun lagra_parser_common:string/1),
+			QText = lagra_parser_common:replace_quoted_string(Found),
 			{{string, {LnNo, ChNo}, QText},
 			 {Rest, LnNo+LnCount, tailchars(ChNo, LnCount, Found)}};
 		nomatch ->
@@ -219,15 +218,16 @@ match_longstring(File, Line, LnNo, ChNo, LnCount, Re) ->
 				{error, Reason} ->
 					throw(Reason);
 				L ->
-					match_longstring(File, Line++L, LnNo, ChNo, LnCount+1, Re)
+					match_longstring(File, <<Line/binary, L/binary>>,
+									 LnNo, ChNo, LnCount+1, Re)
 			end
 	end.
 
--spec tailchars(integer(), integer(), string()) -> integer().
+-spec tailchars(integer(), integer(), unicode:chardata()) -> integer().
 tailchars(ChNo, 0, Str) ->
 	% Return the resulting character position after advancing by the
 	% (long) string Str
-	ChNo+length(Str)+6;
+	ChNo+string:length(Str)+6;
 tailchars(_, _, Str) ->
 	[_, LastLine] = string:split(Str, "\n", trailing),
-	length(LastLine)+3.
+	string:length(LastLine)+3.

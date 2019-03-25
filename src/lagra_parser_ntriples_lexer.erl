@@ -32,7 +32,7 @@
 -export([code_change/3]).
 
 -record(state, {file     :: file:io_device(),
-				rest     :: unicode:charlist() | eof,
+				rest     :: unicode:chardata() | eof,
 				line_num :: integer(),
 				char_num :: integer()
 			   }).
@@ -51,7 +51,7 @@ next_term(TermSrv) ->
 
 init([File, _Options]) ->
 	{ok, #state{file=File,
-				rest=[],
+				rest= <<>>,
 				line_num=0,
 				char_num=1}}.
 
@@ -79,48 +79,51 @@ code_change(_OldVsn, State, _Extra) ->
 %%% server reads a line at a time from the input, and returns the next
 %%% token on that line.
 
--spec term(file:io_device(), string() | eof, integer(), integer()) ->
+-spec term(file:io_device(), unicode:chardata() | eof, integer(), integer()) ->
 				  {lagra_parser_ntriples_parser:lexeme(),
-                                                     % Type, Pos, Text = Result
-				   {string(), integer(), integer()}}.% Rest, Ln, Char = State
-term(File, [], LnNo, ChNo) ->
+                                          % Type, Pos, Text = Result
+				   {unicode:chardata(), integer(), integer()}}.
+                                          % Rest, Ln, Char = State
+term(File, Empty, LnNo, ChNo)
+  when Empty =:= <<"">> ->
 	Line = case io:get_line(File, "") of
 			   eof -> eof;
 			   {error, Reason} ->
 				   throw(Reason);
 			   L -> L
 		   end,
-	{{eol, {LnNo, ChNo}, ""}, {Line, LnNo+1, 1}};
+	{{eol, {LnNo, ChNo}, <<"">>}, {Line, LnNo+1, 1}};
 term(_File, eof, LnNo, ChNo) ->
-	{{eof, {LnNo, ChNo}, ""}, {"", LnNo, ChNo}};
+	{{eof, {LnNo, ChNo}, <<"">>}, {<<"">>, LnNo, ChNo}};
 term(File, Line, LnNo, ChNo) ->
 	case first_match(Line, ?REGEX) of
 		notfound ->
-			{{error, {LnNo, ChNo}, Line}, {tl(Line), LnNo, ChNo+1}};
+			{{error, {LnNo, ChNo}, Line},
+			 {string:slice(Line, 1), LnNo, ChNo+1}};
 		{{whitespace, Text}, Rest} ->
-			term(File, Rest, LnNo, ChNo+length(Text));
+			term(File, Rest, LnNo, ChNo+string:length(Text));
 		{{comment, Text}, Rest} ->
-			term(File, Rest, LnNo, ChNo+length(Text));
+			term(File, Rest, LnNo, ChNo+string:length(Text));
 		{{string_literal_quote, Text}, Rest} ->
-			QText = lagra_parser_common:replace_quoted(
-					  Text, fun lagra_parser_common:string/1),
+			QText = lagra_parser_common:replace_quoted_string(Text),
 			{{string_literal_quote, {LnNo, ChNo}, QText},
-			 {Rest, LnNo, ChNo+length(Text)}};
+			 {Rest, LnNo, ChNo+string:length(Text)}};
 		{{iriref, Text}, Rest} ->
-			QText = lagra_parser_common:replace_quoted(
-					  Text, fun lagra_parser_common:iri/1),
+			QText = lagra_parser_common:replace_quoted_iri(Text),
 			{{iriref, {LnNo, ChNo}, QText},
-			 {Rest, LnNo, ChNo+length(Text)}};
+			 {Rest, LnNo, ChNo+string:length(Text)}};
 		{{Type, Text}, Rest} ->
-			{{Type, {LnNo, ChNo}, Text}, {Rest, LnNo, ChNo+length(Text)}}
+			{{Type, {LnNo, ChNo}, Text},
+			 {Rest, LnNo, ChNo+string:length(Text)}}
 	end.
 
--spec first_match(string(), [{atom(), string()}]) ->
-						 notfound | {{atom(), string()}, string()}.
+-spec first_match(unicode:chardata(), [{atom(), unicode:chardata()}]) ->
+						 notfound | {{atom(), unicode:chardata()},
+									 unicode:chardata()}.
 first_match(_Line, []) ->
 	notfound;
 first_match(Line, [{Tag, Re} | Tail]) ->
-	case re:run(Line, "^"++Re++"(.*)", [{capture, all, list}, unicode]) of
+	case re:run(Line, "^"++Re++"(.*)", [{capture, all, binary}, unicode]) of
 		{match, [_, Found, Rest]} ->
 			{{Tag, Found}, Rest};
 		nomatch -> first_match(Line, Tail)

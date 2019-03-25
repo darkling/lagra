@@ -13,8 +13,8 @@
 -export([terminate/2]).
 -export([code_change/3]).
 
--record(state, {quads                      :: [lagra_model:quad()],
-				default = {iri, "urn:nil"} :: lagra_model:graph()
+-record(state, {quads                          :: [lagra_model:quad()],
+				default = {iri, <<"urn:nil">>} :: lagra_model:graph()
 	   }).
 
 %% API.
