@@ -7,23 +7,19 @@
 -export([new_parser/3]).
 -export([stop_parser/1]).
 
+-define(PARSERS_MAP, #{ntriples => {lagra_parser_ntriples_parser,
+									lagra_parser_ntriples_lexer},
+					   turtle => {lagra_parser_turtle_parser,
+								  lagra_parser_turtle_lexer}}).
+
 start_link() ->
 	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
-new_parser(ntriples, File, Options) ->
-	{ok, _Manager, _Parser}
-		= supervisor:start_child(
-			?MODULE,
-			[[lagra_parser_ntriples_parser,
-			 lagra_parser_ntriples_lexer,
-			 File, Options]]);
-new_parser(turtle, File, Options) ->
-	{ok, _Manager, _Parser}
-		= supervisor:start_child(
-			?MODULE,
-			[[lagra_parser_turtle_parser,
-			 lagra_parser_turtle_lexer,
-			 File, Options]]).
+new_parser(Type, File, Options) ->
+	{ParserMod, LexerMod} = maps:get(Type, ?PARSERS_MAP),
+	{ok, _Manager, _NewParser}
+		= supervisor:start_child(?MODULE,
+								 [[ParserMod, LexerMod, File, Options]]).
 
 stop_parser(Manager) ->
 	_ = supervisor:terminate_child(?MODULE, Manager),
