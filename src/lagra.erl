@@ -162,12 +162,32 @@ parse_incremental(File, ntriples, Options) ->
 parse_incremental(File, turtle, Options) ->
 	lagra_parser_turtle:parse_incremental(File, Options).
 
+%% @equiv serialize(Store, File, Type, #{})
 -spec serialize(store(), file:io_device(), atom()) ->
 					   ok | {error, term()}.
 serialize(Store, File, Type) ->
-	serialize(Store, File, Type, []).
+	serialize(Store, File, Type, #{}).
 
--spec serialize(store(), file:io_device(), atom(), proplists:proplist()) ->
+%% @doc Render a graph from a store to an open file
+%%
+%% @param Store The file store to use
+%%
+%% @param File A file open for writing to
+%%
+%% @param Type The type of file to render. Defined types are
+%% `ntriples' and `turtle'.
+%%
+%% @param Options The options to pass to the serializer. Options
+%%        common to all serializers are:
+%%
+%%   `notify => sync | async | {Proc :: atom() | pid(), Ref}`: Return
+%%   when the serialization is complete (`sync`), or immediately
+%%   (`async`, the default), or send a message `{serialized, Ref}` to
+%%   the process `Proc` on completion.
+%%
+%% @returns `ok'
+
+-spec serialize(store(), file:io_device(), parser_type(), map()) ->
 					   ok | {error, term()}.
 serialize(Store, File, ntriples, Options) ->
 	lagra_serializer_ntriples:serialize(Store, File, Options).
