@@ -16,7 +16,7 @@
 -export([destroy_store/1]).
 
 -export([parse/3, parse/4]).
--export([parse_incremental/2, parse_incremental/3]).
+-export([parse_incremental/4, parse_incremental/5]).
 -export([serialize/3, serialize/4]).
 
 -export([add/2]).
@@ -35,12 +35,11 @@
 -type grouped_node() :: {node_map_elt(),
 						 {[lagra_model:rdfnode()],
 						  [lagra_model:rdfnode()]}}.
--type partial_result(T) :: {ok, [T], parse_state(T)} | {error, term()}.
--type parse_state(T) :: last | fun (() -> partial_result(T)).
 -type parser_type() :: ntriples | turtle.
+-type incr_cb() :: fun (([lagra_model:triple()], any()) -> any()).
 
 -export_type([store/0]).
--export_type([partial_result/1, parse_state/1]).
+-export_type([incr_cb/0]).
 
 %% @equiv create_store(Type, #{})
 %% @spec (Type :: trivial) -> store()
@@ -120,24 +119,31 @@ parse(Store, File, ntriples, Options) ->
 parse(Store, File, turtle, Options) ->
 	lagra_parser_turtle:parse(Store, File, Options).
 
-%% @equiv parse_incremental(File, Type, #{})
--spec parse_incremental(file:io_device(), parser_type()) ->
-							   partial_result(lagra_model:triple()).
-parse_incremental(File, Type) ->
-	parse_incremental(File, Type, #{}).
+%% @equiv parse_incremental(File, Type, Callback, State, #{})
+-spec parse_incremental(file:io_device(), parser_type(),
+						incr_cb(), any())
+					   -> any().
+parse_incremental(File, Type, Callback, State) ->
+	parse_incremental(File, Type, Callback, State, #{}).
 
 %% @doc Parse an open file-like object incrementally.
 %%
 %%   Reads the contents of `File', returning a partial list of the
 %%   triples, and a continuation function to continue the parsing.
 %%
-%% @spec (File :: file:io_device(), Type :: parser_type(), Options :: map())
-%%          -> partial_result(lagra_model:triple())
+%% @spec (File :: file:io_device(), Type :: parser_type(),
+%%        Callback :: incr_cb(), State :: any(), Options :: map())
+%%          -> any().
 %%
 %% @param File An open file-like object
 %%
 %% @param Parser The parser to use. Defined parsers are `ntriples' and
 %%   `turtle'.
+%%
+%% @param Callback A function called when a batch of triples has been
+%% parsed from the input.
+%%
+%% @param State The initial state passed to the first call of the `Callback'
 %%
 %% @param Options The options to pass to the parser. All parsers
 %% support the following options:
@@ -148,19 +154,21 @@ parse_incremental(File, Type) ->
 %% For individual parsers' options, see the `Options' parameter of
 %% parse/4.
 %%
-%% @returns `{ok, Triples, Continuation}'
+%% @returns The updated `State' value, or `{error, Err, State}'.
 %%
-%%   where `Triples' is a list of triples, and the `Continuation' is
-%%   either the atom `last', indicating that there are no more triples
-%%   in the `File', or it is a function with arity zero which will
-%%   read the next batch of triples from the `File', returning a
-%%   similar result to this function.
--spec parse_incremental(file:io_device(), parser_type(), map()) ->
-							   partial_result(lagra_model:triple()).
-parse_incremental(File, ntriples, Options) ->
-	lagra_parser_ntriples:parse_incremental(File, Options);
-parse_incremental(File, turtle, Options) ->
-	lagra_parser_turtle:parse_incremental(File, Options).
+%% The parser reads triples incrementally from the input file,
+%% batching them up in a list. When the end of the input is reached,
+%% or the list reaches the maximum batch size, the `Callback' function
+%% is called with the current value of the `State'. The `Callback'
+%% function should process the triples as appropriate, and then return
+%% an updated value of `State'.
+-spec parse_incremental(file:io_device(), parser_type(),
+						incr_cb(), any(), map()) ->
+							   any().
+parse_incremental(File, ntriples, Callback, State, Options) ->
+	lagra_parser_ntriples:parse_incremental(File, Callback, State, Options);
+parse_incremental(File, turtle, Callback, State, Options) ->
+	lagra_parser_turtle:parse_incremental(File, Callback, State, Options).
 
 %% @equiv serialize(Store, File, Type, #{})
 -spec serialize(store(), file:io_device(), atom()) ->

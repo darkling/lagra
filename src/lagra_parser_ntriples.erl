@@ -1,6 +1,6 @@
 %% @private
 -module(lagra_parser_ntriples).
--export([parse/3, parse_incremental/2]).
+-export([parse/3, parse_incremental/4]).
 
 -spec parse(lagra:store(), file:io_device(), map())
 		   -> ok | {error, atom(), {integer(), integer()}}.
@@ -31,31 +31,30 @@ parse_loop(Parser, Store) ->
 			Err
 	end.
 
--spec parse_incremental(file:io_device(), map()) ->
-							   lagra:partial_result(lagra_model:triple()).
-parse_incremental(File, Options) ->
+-spec parse_incremental(file:io_device(), lagra:incr_cb(), any(), map()) ->
+							   any().
+parse_incremental(File, Callback, State, Options) ->
 	Count = maps:get(batch, Options, 1000),
 	{ok, Sup, Parser} = lagra_parsers_sup:new_parser(ntriples, File, Options),
-	parse_incremental_loop(Parser, Sup, [], Options, Count).
+	parse_incremental_loop(Parser, Sup, [], Callback, State, Options, Count).
 
--spec parse_incremental_loop(pid(), pid(),
-							 [lagra_model:triple()],
-							 map(), integer()) ->
-									lagra:partial_result(lagra_model:triple()).
-parse_incremental_loop(Parser, Sup, Acc, Options, 0) ->
+-spec parse_incremental_loop(pid(), pid(), [lagra_model:triple()],
+							 lagra:incr_cb(), any(), map(), integer()) ->
+									any().
+parse_incremental_loop(Parser, Sup, Acc, Callback, State, Options, 0) ->
 	Count = maps:get(batch, Options, 1000),
-	{ok, Acc,
-	 fun() ->
-			 parse_incremental_loop(Parser, Sup, [], Options, Count)
-	 end};
-parse_incremental_loop(Parser, Sup, Acc, Options, Count) ->
+	NewState = Callback(Acc, State),
+	parse_incremental_loop(Parser, Sup, [], Callback, NewState, Options, Count);
+parse_incremental_loop(Parser, Sup, Acc, Callback, State, Options, Count) ->
 	case lagra_parser_ntriples_parser:triple(Parser) of
 		eof ->
 			lagra_parsers_sup:stop_parser(Sup),
-			{ok, Acc, last};
+			Callback(Acc, State);
 		{ok, T} ->
-			parse_incremental_loop(Parser, Sup, [T|Acc], Options, Count-1);
+			parse_incremental_loop(Parser, Sup, [T|Acc],
+								   Callback, State, Options, Count-1);
 		{error, _, _} = Err ->
 			lagra_parsers_sup:stop_parser(Sup),
-			{error, Err, Acc}
+			NewState = Callback(Acc, State),
+			{error, Err, NewState}
 	end.
