@@ -1,0 +1,6 @@
+<https://carfax.org.uk/hugo.ttl> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<https://carfax.org.uk/hugo.ttl> <http://xmlns.com/foaf/0.1/homepage> <http://carfax.org.uk/>.
+<https://carfax.org.uk/hugo.ttl> <http://xmlns.com/foaf/0.1/mbox> <mailto:hugo@carfax.org.uk> .
+<https://carfax.org.uk/hugo.ttl> <http://xmlns.com/foaf/0.1/name> "Hugo Mills" .
+<https://carfax.org.uk/hugo.ttl> <http://xmlns.com/foaf/0.1/nick> This is a failure
+<https://carfax.org.uk/hugo.ttl> <http://xmlns.com/foaf/0.1/nick> "darkling" .

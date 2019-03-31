@@ -1,0 +1,10 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@base <https://carfax.org.uk/> .
+
+<hugo.ttl>
+  a foaf:Person;
+  foaf:homepage <>;
+  foaf:mbox <mailto:hugo@carfax.org.uk>;
+  foaf:name "Hugo Mills";
+  foaf:nick This is a failure;
+  foaf:nick "darkling".
