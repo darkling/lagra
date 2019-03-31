@@ -1,0 +1,32 @@
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix cfx: <https://carfax.org.uk/> .
+@prefix gh: <https://github.com/darkling/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> foaf:primaryTopic <https://carfax.org.uk/software/lagra/>;
+   dc:issued "2019-03-31T16:12:00+01:00"^^xsd:dateTime.
+
+<https://carfax.org.uk/software/lagra/>
+    doap:description """
+Lagra is an Erlang library for loading, managing, saving and manipulating RDF graphs. It allows RDF graphs to be constructed in memory, and searched and manipulated in code. It also has support for reading N-Triples and Turtle, and for writing N-Triples."""@en_GB;
+    doap:homepage gh:lagra;
+    doap:repository gh:lagra.git, <http://git.darksatanic.net/repo/lagra.git/>;
+    doap:maintainer cfx:hugo.ttl;
+    doap:implements <https://www.w3.org/TR/n-triples>,
+                    <https://www.w3.org/TR/2014/REC-turtle-20140225/>;
+    doap:name "Lagra";
+    doap:programming-language "erlang";
+    doap:platform "BEAM";
+    doap:shortdesc "RDF for Erlang"@en_GB;
+    a doap:Project.
+
+gh:lagra.git a doap:GitRepository.
+<http://git.darksatanic.net/repo/lagra.git/> a doap:GitRepository.
+
+cfx:hugo.ttl
+  a foaf:Person;
+  foaf:homepage cfx:;
+  foaf:mbox <mailto:hugo@carfax.org.uk>;
+  foaf:name "Hugo Mills";
+  foaf:nick "darkling".
