@@ -50,7 +50,7 @@ post_end_per_testcase(_Suite, Case, Config, EndData,
 	Outcome = case ?config(tc_status, Config) of
 				  ok        -> "earl:passed";
 				  {skip, _} -> "earl:untested";
-				  {fail, _} -> "earl:failed"
+				  _         -> "earl:failed"
 			  end,
 
 	AssertedBy = lists:join(", ", maps:get(asserted_by, State)),
