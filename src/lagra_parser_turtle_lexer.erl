@@ -141,7 +141,7 @@ term(File, Empty, LnNo, _ChNo)
 			   eof -> eof;
 			   {error, Reason} ->
 				   throw(Reason);
-			   L -> L
+			   L -> unicode:characters_to_binary(L)
 		   end,
 	term(File, Line, LnNo+1, 1);
 term(_File, eof, LnNo, ChNo) ->
@@ -218,7 +218,8 @@ match_longstring(File, Line, LnNo, ChNo, LnCount, Re) ->
 				{error, Reason} ->
 					throw(Reason);
 				L ->
-					match_longstring(File, <<Line/binary, L/binary>>,
+					LB = unicode:characters_to_binary(L),
+					match_longstring(File, <<Line/binary, LB/binary>>,
 									 LnNo, ChNo, LnCount+1, Re)
 			end
 	end.
