@@ -583,13 +583,26 @@ resolve_relative_iri(IRI, Base) ->
 	lagra_model:new_iri(NewText).
 
 %% Implemented from the algorithm in RFC 3986 Section 5.2.2
--spec resolve_relative_iri_map(uri_string:uri_map(), uri_string:uri_map()) ->
+-spec resolve_relative_iri_map(uri_string:uri_map(),
+							   uri_string:uri_map()) ->
 									  uri_string:uri_map().
-resolve_relative_iri_map(#{scheme := _} = IRI, _Base) ->
+resolve_relative_iri_map(IRI, Base) ->
+	try resolve_relative_iri_map_unsafe(IRI, Base)
+	catch
+		error:{badkey, _} ->
+			% Trying to resolve a relative IRI when there's no base.
+			% Turn this into a clearer exception
+			throw({error, unresolvable_relative_iri, IRI})
+	end.
+
+-spec resolve_relative_iri_map_unsafe(uri_string:uri_map(),
+									  uri_string:uri_map()) ->
+									  uri_string:uri_map().
+resolve_relative_iri_map_unsafe(#{scheme := _} = IRI, _Base) ->
 	IRI;
-resolve_relative_iri_map(#{host := _} = IRI0, Base) ->
+resolve_relative_iri_map_unsafe(#{host := _} = IRI0, Base) ->
 	IRI0#{scheme => maps:get(scheme, Base)};
-resolve_relative_iri_map(#{path := <<"">>} = IRI0, Base) ->
+resolve_relative_iri_map_unsafe(#{path := <<"">>} = IRI0, Base) ->
 	IRI1 = IRI0#{scheme => maps:get(scheme, Base),
 				 host => maps:get(host, Base),
 				 path => maps:get(path, Base)},
@@ -597,10 +610,10 @@ resolve_relative_iri_map(#{path := <<"">>} = IRI0, Base) ->
 		none -> IRI1;
 		Q ->    IRI1#{query => Q}
 	end;
-resolve_relative_iri_map(#{path := <<$/, _/binary>>} = IRI0, Base) ->
+resolve_relative_iri_map_unsafe(#{path := <<$/, _/binary>>} = IRI0, Base) ->
 	IRI0#{scheme => maps:get(scheme, Base),
 		  host => maps:get(host, Base)};
-resolve_relative_iri_map(#{path := IRIPath} = IRI0,
+resolve_relative_iri_map_unsafe(#{path := IRIPath} = IRI0,
 						 #{path := BasePath} = Base) ->
 	IRI1 = case maps:get(scheme, Base, none) of
 			   none -> IRI0;
