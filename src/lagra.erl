@@ -128,8 +128,8 @@ parse_incremental(File, Type, Callback, State) ->
 
 %% @doc Parse an open file-like object incrementally.
 %%
-%%   Reads the contents of `File', returning a partial list of the
-%%   triples, and a continuation function to continue the parsing.
+%%   Reads the contents of `File', calling an accumulation function
+%%   for each batch of triples read.
 %%
 %% @spec (File :: file:io_device(), Type :: parser_type(),
 %%        Callback :: incr_cb(), State :: any(), Options :: map())
