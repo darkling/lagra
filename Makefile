@@ -1,6 +1,6 @@
 PROJECT = lagra
 PROJECT_DESCRIPTION = RDF library for Erlang
-PROJECT_VERSION = 0.1.0
+PROJECT_VERSION = 0.2.0
 TEST_DIR = ct
 TESTS_ASSERTED_BY = <https://raw.githubusercontent.com/darkling/lagra/master/doap.ttl\#>
 CT_OPTS = -ct_hooks ct_earl_hook "asserted_by=$(TESTS_ASSERTED_BY);subject=<https://raw.githubusercontent.com/darkling/lagra/master/doap.ttl\#>"
