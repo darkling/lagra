@@ -42,6 +42,10 @@
 -export_type([rdfnode/0, triple/0, quad/0]).
 -export_type([pattern/0, triple_pattern/0, quad_pattern/0]).
 
+-type prefix_map() :: #{binary() | rdfnode() => unicode:string()}.
+
+-export_type([prefix_map/0]).
+
 -spec new_literal(term()) -> literalnode().
 new_literal(Text) when is_binary(Text) ->
 	{literal, {string, Text}};

@@ -1,0 +1,3 @@
+@base <http://example.com/> .
+
+<foo#s> <foo#p> <foo#o>.

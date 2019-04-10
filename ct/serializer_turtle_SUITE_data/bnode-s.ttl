@@ -1,0 +1,3 @@
+@base <http://example.com/> .
+
+_:20945 <p> <o>.

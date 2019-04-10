@@ -1,0 +1,4 @@
+@base <http://example.com/> .
+
+<s> <p> """ 	\r\b"'
+""".

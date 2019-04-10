@@ -1,0 +1,5 @@
+@base <http://example.com/> .
+
+<s> <p> <o1>.
+<s> <p> <o2>.
+<s> <p> <o3>.

@@ -193,12 +193,25 @@ serialize(Store, File, Type) ->
 %%   (`async`, the default), or send a message `{serialized, Ref}` to
 %%   the process `Proc` on completion.
 %%
+%% The `ntriples' serializer takes no additional options.
+%%
+%% For the `turtle' serializer, options are:
+%%
+%%   `prefixes => map(lagra_model:rdfnode() | binary() => unicode:string())':
+%%                Map partial IRI prefixes (either as a lagra
+%%                IRI, or as a binary) to abbreviated prefixes. e.g.::
+%%
+%%      Prefixes = #{<<"http://www.w3.org/1999/02/22-rdf-syntax-ns#">>
+%%                    => <<"rdf">>}
+%%
 %% @returns `ok'
 
 -spec serialize(store(), file:io_device(), parser_type(), map()) ->
 					   ok | {error, term()}.
 serialize(Store, File, ntriples, Options) ->
-	lagra_serializer_ntriples:serialize(Store, File, Options).
+	lagra_serializer_ntriples:serialize(Store, File, Options);
+serialize(Store, File, turtle, Options) ->
+	lagra_serializer_turtle:serialize(Store, File, Options).
 
 %% @doc Add a triple or quad to a triplestore.
 %%

@@ -18,7 +18,7 @@ fashion. Lagra also provides an API for querying and manipulating
 It supports the following RDF serialization formats:
 
  * `N-Triples <https://www.w3.org/TR/n-triples/>`_ (read/write)
- * `Turtle <https://www.w3.org/TR/turtle/>`_ (read only)
+ * `Turtle <https://www.w3.org/TR/turtle/>`_ (read/write)
 
 Why "lagra"?
 ------------
@@ -61,7 +61,7 @@ Future plans
 
 In no particular order:
 
- * Write Turtle
+ * Write Turtle more elegantly
  * Read/write JSON-LD
  * Read/write RDF/XML
  * Use a remote SPARQL/SPARUL endpoint as a store
