@@ -27,7 +27,7 @@
 -type subject() :: resource().
 -type predicate() :: iri().
 -type object() :: rdfnode().
--type graph() :: iri().
+-type graph() :: resource().
 
 -type triple() :: {subject(), predicate(), object()}.
 -type quad() :: {subject(), predicate(), object(), graph()}.
