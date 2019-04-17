@@ -18,6 +18,7 @@ fashion. Lagra also provides an API for querying and manipulating
 It supports the following RDF serialization formats:
 
  * `N-Triples <https://www.w3.org/TR/n-triples/>`_ (read/write)
+ * `N-Quads <https://www.w3.org/TR/n-quads/>`_ (read only)
  * `Turtle <https://www.w3.org/TR/turtle/>`_ (read/write)
 
 Why "lagra"?

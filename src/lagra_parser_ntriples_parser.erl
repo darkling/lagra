@@ -4,7 +4,11 @@
 
 -type partial_triple() :: {lagra_model:subject() | none,
 						   lagra_model:predicate() | none,
-						   lagra_model:object() | none}.
+						   lagra_model:object() | none}
+						  | {lagra_model:subject() | none,
+							 lagra_model:predicate() | none,
+							 lagra_model:object() | none,
+							 lagra_model:graph()}.
 
 -type pos() :: {integer(), integer()}.
 -type lexeme() :: {atom(), pos(), unicode:chardata()}.
@@ -30,7 +34,8 @@
 		{lexer :: pid() | undefined,
 		 triple :: partial_triple(),
 		 bnodes :: map(),
-		 allow_relative :: boolean()
+		 allow_relative :: boolean(),
+		 nquads :: boolean()
 		}).
 -type state() :: #state{}.
 
@@ -51,7 +56,8 @@ triple(Parser) ->
 init([Options]) ->
 	State = #state{triple={none, none, none},
 				   bnodes=#{},
-				   allow_relative=maps:get(allow_relative, Options, false)},
+				   allow_relative=maps:get(allow_relative, Options, false),
+				   nquads=maps:get(nquads, Options, false)},
 	{ok, State}.
 
 handle_call(triple, _From, State) ->
@@ -82,9 +88,9 @@ code_change(_OldVsn, State, _Extra) ->
 %%% The parser is basically a simple state machine, cycling through
 %%% subject (iri or bnode), predicate (iri), object (iri, bnode,
 %%% literal), literal annotations (lang tag, type) if appropriate, and
-%%% finishing with dot and EOL.
+%%% finishing with an optional graph iri or bnode, and finally dot and EOL.
 %%% Whitespace and comments are dropped in the lexer.
-%%% The parser returns either 'eof' or a triple or an error as
+%%% The parser returns either 'eof' or a triple or a quad or an error as
 %%% {'error', ErrType, {Line, Char}}
 
 -spec parse_subject(lexeme(), state()) -> parse_result().
@@ -134,8 +140,8 @@ parse_object({iriref, Pos, Text},
 	IRI = lagra_model:new_iri(Text),
 	case lagra_model:is_absolute_iri(IRI) or State#state.allow_relative of
 		true ->
-			parse_dot(next_term(State),
-					  State#state{triple={S, P, IRI}});
+			parse_maybe_graph(next_term(State),
+							  State#state{triple={S, P, IRI}});
 		false ->
 			{error, relative_iri, Pos}
 	end;
@@ -144,7 +150,7 @@ parse_object({blank_node_label, _, Text},
 	{NewMap, BNode} = get_bnode_or_new(BNodes, Text),
 	NewState = State#state{triple = {S, P, BNode},
 						   bnodes = NewMap},
-	parse_dot(next_term(NewState), NewState);
+	parse_maybe_graph(next_term(NewState), NewState);
 parse_object({string_literal_quote, _, Text},
 			 State = #state{triple={S, P, none}}) ->
 	parse_maybe_string_annotation(
@@ -158,12 +164,15 @@ parse_object({_, Pos, _}, #state{triple={_, _, none}}) ->
 parse_maybe_string_annotation(
   {langtag, _, Lang},
   State = #state{triple={S, P, {literal, {string, Text}}}}) ->
-	parse_dot(next_term(State),
-			  State#state{triple={S, P, {literal, {string, Text, Lang}}}});
+	parse_maybe_graph(
+	  next_term(State),
+	  State#state{triple={S, P, {literal, {string, Text, Lang}}}});
 parse_maybe_string_annotation(
   {type_hats, _, _},
   State = #state{triple={_S, _P, {literal, {string, _Text}}}}) ->
 	parse_type(next_term(State), State);
+parse_maybe_string_annotation(Term, State = #state{nquads=true}) ->
+	parse_maybe_graph(Term, State);
 parse_maybe_string_annotation(Dot={dot, _, _}, State) ->
 	parse_dot(Dot, State);
 parse_maybe_string_annotation({_, Pos, _}, _) ->
@@ -180,7 +189,7 @@ parse_type({iriref, Pos, Type},
 			NewLiteral = lagra_model:new_literal_typed(ConvertedValue, Type),
 			NewTriple = {S, P, NewLiteral},
 			NewState = State#state{triple=NewTriple},
-			parse_dot(next_term(NewState), NewState);
+			parse_maybe_graph(next_term(NewState), NewState);
 		false ->
 			{error, relative_iri, Pos}
 	end;
@@ -188,7 +197,35 @@ parse_type({_, Pos, _}, _) ->
 	{error, syntax, Pos}.
 
 
+-spec parse_maybe_graph(lexeme(), state()) -> parse_result().
+parse_maybe_graph(Token, State = #state{nquads=false}) ->
+	parse_dot(Token, State);
+parse_maybe_graph(Token = {dot, _, _}, State) ->
+	parse_dot(Token, State);
+parse_maybe_graph({iriref, Pos, Text},
+				  State = #state{triple={S, P, O}}) ->
+	IRI = lagra_model:new_iri(Text),
+	case lagra_model:is_absolute_iri(IRI) or State#state.allow_relative of
+		true ->
+			parse_dot(next_term(State),
+					  State#state{triple={S, P, O, IRI}});
+		false ->
+			{error, relative_iri, Pos}
+	end;
+parse_maybe_graph({blank_node_label, _, Text},
+				  State = #state{triple={S, P, O}, bnodes=BNodes}) ->
+	{NewMap, BNode} = get_bnode_or_new(BNodes, Text),
+	NewState = State#state{triple = {S, P, O, BNode},
+						   bnodes = NewMap},
+	parse_dot(next_term(NewState), NewState);
+parse_maybe_graph({_, Pos, _}, _) ->
+	{error, syntax, Pos}.
+
+
 -spec parse_dot(lexeme(), state()) -> parse_result().
+parse_dot(Token, State = #state{triple={S, P, O}, nquads=true}) ->
+	G = lagra_model:new_iri(<<"urn:nil">>),
+	parse_dot(Token, State#state{triple={S, P, O, G}});
 parse_dot({dot, _, _}, State = #state{triple=Triple}) ->
 	NewState = State#state{triple={none, none, none}},
 	case parse_eol(next_term(NewState), NewState) of

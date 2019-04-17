@@ -59,6 +59,31 @@ while read testid file uscore type result; do
 			fun_names+=("'"$uscore"'")
 			;;
 
+		TestNQuadsPositiveSyntax)
+			funs="${funs}
+'$uscore'(Config) ->
+    Store = ?config(store1, Config),
+    Filename = filename:join(?config(data_dir, Config), \"$file\"),
+    io:format(\"Filename = ~p~n\", [Filename]),
+    {ok, File} = file:open(Filename, [read, {encoding, utf8}, binary]),
+    ok = lagra:parse(Store, File, nquads).
+"
+			fun_names+=("'"$uscore"'")
+			;;
+
+		TestNQuadsNegativeSyntax)
+			funs="${funs}
+'$uscore'(Config) ->
+    Store = ?config(store1, Config),
+    {ok, File} = file:open(
+        filename:join(?config(data_dir, Config),
+                              \"$file\"),
+                      [read, {encoding, utf8}, binary]),
+    {error, _, _} = lagra:parse(Store, File, nquads).
+"
+			fun_names+=("'"$uscore"'")
+			;;
+
 		TestTurtleEval)
 			funs="${funs}
 '$uscore'(Config) ->

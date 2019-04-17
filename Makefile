@@ -17,6 +17,11 @@ ct/parser_ntriples_w3_SUITE.erl: ct/parser_ntriples_w3_SUITE_data/manifest.ttl s
 	$(Q)@scripts/gen-parser-test-suite.sh $< $(notdir $(subst .erl,,$@)) \
 		"http://www.w3.org/2013/N-TriplesTests/manifest.ttl\#" >$@
 
+ct/parser_nquads_w3_SUITE.erl: ct/parser_nquads_w3_SUITE_data/manifest.ttl scripts/gen-parser-test-suite.sh
+	@echo " GENCT " $<
+	$(Q)@scripts/gen-parser-test-suite.sh $< $(notdir $(subst .erl,,$@)) \
+		"http://www.w3.org/2013/N-QuadsTests/manifest.ttl\#" >$@
+
 ct/parser_turtle_w3_SUITE.erl: ct/parser_turtle_w3_SUITE_data/manifest.ttl scripts/gen-parser-test-suite.sh
 	@echo " GENCT " $<
 	$(Q)@scripts/gen-parser-test-suite.sh $< $(notdir $(subst .erl,,$@)) \

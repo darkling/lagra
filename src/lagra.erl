@@ -97,11 +97,11 @@ parse(Store, File, Parser) ->
 %%
 %% @param File An open file-like object
 %%
-%% @param Parser The parser to use. Defined parsers are `ntriples' and
-%%   `turtle'.
+%% @param Parser The parser to use. Defined parsers are `ntriples',
+%%   `nquads' and `turtle'.
 %%
-%% @param Options The options to pass to the parser. For `ntriples',
-%% the options are:
+%% @param Options The options to pass to the parser. For `ntriples'
+%% and `nquads', the options are:
 %%
 %% `allow_relative => boolean()': Allow parsing relative URIs. This is
 %% forbidden by the NTriples standard, but may be useful for parsing
@@ -116,6 +116,8 @@ parse(Store, File, Parser) ->
 				   ok | {error, term(), integer()}.
 parse(Store, File, ntriples, Options) ->
 	lagra_parser_ntriples:parse(Store, File, Options);
+parse(Store, File, nquads, Options) ->
+	lagra_parser_ntriples:parse(Store, File, Options#{nquads=>true});
 parse(Store, File, turtle, Options) ->
 	lagra_parser_turtle:parse(Store, File, Options).
 
@@ -137,8 +139,8 @@ parse_incremental(File, Type, Callback, State) ->
 %%
 %% @param File An open file-like object
 %%
-%% @param Parser The parser to use. Defined parsers are `ntriples' and
-%%   `turtle'.
+%% @param Parser The parser to use. Defined parsers are `ntriples',
+%%   `nquads' and `turtle'.
 %%
 %% @param Callback A function called when a batch of triples has been
 %% parsed from the input.
