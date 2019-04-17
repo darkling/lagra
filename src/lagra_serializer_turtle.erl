@@ -19,7 +19,7 @@ serialize(Store, File, #{notify := {Caller, Id}} = Options) ->
 			   end),
 	ok;
 serialize(Store, File, Options) ->
-	serialize(Store, File, Options#{notify => async}).
+	serialize(Store, File, Options#{notify => sync}).
 
 -spec serialize_impl(lagra:store(), file:io_device(), map()) -> ok.
 serialize_impl(Store, File, Options) ->
