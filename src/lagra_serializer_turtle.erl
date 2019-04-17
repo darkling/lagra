@@ -1,6 +1,7 @@
 -module(lagra_serializer_turtle).
 -export([serialize/3]).
 -export_type([turtle_wr_opts/0]).
+-include_lib("lagra/include/namespaces.hrl").
 
 -type turtle_wr_opts() :: #{notify => async | sync | {pid(), any()},
 							prefixes => lagra_model:prefix_map()}.
@@ -72,8 +73,6 @@ next_triple([{S, P, O}|Triples], File, Pfx, _, _) ->
 	next_triple(Triples, File, Pfx, S, P).
 
 
--define(XSD, "http://www.w3.org/2001/XMLSchema#").
-
 -spec node_to_text(lagra_model:rdfnode(), map()) -> unicode:charlist().
 node_to_text({iri, Iri}, Pfxs) ->
 	case split_prefix(Iri) of
@@ -93,22 +92,22 @@ node_to_text({literal, {string, Text}}, _) ->
 	["\"", quote_text(Text), "\""];
 node_to_text({literal, {string, Text, Locale}}, _) ->
 	["\"", quote_text(Text), "\"@", Locale];
-node_to_text({literal, {typed, Term, <<?XSD, Type/binary>>}}, _)
+node_to_text({literal, {typed, Term, ?XSD(Type/binary)}}, _)
   when Type =:= <<"integer">>; Type =:= <<"nonPositiveInteger">>;
 	   Type =:= <<"negativeInteger">>; Type =:= <<"long">>; Type =:= <<"int">>;
 	   Type =:= <<"short">>; Type =:= <<"byte">>;
 	   Type =:= <<"nonNegativeInteger">>; Type =:= <<"unsignedLong">>;
 	   Type =:= <<"unsignedInt">>; Type =:= <<"unsignedShort">>;
 	   Type =:= <<"unsignedByte">>; Type =:= <<"positiveInteger">> ->
-	["\"", io_lib:format("~B", [Term]), "\"^^<", ?XSD, Type, ">"];
-node_to_text({literal, {typed, Term, <<?XSD, Type/binary>>}}, _)
+	["\"", io_lib:format("~B", [Term]), "\"^^<", ?XSD(Type/binary), ">"];
+node_to_text({literal, {typed, Term, ?XSD(Type/binary)}}, _)
   when Type =:= <<"double">>;
 	   Type =:= <<"decimal">>;
 	   Type =:= <<"double">> ->
-	["\"", io_lib:format("~g", [Term]), "\"^^<", ?XSD, Type, ">"];
-node_to_text({literal, {typed, Term, <<?XSD, Type/binary>>}}, _)
+	["\"", io_lib:format("~g", [Term]), "\"^^<", ?XSD(Type/binary), ">"];
+node_to_text({literal, {typed, Term, ?XSD(Type/binary)}}, _)
   when Type =:= <<"boolean">> ->
-	["\"", atom_to_list(Term), "\"^^<", ?XSD, Type, ">"];
+	["\"", atom_to_list(Term), "\"^^<", ?XSD(Type/binary), ">"];
 node_to_text({literal, {typed, Term, Type}}, _) ->
 	["\"", quote_text(Term), "\"^^<", Type, ">"].
 

@@ -1,0 +1,4 @@
+-define(RDF(T), <<"http://www.w3.org/1999/02/22-rdf-syntax-ns#", T >>).
+-define(RDFS(T), <<"http://www.w3.org/2000/01/rdf-schema#", T >>).
+-define(XSD(T), <<"http://www.w3.org/2001/XMLSchema#", T >>).
+-define(OWL(T), <<"http://www.w3.org/2002/07/owl#", T >>).
