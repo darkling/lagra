@@ -67,6 +67,7 @@ In no particular order:
  * Read/write RDF/XML
  * Write Turtle more elegantly
  * Read/write RDF/XML
+ * Read JSON-LD
  * Use a remote SPARQL/SPARUL endpoint as a store
  * Improve the in-memory store, so that it is usable for more than
    trivial-sized graphs

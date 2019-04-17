@@ -5,6 +5,9 @@ TEST_DIR = ct
 TESTS_ASSERTED_BY = <https://raw.githubusercontent.com/darkling/lagra/master/doap.ttl\#>
 CT_OPTS = -ct_hooks ct_earl_hook "asserted_by=$(TESTS_ASSERTED_BY);subject=<https://raw.githubusercontent.com/darkling/lagra/master/doap.ttl\#>"
 
+DEPS = jsx
+dep_jsx_commit = v2.9.0
+
 include erlang.mk
 
 .PHONY: test-suites

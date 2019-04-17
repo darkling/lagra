@@ -182,7 +182,8 @@ serialize(Store, File, Type) ->
 %%
 %% @param Store The file store to use
 %%
-%% @param File A file open for writing to
+%% @param File A file open for writing to, or the atom 'mem', to serialize
+%%             to an in-memory object (JSON-LD only at present).
 %%
 %% @param Type The type of file to render. Defined types are
 %% `ntriples' and `turtle'.
@@ -208,12 +209,14 @@ serialize(Store, File, Type) ->
 %%
 %% @returns `ok'
 
--spec serialize(store(), file:io_device(), parser_type(), map()) ->
-					   ok | {error, term()}.
+-spec serialize(store(), file:io_device() | mem, parser_type(), map()) ->
+					   ok | {error, term()} | any().
 serialize(Store, File, ntriples, Options) ->
 	lagra_serializer_ntriples:serialize(Store, File, Options);
 serialize(Store, File, turtle, Options) ->
-	lagra_serializer_turtle:serialize(Store, File, Options).
+	lagra_serializer_turtle:serialize(Store, File, Options);
+serialize(Store, File, jsonld, Options) ->
+	lagra_serializer_jsonld:serialize(Store, File, Options).
 
 %% @doc Add a triple or quad to a triplestore.
 %%
