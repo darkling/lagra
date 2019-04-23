@@ -20,6 +20,7 @@ It supports the following RDF serialization formats:
  * `N-Triples <https://www.w3.org/TR/n-triples/>`_ (read/write)
  * `N-Quads <https://www.w3.org/TR/n-quads/>`_ (read only)
  * `Turtle <https://www.w3.org/TR/turtle/>`_ (read/write)
+ * `JSON-LD <https://www.w3.org/TR/json-ld/>`_ (write)
 
 Why "lagra"?
 ------------
@@ -62,8 +63,9 @@ Future plans
 
 In no particular order:
 
+ * Read JSON-LD
+ * Read/write RDF/XML
  * Write Turtle more elegantly
- * Read/write JSON-LD
  * Read/write RDF/XML
  * Use a remote SPARQL/SPARUL endpoint as a store
  * Improve the in-memory store, so that it is usable for more than
@@ -72,9 +74,8 @@ In no particular order:
  * Namespace management (parse namespaces from input documents; serialize
    with supplied namespace map)
 
-I have an immediate need for the first two items on the above list,
-and will shortly be needing the remote store functionality, so they
-have the highest priority.
+I have an immediate need for the remote store functionality, so that
+has the highest priority.
 
 Contact
 =======
