@@ -68,6 +68,17 @@ process_test([<<"jld:FromRDFTest">>, <<"jld:PositiveEvaluationTest">>],
 	#{<<"@id">> := TestId,
 	  <<"input">> := InputFile,
 	  <<"expect">> := ExpectFile} = TestDef,
+	Options = maps:get(<<"option">>, TestDef, #{}),
+	MO1 = case Options of
+			  #{<<"useNativeTypes">> := NativeTypes} ->
+				  #{native_types => NativeTypes};
+			  _ -> #{}
+		  end,
+	MO2 = case Options of
+			  #{<<"useRdfType">> := RdfType} ->
+				  MO1#{rdf_type => RdfType};
+			  _ -> MO1
+		  end,
 
 	FnName = ["'", "fromRDF", TestId, "'"],
 	FnBody =
@@ -78,7 +89,8 @@ process_test([<<"jld:FromRDFTest">>, <<"jld:PositiveEvaluationTest">>],
     {ok, InFile} = file:open(Filename, [read, {encoding, utf8}, binary]),
     ok = lagra:parse(Store, InFile, nquads),
     ok = file:close(InFile),
-    Output = lagra:serialize(Store, mem, jsonld),
+    Output = lagra:serialize(Store, mem, jsonld, ",
+		 io_lib:format("~p", [MO2]), "),
     ExpectFile = filename:join(?config(data_dir, Config), \"", ExpectFile, "\"),
     {ok, ExpData} = file:read_file(ExpectFile),
     Expected = jsx:decode(ExpData, [return_maps]),
