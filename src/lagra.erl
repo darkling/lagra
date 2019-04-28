@@ -207,6 +207,16 @@ serialize(Store, File, Type) ->
 %%      Prefixes = #{<<"http://www.w3.org/1999/02/22-rdf-syntax-ns#">>
 %%                    => <<"rdf">>}
 %%
+%% The `jsonld' serializer takes three options:
+%%
+%%   `native_types' => boolean(): Write the JSON-LD file using native
+%%   JSON types (default false).
+%%
+%%   `rdf_type' => boolean(): Use `rdf:type' explicitly, rather than
+%%   `@type' (default false).
+%%
+%%   `ordered' => boolean(): Order dictionary keys in the output.
+%%
 %% @returns `ok'
 
 -spec serialize(store(), file:io_device() | mem, parser_type(), map()) ->
