@@ -43,13 +43,16 @@ main([ManifestFile]) ->
 	Pieces = lists:append([process_manifest(Where, SubMf)
 						   || SubMf <- maps:get(<<"sequence">>, Manifest)]),
 	io:format(?HEADER, []),
-    [io:format("-export([~ts/1]).~n", [FnName]) || {FnName, _} <- Pieces],
+    [io:format("-export([~ts/1]).~n", [FnName]) || {FnName, _} <- Pieces,
+												   FnName =/= ""],
     io:format("-export([init_per_suite/1, end_per_suite/1]).~n", []),
 	io:format("-export([init_per_testcase/2, end_per_testcase/2]).~n~n", []),
 	io:format(?INIT_END, []),
-	[io:format("~ts~n~n", [FnBody]) || {_, FnBody} <- Pieces],
+	[io:format("~ts~n~n", [FnBody]) || {FnName, FnBody} <- Pieces,
+									   FnName =/= ""],
 	io:format("all() ->~n    [~ts].~n",
-			  [lists:join(",", [FnName || {FnName, _} <- Pieces])]).
+			  [lists:join(",", [FnName || {FnName, _} <- Pieces,
+										  FnName =/= ""])]).
 
 process_manifest(Dir, Filename) ->
 	{ok, JsonMf} = file:read_file(filename:join(Dir, Filename)),
@@ -83,7 +86,15 @@ process_test([<<"jld:FromRDFTest">>, <<"jld:PositiveEvaluationTest">>],
     io:format(\"Expected ~p~n\", [Expected]),
     true = lagra_jsonld_utils:jsonld_object_compare(Output, Expected)."
 		],
-	{FnName, FnBody};
+
+	case maps:get(<<"specVersion">>, Options, <<"json-ld-1.0">>) of
+		<<"json-ld-1.0">> ->
+			{FnName, FnBody};
+		<<"json-ld-1.1">> ->
+			{[], []};
+		_ ->
+			{FnName, FnBody}
+	end;
 
 process_test(_, _) ->
 	skip.
