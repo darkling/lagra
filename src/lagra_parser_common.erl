@@ -140,4 +140,4 @@ convert_xsd_type(Text, _) ->
 %%  base64Binary -> binary()
 %%  hexBinary -> binary()
 %%  dateTime -> {{Y, M, D}, {H, M, S}}
-%%  & all their friends
+%%  &amp; all their friends

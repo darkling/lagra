@@ -135,7 +135,7 @@ parse_incremental(File, Type, Callback, State) ->
 %%
 %% @spec (File :: file:io_device(), Type :: parser_type(),
 %%        Callback :: incr_cb(), State :: any(), Options :: map())
-%%          -> any().
+%%          -> any()
 %%
 %% @param File An open file-like object
 %%
@@ -190,10 +190,10 @@ serialize(Store, File, Type) ->
 %% @param Options The options to pass to the serializer. Options
 %%        common to all serializers are:
 %%
-%%   `notify => sync | async | {Proc :: atom() | pid(), Ref}`: Return
-%%   when the serialization is complete (`sync`), or immediately
-%%   (`async`, the default), or send a message `{serialized, Ref}` to
-%%   the process `Proc` on completion.
+%%   `notify => sync | async | {Proc :: atom() | pid(), Ref}': Return
+%%   when the serialization is complete (`sync'), or immediately
+%%   (`async', the default), or send a message `{serialized, Ref}' to
+%%   the process `Proc' on completion.
 %%
 %% The `ntriples' serializer takes no additional options.
 %%
@@ -201,10 +201,10 @@ serialize(Store, File, Type) ->
 %%
 %%   `prefixes => map(lagra_model:rdfnode() | binary() => unicode:string())':
 %%                Map partial IRI prefixes (either as a lagra
-%%                IRI, or as a binary) to abbreviated prefixes. e.g.::
+%%                IRI, or as a binary) to abbreviated prefixes. e.g.:
 %%
-%%      Prefixes = #{<<"http://www.w3.org/1999/02/22-rdf-syntax-ns#">>
-%%                    => <<"rdf">>}
+%%      `Prefixes = #{<<"http://www.w3.org/1999/02/22-rdf-syntax-ns#">>
+%%                    => <<"rdf">>}'
 %%
 %% @returns `ok'
 
@@ -250,7 +250,7 @@ find_all_q(Store, Pattern) when tuple_size(Pattern) =:= 4 ->
 find_all_q(Store, {Sp, Pp, Op}) ->
 	find_all_q(Store, {Sp, Pp, Op, '_'}).
 
-%% @doc Return all quads in a triplestore matching a specific pattern.
+%% @doc Return all triples in a triplestore matching a specific pattern.
 %%
 %% @param Store The triplestore to search.
 %%
