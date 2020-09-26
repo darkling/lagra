@@ -1,6 +1,7 @@
 %% @private
 -module(lagra_serializer_ntriples).
 -export([serialize/3]).
+-export([serialize_impl/3]).
 
 -spec serialize(lagra:store(), file:io_device(), map()) -> ok.
 serialize(Store, File, #{notify := async} = Options) ->

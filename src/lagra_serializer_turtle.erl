@@ -1,5 +1,6 @@
 -module(lagra_serializer_turtle).
 -export([serialize/3]).
+-export([serialize_impl/3]).
 -export_type([turtle_wr_opts/0]).
 -include_lib("lagra/include/namespaces.hrl").
 
