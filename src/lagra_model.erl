@@ -56,7 +56,15 @@ new_literal(Int) when is_integer(Int) ->
 new_literal(Float) when is_float(Float) ->
 	{literal, {typed, Float, <<"http://www.w3.org/2001/XMLSchema#double">>}};
 new_literal(Bool) when is_boolean(Bool) ->
-	{literal, {typed, Bool, <<"http://www.w3.org/2001/XMLSchema#boolean">>}}.
+	{literal, {typed, Bool, <<"http://www.w3.org/2001/XMLSchema#boolean">>}};
+new_literal({{Y, M, D}, {H, N, S}})
+  when is_integer(Y), is_integer(M), is_integer(D),
+	   is_integer(H), is_integer(N), is_integer(S) ->
+	DateString = unicode:characters_to_binary(
+				   io_lib:format(
+					 "~4..0B-~2..0B-~2..0BT~2..0B:~2..0B:~2..0BZ",
+					 [Y, M, D, H, N, S])),
+	{literal, {typed, DateString, <<"http://www.w3.org/2001/XMLSchema#dateTime">>}}.
 
 -spec new_literal(unicode:chardata(), unicode:chardata()) -> literalnode().
 new_literal(Text, Locale) ->
@@ -83,6 +91,11 @@ literal_value({string, Text}) ->
 	Text;
 literal_value({string, Text, _}) ->
 	Text;
+literal_value({typed, Text, <<"http://www.w3.org/2001/XMLSchema#dateTime">>}) ->
+	<<Y:4/binary, "-", M:2/binary, "-", D:2/binary, "T",
+	  H:2/binary, ":", N:2/binary, ":", S:2/binary, "Z">> = Text,
+	{{binary_to_integer(Y), binary_to_integer(M), binary_to_integer(D)},
+	 {binary_to_integer(H), binary_to_integer(N), binary_to_integer(S)}};
 literal_value({typed, Text, _}) ->
 	Text.
 
