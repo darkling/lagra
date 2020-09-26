@@ -7,8 +7,8 @@
 -export([literal_locale/1]).
 -export([literal_type/1]).
 -export([iri_to_text/1]).
--export([new_triple/3]).
--export([new_quad/4]).
+-export([new_triple/1, new_triple/3, triple/1, triple/3]).
+-export([new_quad/1, new_quad/4, quad/1, quad/4]).
 -export([subject/1, predicate/1, object/1, graph/1]).
 -export([quad_to_triple/1]).
 
@@ -119,13 +119,71 @@ literal_type({typed, _, Type}) ->
 iri_to_text({iri, Location}) ->
 	Location.
 
--spec new_triple(subject(), predicate(), object()) -> triple().
-new_triple(S, P, O) ->
-	{S, P, O}.
+-spec new_triple({subject() | unicode:chardata(),
+				  predicate() | unicode:chardata(),
+				  object() | term()}) -> triple().
+new_triple({S, P, O}) -> new_triple(S, P, O).
 
--spec new_quad(subject(), predicate(), object(), graph()) -> quad().
+-spec new_triple(subject() | unicode:chardata(),
+				 predicate() | unicode:chardata(),
+				 object() | term()) -> triple().
+new_triple(S, P, O) when is_binary(S) ->
+	new_triple(new_iri(S), P, O);
+new_triple(S, P, O) when is_binary(P) ->
+	new_triple(S, new_iri(P), O);
+new_triple(S, P, O) when is_binary(O) ->
+	new_triple(S, P, new_iri(O));
+new_triple(S, P, {Type, _} = O)
+  when Type =:= literal; Type =:= iri; Type =:= bnode ->
+	{S, P, O};
+new_triple(S, P, O) ->
+	new_triple(S, P, new_literal(O)).
+
+-spec triple({subject() | unicode:chardata(),
+			  predicate() | unicode:chardata(),
+			  object() | term()}) -> triple().
+triple({S, P, O}) -> new_triple(S, P, O).
+
+-spec triple(subject() | unicode:chardata(),
+			 predicate() | unicode:chardata(),
+			 object() | unicode:chardata()) -> triple().
+triple(S, P, O) -> new_triple(S, P, O).
+
+-spec new_quad({subject() | unicode:chardata(),
+				predicate() | unicode:chardata(),
+				object() | term(),
+				graph() | unicode:chardata()}) -> quad().
+new_quad({S, P, O, G}) -> new_quad(S, P, O, G).
+
+-spec new_quad(subject() | unicode:chardata(),
+			   predicate() | unicode:chardata(),
+			   object() | term(),
+			   graph() | unicode:chardata()) -> quad().
+new_quad(S, P, O, G) when is_binary(S) ->
+	new_quad(new_iri(S), P, O, G);
+new_quad(S, P, O, G) when is_binary(P) ->
+	new_quad(S, new_iri(P), O, G);
+new_quad(S, P, O, G) when is_binary(O) ->
+	new_quad(S, P, new_iri(O), G);
+new_quad(S, P, O, G) when is_binary(G) ->
+	new_quad(S, P, O, new_iri(G));
+new_quad(S, P, {Type, _} = O, G)
+  when Type =:= literal; Type =:= iri; Type =:= bnode ->
+	{S, P, O, G};
 new_quad(S, P, O, G) ->
-	{S, P, O, G}.
+	new_quad(S, P, new_literal(O), G).
+
+-spec quad({subject() | unicode:chardata(),
+			predicate() | unicode:chardata(),
+			object() | term(),
+			graph() | unicode:chardata()}) -> quad().
+quad({S, P, O, G}) -> new_quad(S, P, O, G).
+
+-spec quad(subject() | unicode:chardata(),
+		   predicate() | unicode:chardata(),
+		   object() | term(),
+		   graph() | unicode:chardata()) -> quad().
+quad(S, P, O, G) -> new_quad(S, P, O, G).
 
 -spec subject(triple() | quad()) -> subject().
 subject({S, _P, _O}) ->
