@@ -2,7 +2,7 @@
 -export([serialize/3]).
 -export([serialize_impl/3]).
 -export_type([turtle_wr_opts/0]).
--include_lib("lagra/include/namespaces.hrl").
+-include("include/namespaces.hrl").
 
 -type turtle_wr_opts() :: #{notify => async | sync | {pid(), any()},
 							prefixes => lagra_model:prefix_map()}.
